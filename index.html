@@ -1293,24 +1293,30 @@
     <h2 class="section-head display">Request your assessment.</h2>
     <p class="section-lead">Share a few basics and we'll be in touch to get you started. No financials required.</p>
 
-    <form id="assessment-form" style="max-width:560px;display:flex;flex-direction:column;gap:20px;" onsubmit="handleFormSubmit(event)">
+    <form id="assessment-form" action="https://formsubmit.co/matthew@fracturesystems.com" method="POST" style="max-width:560px;display:flex;flex-direction:column;gap:20px;">
+      <!-- Formsubmit config -->
+      <input type="hidden" name="_subject" value="New Exit Blueprint Assessment Request" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="https://exitblueprint.net/#assessment" />
+      <input type="hidden" name="_template" value="table" />
+
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div class="form-field">
           <label class="form-label mono" for="f-name">Your Name</label>
-          <input class="form-input" id="f-name" type="text" placeholder="Jane Smith" required />
+          <input class="form-input" id="f-name" name="name" type="text" placeholder="Jane Smith" required />
         </div>
         <div class="form-field">
           <label class="form-label mono" for="f-company">Company</label>
-          <input class="form-input" id="f-company" type="text" placeholder="Acme Inc." required />
+          <input class="form-input" id="f-company" name="company" type="text" placeholder="Acme Inc." required />
         </div>
       </div>
       <div class="form-field">
         <label class="form-label mono" for="f-email">Email</label>
-        <input class="form-input" id="f-email" type="email" placeholder="jane@acme.com" required />
+        <input class="form-input" id="f-email" name="email" type="email" placeholder="jane@acme.com" required />
       </div>
       <div class="form-field">
         <label class="form-label mono" for="f-revenue">Annual Revenue (approximate)</label>
-        <select class="form-input" id="f-revenue" required>
+        <select class="form-input" id="f-revenue" name="annual_revenue" required>
           <option value="" disabled selected>Select a range</option>
           <option>Under $1M</option>
           <option>$1M – $5M</option>
@@ -1321,7 +1327,7 @@
       </div>
       <div class="form-field">
         <label class="form-label mono" for="f-timeline">Exit Timeline</label>
-        <select class="form-input" id="f-timeline" required>
+        <select class="form-input" id="f-timeline" name="exit_timeline" required>
           <option value="" disabled selected>When are you thinking?</option>
           <option>Under 1 year</option>
           <option>1 to 2 years</option>
@@ -1334,9 +1340,6 @@
         Request my assessment
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <p id="form-confirm" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--emerald-2);padding:16px;background:rgba(31,111,92,0.1);border:1px solid rgba(31,111,92,0.2);border-radius:var(--radius);">
-        Got it. We'll be in touch shortly.
-      </p>
     </form>
   </div>
 </section>
@@ -1462,18 +1465,6 @@
     // Delay slightly so page paints first
     setTimeout(function() { requestAnimationFrame(animate); }, 400);
   })();
-
-  /* ── Assessment form ── */
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    var form = document.getElementById('assessment-form');
-    var confirm = document.getElementById('form-confirm');
-    var btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.style.opacity = '0.6';
-    confirm.style.display = 'block';
-    confirm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
 
   /* ── Scroll reveal ── */
   (function() {
