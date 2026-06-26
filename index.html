@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exit Blueprint — Diligence Readiness Score</title>
+  <meta name="description" content="Know what the buyer will find. Before they find it. Exit Blueprint scores how prepared your business is to survive buyer diligence with its valuation intact." />
+  <meta property="og:title" content="Exit Blueprint — Diligence Readiness Score" />
+  <meta property="og:description" content="Most value is lost in the deal, not at the offer. Score your diligence readiness before the buyer does." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://exitblueprint.net" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --ink:        #0E1916;
+      --ink-2:      #16201E;
+      --ink-3:      #1E2E2A;
+      --surface:    #1A2823;
+      --surface-2:  #223029;
+      --card:       #1E2D29;
+      --card-2:     #243530;
+      --line:       #2C3E39;
+      --line-2:     #3A5048;
+      --text:       #DDD8CC;
+      --text-2:     #A8B0AC;
+      --text-3:     #6A7872;
+      --brass:      #9A742B;
+      --brass-soft: #B9954A;
+      --brass-light:#D4B576;
+      --emerald:    #1F6F5C;
+      --emerald-2:  #2E8C73;
+      --amber:      #BE8418;
+      --clay:       #A6402E;
+      --radius:     6px;
+      --radius-lg:  12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      background: var(--ink);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Typography ── */
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.08em;
+    }
+    .display {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+    }
+    .display-italic {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 300; line-height: 1.15; }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 100px 0; }
+
+    hr.rule {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14, 25, 22, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .wordmark {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .wordmark-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .wordmark-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: var(--brass-soft);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--brass);
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brass);
+      color: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--brass-soft);
+      transition: background 0.15s, border-color 0.15s;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--brass-soft);
+      border-color: var(--brass-light);
+    }
+
+    /* ── Hero ── */
+    #hero {
+      padding: 120px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brass-soft);
+      margin-bottom: 24px;
+    }
+
+    h1.hero-head {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    h1.hero-head .accent {
+      color: var(--brass-soft);
+      font-style: italic;
+    }
+
+    .hero-lead {
+      font-size: 18px;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-note {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--text-3);
+      letter-spacing: 0.06em;
+      margin-top: 16px;
+    }
+
+    /* ── Grid background ── */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 70% 50%, transparent 40%, var(--ink) 80%);
+      pointer-events: none;
+    }
+    .hero-grid { position: relative; z-index: 1; }
+
+    /* ── DRS Gauge ── */
+    .gauge-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .gauge-card {
+      background: var(--card);
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px 28px;
+      width: 100%;
+    }
+
+    .gauge-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .gauge-svg-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .gauge-svg { overflow: visible; }
+
+    .gauge-score-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -8px;
+    }
+
+    .gauge-score-num {
+      font-family: 'Fraunces', serif;
+      font-size: 56px;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--brass-light);
+      letter-spacing: -0.03em;
+    }
+
+    .gauge-tier {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--emerald-2);
+      margin-top: 4px;
+    }
+
+    .gauge-band {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      color: var(--text-3);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .gauge-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .gauge-meta-item {
+      text-align: center;
+    }
+    .gauge-meta-val {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text);
+    }
+    .gauge-meta-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px;
+      color: var(--text-3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ── Problem ── */
+    #problem {
+      background: var(--ink-2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .big-line {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--text);
+      max-width: 800px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .problem-item {
+      background: var(--card);
+      padding: 32px 28px;
+    }
+
+    .problem-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--brass-soft);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .problem-item h3 {
+      font-size: 18px;
+      font-weight: 300;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .problem-item p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* ── Method ── */
+    #method { background: var(--ink); }
+
+    .section-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brass-soft);
+      margin-bottom: 16px;
+    }
+
+    .section-head {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      max-width: 720px;
+      margin-bottom: 16px;
+    }
+
+    .section-lead {
+      font-size: 17px;
+      color: var(--text-2);
+      max-width: 640px;
+      margin-bottom: 56px;
+      line-height: 1.7;
+    }
+
+    .dimensions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .dim-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .dim-card:hover { border-color: var(--line-2); }
+
+    .dim-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .dim-card.rq::before { background: var(--brass); }
+    .dim-card.fi::before { background: var(--emerald); }
+    .dim-card.oi::before { background: var(--brass-soft); }
+    .dim-card.cr::before { background: var(--amber); }
+    .dim-card.mt::before { background: var(--emerald-2); }
+    .dim-card.gd::before { background: var(--clay); }
+
+    .dim-code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--text-3);
+      margin-bottom: 8px;
+    }
+
+    .dim-name {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .dim-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .dim-weight {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--text-3);
+      letter-spacing: 0.08em;
+    }
+    .dim-weight span {
+      color: var(--brass-soft);
+    }
+
+    /* ── Trifecta ── */
+    #trifecta {
+      background: var(--ink-2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .trifecta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .trifecta-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+    }
+
+    .trifecta-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+    }
+    .trifecta-icon.business { background: rgba(154, 116, 43, 0.15); color: var(--brass-soft); border: 1px solid rgba(154, 116, 43, 0.25); }
+    .trifecta-icon.financial { background: rgba(31, 111, 92, 0.15); color: var(--emerald-2); border: 1px solid rgba(31, 111, 92, 0.25); }
+    .trifecta-icon.personal { background: rgba(46, 140, 115, 0.12); color: var(--emerald-2); border: 1px solid rgba(46, 140, 115, 0.2); }
+
+    .trifecta-card h3 {
+      font-size: 22px;
+      font-weight: 300;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .trifecta-card p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ── Bands ── */
+    #bands { background: var(--ink); }
+
+    .bands-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 48px;
+    }
+
+    .bands-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      background: var(--card-2);
+      padding: 12px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .bands-table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .bands-table tr:last-child td { border-bottom: none; }
+    .bands-table tr { background: var(--card); transition: background 0.12s; }
+    .bands-table tr:hover { background: var(--card-2); }
+
+    .band-range {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    .band-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .band-tier { font-weight: 500; color: var(--text); }
+    .band-time { color: var(--text-2); }
+
+    /* ── Process ── */
+    #process {
+      background: var(--ink-2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 48px;
+    }
+
+    .process-step {
+      background: var(--card);
+      padding: 32px 24px;
+      position: relative;
+    }
+
+    .step-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+
+    .step-name {
+      font-family: 'Fraunces', serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+
+    /* ── Who ── */
+    #who { background: var(--ink); }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 48px;
+    }
+
+    .who-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .who-icon {
+      width: 32px; height: 32px;
+      border-radius: var(--radius);
+      background: rgba(154, 116, 43, 0.1);
+      border: 1px solid rgba(154, 116, 43, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .who-icon svg { width: 14px; height: 14px; stroke: var(--brass-soft); }
+
+    .who-label {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── Beyond ── */
+    #beyond {
+      background: var(--ink-2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .beyond-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .beyond-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .beyond-card h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brass-soft);
+      margin-bottom: 12px;
+    }
+    .beyond-card p {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* ── CTA ── */
+    #cta {
+      background: var(--card);
+      border-top: 1px solid var(--line-2);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.15;
+    }
+    #cta .container { position: relative; z-index: 1; }
+
+    .cta-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 24px;
+    }
+
+    #cta h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #cta p {
+      font-size: 16px;
+      color: var(--text-2);
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brass);
+      color: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: var(--radius);
+      border: 1px solid var(--brass-soft);
+      transition: background 0.15s;
+    }
+    .btn-large:hover { background: var(--brass-soft); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid var(--line);
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    .footer-brand { max-width: 360px; }
+    .footer-brand .wordmark { margin-bottom: 14px; display: inline-flex; }
+    .footer-disclaimer {
+      font-size: 11px;
+      color: var(--text-3);
+      line-height: 1.65;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: var(--text-3);
+      font-size: 13px;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-2); }
+
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--text-3);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .dimensions-grid { grid-template-columns: repeat(2, 1fr); }
+      .trifecta-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .beyond-grid { grid-template-columns: repeat(2, 1fr); }
+      .who-grid { grid-template-columns: repeat(2, 1fr); }
+      .problem-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+      .footer-links { align-items: flex-start; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 64px 0; }
+      .dimensions-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .beyond-grid { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 360px) {
+      .container { padding: 0 16px; }
+      h1.hero-head { font-size: 28px; }
+    }
+
+    /* ── Animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="wordmark">
+        <span class="wordmark-name">Exit Blueprint</span>
+        <span class="wordmark-tag mono">DRS</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#method">Method</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#who">Who it's for</a></li>
+      </ul>
+      <a href="#cta" class="btn-primary">Start the assessment</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow mono">Diligence Readiness Score</p>
+        <h1 class="hero-head">
+          Know what the buyer will find.<br>
+          <span class="accent display-italic">Before</span> they find it.
+        </h1>
+        <p class="hero-lead">
+          Most value is lost in the deal, not at the offer. Exit Blueprint scores how prepared your business is to survive buyer diligence with its valuation intact.
+        </p>
+        <a href="#cta" class="btn-primary">
+          Start the assessment
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="hero-note mono">~10 minutes. Three readiness legs. No financials required.</p>
+      </div>
+
+      <div class="gauge-wrap">
+        <div class="gauge-card">
+          <p class="gauge-label mono">Diligence Readiness Score</p>
+          <div class="gauge-svg-wrap">
+            <svg class="gauge-svg" width="260" height="155" viewBox="0 0 320 175" xmlns="http://www.w3.org/2000/svg">
+              <!-- Track background -->
+              <path d="M30 160 A130 130 0 0 1 290 160" fill="none" stroke="#2C3E39" stroke-width="18" stroke-linecap="round"/>
+
+              <!-- Zone arcs: [0,40] clay, [40,55] amber, [55,70] brass-soft, [70,85] emerald, [85,100] deep emerald -->
+              <!-- point(s): x = 160 - 130*cos(PI*s/100), y = 160 - 130*sin(PI*s/100) -->
+              <!-- s=0:   x=160-130*cos(0)=30,    y=160-130*0=160 -->
+              <!-- s=40:  x=160-130*cos(0.4PI),   cos(72deg)=0.309, x=159.8, y=160-130*0.951=36.4 -->
+              <!-- s=55:  x=160-130*cos(0.55PI),  cos(99deg)=-0.156, x=180.3, y=160-130*0.988=31.6 -->
+              <!-- s=70:  x=160-130*cos(0.7PI),   cos(126deg)=-0.588, x=236.4, y=160-130*0.809=54.8 -->
+              <!-- s=85:  x=160-130*cos(0.85PI),  cos(153deg)=-0.891, x=275.8, y=160-130*0.454=100.9 -->
+              <!-- s=100: x=160-130*cos(PI)=290,  y=160 -->
+
+              <!-- Clay 0-40 -->
+              <path d="M30 160 A130 130 0 0 1 119.86 36.37" fill="none" stroke="#A6402E" stroke-width="16" stroke-linecap="round"/>
+              <!-- Amber 40-55 -->
+              <path d="M119.86 36.37 A130 130 0 0 1 160.31 31.55" fill="none" stroke="#BE8418" stroke-width="16"/>
+              <!-- Brass-soft 55-70 -->
+              <path d="M160.31 31.55 A130 130 0 0 1 236.44 54.83" fill="none" stroke="#B9954A" stroke-width="16"/>
+              <!-- Emerald 70-85 -->
+              <path d="M236.44 54.83 A130 130 0 0 1 275.83 100.9" fill="none" stroke="#1F6F5C" stroke-width="16"/>
+              <!-- Deep Emerald 85-100 -->
+              <path d="M275.83 100.9 A130 130 0 0 1 290 160" fill="none" stroke="#2E8C73" stroke-width="16" stroke-linecap="round"/>
+
+              <!-- Needle group -->
+              <g id="gauge-needle" style="transform-origin: 160px 160px; transform: rotate(-90deg);">
+                <line x1="160" y1="160" x2="160" y2="50" stroke="var(--brass-light)" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="160" cy="160" r="7" fill="var(--card)" stroke="var(--brass-soft)" stroke-width="2"/>
+                <circle cx="160" cy="160" r="3" fill="var(--brass-soft)"/>
+              </g>
+
+              <!-- Score labels -->
+              <text x="24" y="178" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6A7872" text-anchor="middle">0</text>
+              <text x="296" y="178" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6A7872" text-anchor="middle">100</text>
+              <text x="160" y="20" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6A7872" text-anchor="middle">50</text>
+            </svg>
+          </div>
+          <div class="gauge-score-block">
+            <span class="gauge-score-num" id="gauge-score">0</span>
+            <span class="gauge-tier mono" id="gauge-tier">Calculating...</span>
+            <span class="gauge-band mono" id="gauge-band"></span>
+          </div>
+          <div class="gauge-meta">
+            <div class="gauge-meta-item">
+              <div class="gauge-meta-val display" id="meta-conservative">—</div>
+              <div class="gauge-meta-label mono">Conservative</div>
+            </div>
+            <div class="gauge-meta-item">
+              <div class="gauge-meta-val display" id="meta-base">—</div>
+              <div class="gauge-meta-label mono">Base</div>
+            </div>
+            <div class="gauge-meta-item">
+              <div class="gauge-meta-val display" id="meta-optimistic">—</div>
+              <div class="gauge-meta-label mono">Optimistic</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── Problem ── -->
+<section id="problem">
+  <div class="container">
+    <p class="big-line display">A clean offer means little. Diligence is where the price gets re-cut.</p>
+    <div class="problem-grid reveal">
+      <div class="problem-item">
+        <div class="problem-num mono">01</div>
+        <h3>The offer is not the price</h3>
+        <p>Most owners negotiate hard for a headline number, then lose it in diligence. By the time the buyer's team arrives, the leverage has shifted.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num mono">02</div>
+        <h3>Surprises become discounts</h3>
+        <p>Undocumented addbacks, concentrated customers, owner-dependent operations, weak financials: each one gives the buyer a reason to renegotiate or restructure.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num mono">03</div>
+        <h3>Most owners find out too late</h3>
+        <p>A diligence process that starts at the letter of intent gives you no runway to fix what the buyer will find. The preparation window is now, not then.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Method ── -->
+<section id="method">
+  <div class="container">
+    <p class="section-eyebrow mono">The Method</p>
+    <h2 class="section-head display">Six dimensions. One composite score.</h2>
+    <p class="section-lead">The Diligence Readiness Score is a single 0 to 100 measure built from the six categories a private equity buyer interrogates first. Each is weighted by how heavily it moves a valuation.</p>
+
+    <div class="dimensions-grid reveal">
+      <div class="dim-card rq">
+        <div class="dim-code mono">RQ</div>
+        <div class="dim-name display">Revenue Quality</div>
+        <p class="dim-desc">Contract coverage, recurring revenue mix, owner-relationship dependency, pricing power, and net revenue retention.</p>
+        <div class="dim-weight mono">Weight: <span>25%</span></div>
+      </div>
+      <div class="dim-card fi">
+        <div class="dim-code mono">FI</div>
+        <div class="dim-name display">Financial Integrity</div>
+        <p class="dim-desc">Quality of outside review, depth of financial history, addback documentation, related-party disclosure, and close cadence.</p>
+        <div class="dim-weight mono">Weight: <span>20%</span></div>
+      </div>
+      <div class="dim-card oi">
+        <div class="dim-code mono">OI</div>
+        <div class="dim-name display">Operational Independence</div>
+        <p class="dim-desc">Business continuity without the owner, SOP coverage, management depth, and institutional versus founder-owned client relationships.</p>
+        <div class="dim-weight mono">Weight: <span>20%</span></div>
+      </div>
+      <div class="dim-card cr">
+        <div class="dim-code mono">CR</div>
+        <div class="dim-name display">Customer Risk</div>
+        <p class="dim-desc">Single-customer concentration, top-five concentration, contract protections, relationship governance, and historical churn.</p>
+        <div class="dim-weight mono">Weight: <span>15%</span></div>
+      </div>
+      <div class="dim-card mt">
+        <div class="dim-code mono">MT</div>
+        <div class="dim-name display">Management & Team</div>
+        <p class="dim-desc">Leadership layer below owner, protective covenants, voluntary retention, financial leadership quality, and incentive alignment through a sale.</p>
+        <div class="dim-weight mono">Weight: <span>10%</span></div>
+      </div>
+      <div class="dim-card gd">
+        <div class="dim-code mono">GD</div>
+        <div class="dim-name display">Growth Drivers</div>
+        <p class="dim-desc">Documented pipeline, revenue trend, standardization, expansion levers, and market positioning.</p>
+        <div class="dim-weight mono">Weight: <span>10%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Trifecta ── -->
+<section id="trifecta">
+  <div class="container">
+    <p class="section-eyebrow mono">Three Readiness Legs</p>
+    <h2 class="section-head display">A sale-ready business can still fail to close.</h2>
+    <p class="section-lead">A high DRS with low personal or financial readiness still stalls a deal. All three legs need to be in alignment before a transaction can close on the owner's terms.</p>
+
+    <div class="trifecta-grid reveal">
+      <div class="trifecta-card">
+        <div class="trifecta-icon business mono">DRS</div>
+        <h3 class="display">Business Readiness</h3>
+        <p>The DRS. Scored across six weighted dimensions. Reflects what a buyer's diligence team will find and how much they will use it to recut the price.</p>
+      </div>
+      <div class="trifecta-card">
+        <div class="trifecta-icon financial mono">FIN</div>
+        <h3 class="display">Financial Readiness</h3>
+        <p>Whether the owner's personal financial position supports the exit. A business that scores well but an owner who needs every dollar of a specific price creates brittleness at close.</p>
+      </div>
+      <div class="trifecta-card">
+        <div class="trifecta-icon personal mono">PSN</div>
+        <h3 class="display">Personal Readiness</h3>
+        <p>Clarity on role post-close, transition plan, next chapter, and timeline. Conflicted owners stall transactions, often without knowing why.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Bands ── -->
+<section id="bands">
+  <div class="container">
+    <p class="section-eyebrow mono">Reading the Score</p>
+    <h2 class="section-head display">Five tier bands. Each maps to a readiness state and a timeline.</h2>
+
+    <table class="bands-table reveal">
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>Tier</th>
+          <th>Implied time to ready</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="band-range">85–100</td>
+          <td class="band-tier"><span class="band-dot" style="background:#2E8C73"></span>Diligence Ready</td>
+          <td class="band-time">Ready now. Protect the score.</td>
+        </tr>
+        <tr>
+          <td class="band-range">70–84</td>
+          <td class="band-tier"><span class="band-dot" style="background:#1F6F5C"></span>Market Ready</td>
+          <td class="band-time">3 to 6 months</td>
+        </tr>
+        <tr>
+          <td class="band-range">55–69</td>
+          <td class="band-tier"><span class="band-dot" style="background:#B9954A"></span>Conditional</td>
+          <td class="band-time">6 to 12 months</td>
+        </tr>
+        <tr>
+          <td class="band-range">40–54</td>
+          <td class="band-tier"><span class="band-dot" style="background:#BE8418"></span>High Risk</td>
+          <td class="band-time">12 to 18 months</td>
+        </tr>
+        <tr>
+          <td class="band-range">&lt; 40</td>
+          <td class="band-tier"><span class="band-dot" style="background:#A6402E"></span>Pre-Diligence Required</td>
+          <td class="band-time">18+ months. Foundational work first.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── Process ── -->
+<section id="process">
+  <div class="container">
+    <p class="section-eyebrow mono">How it Works</p>
+    <h2 class="section-head display">Four steps from profile to roadmap.</h2>
+
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-num mono">STEP 01</div>
+        <div class="step-name display">Profile</div>
+        <p class="step-desc">Define your exit goals, intended path, priority ranking, and timeline. This drives the alignment synthesis in the output.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num mono">STEP 02</div>
+        <div class="step-name display">Assess</div>
+        <p class="step-desc">Answer the DRS bank across six dimensions, plus the Financial and Personal readiness legs. Quick mode takes four minutes. Full mode takes ten.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num mono">STEP 03</div>
+        <div class="step-name display">Score</div>
+        <p class="step-desc">The engine computes your DRS, confidence band, tier, and both secondary readiness legs. No submission. Results are instant.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num mono">STEP 04</div>
+        <div class="step-name display">Roadmap</div>
+        <p class="step-desc">The top three ranked gaps are surfaced with initiative copy calibrated to severity. An alignment verdict ties your score to your stated timeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Who ── -->
+<section id="who">
+  <div class="container">
+    <p class="section-eyebrow mono">Who it's For</p>
+    <h2 class="section-head display">Built for the deal table.</h2>
+    <p class="section-lead">Exit Blueprint is built for anyone who needs to know where a business stands before a buyer does the asking.</p>
+
+    <div class="who-grid reveal">
+      <div class="who-item">
+        <div class="who-icon">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="4" r="2.5" stroke="currentColor" stroke-width="1.25"/>
+            <path d="M2 12c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="who-label">Business Owners</span>
+      </div>
+      <div class="who-item">
+        <div class="who-icon">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.25"/>
+            <path d="M5 7h4M5 9.5h2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="who-label">M&A Advisors</span>
+      </div>
+      <div class="who-item">
+        <div class="who-icon">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 2L9 5H12L9.5 7.5L10.5 11L7 9L3.5 11L4.5 7.5L2 5H5L7 2Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="who-label">Exit Planners (CEPA)</span>
+      </div>
+      <div class="who-item">
+        <div class="who-icon">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 10L5 7L8 9L12 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="who-label">PE Acquirers</span>
+      </div>
+      <div class="who-item">
+        <div class="who-icon">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.25"/>
+            <path d="M7 4.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="who-label">Wealth Managers</span>
+      </div>
+      <div class="who-item">
+        <div class="who-icon">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 12V7l4-5 4 5v5M5.5 12V9h3v3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="who-label">Independent Sponsors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Beyond ── -->
+<section id="beyond">
+  <div class="container">
+    <p class="section-eyebrow mono">Beyond the Score</p>
+    <h2 class="section-head display">The score is the beginning, not the summary.</h2>
+
+    <div class="beyond-grid reveal">
+      <div class="beyond-card">
+        <h3 class="mono">DRS</h3>
+        <p>A 0–100 composite with confidence band. The score you hand to an advisor and the number you track over time as you close gaps.</p>
+      </div>
+      <div class="beyond-card">
+        <h3 class="mono">EBITDA Recast</h3>
+        <p>Addback clarity that a buyer's quality-of-earnings team will examine first. Gaps here pull EBITDA and compress the multiple simultaneously.</p>
+      </div>
+      <div class="beyond-card">
+        <h3 class="mono">EV Gap</h3>
+        <p>The distance between current enterprise value and where you need to be. Mapped to your stated timeline and financial readiness leg.</p>
+      </div>
+      <div class="beyond-card">
+        <h3 class="mono">Initiative Roadmap</h3>
+        <p>The top three ranked gaps with severity-calibrated initiative copy. What to do first, in plain language, ordered by weighted impact on the DRS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="container">
+    <p class="cta-label mono">Get Started</p>
+    <h2 class="display">Find your Diligence Readiness Score.</h2>
+    <p>Ten minutes today is cheaper than a re-trade at the closing table.</p>
+    <a href="#" class="btn-large">
+      Start the assessment
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="wordmark">
+          <span class="wordmark-name">Exit Blueprint</span>
+          <span class="wordmark-tag mono" style="margin-left:10px">DRS</span>
+        </a>
+        <p class="footer-disclaimer">
+          The Diligence Readiness Score (DRS) methodology is proprietary IP of Fracture Systems, licensed to Exit Blueprint. The score is indicative only, not a valuation, offer, or financial advice. Results reflect self-reported inputs and should be interpreted alongside qualified advisory counsel.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#method">Method</a>
+        <a href="#process">Process</a>
+        <a href="#who">Who it's for</a>
+        <a href="#cta">Assessment</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="mono">exitblueprint.net</p>
+      <p class="mono">&copy; 2025 Exit Blueprint. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── Gauge animation ── */
+  (function() {
+    var targetScore = 78;
+    var tierLabels = {
+      85: { label: 'Diligence Ready', color: '#2E8C73' },
+      70: { label: 'Market Ready',    color: '#1F6F5C' },
+      55: { label: 'Conditional',     color: '#B9954A' },
+      40: { label: 'High Risk',       color: '#BE8418' },
+       0: { label: 'Pre-Diligence Required', color: '#A6402E' }
+    };
+
+    function tierFor(s) {
+      if (s >= 85) return tierLabels[85];
+      if (s >= 70) return tierLabels[70];
+      if (s >= 55) return tierLabels[55];
+      if (s >= 40) return tierLabels[40];
+      return tierLabels[0];
+    }
+
+    var needle = document.getElementById('gauge-needle');
+    var scoreEl = document.getElementById('gauge-score');
+    var tierEl = document.getElementById('gauge-tier');
+    var bandEl = document.getElementById('gauge-band');
+    var metaCon = document.getElementById('meta-conservative');
+    var metaBase = document.getElementById('meta-base');
+    var metaOpt = document.getElementById('meta-optimistic');
+
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setNeedle(score) {
+      var deg = -90 + (score / 100) * 180;
+      needle.style.transform = 'rotate(' + deg + 'deg)';
+    }
+
+    function bandFor(score) {
+      var scores = [62, 71, 68, 85, 72, 64]; // sample category scores
+      var mean = scores.reduce(function(a,b){return a+b;},0) / scores.length;
+      var sd = Math.sqrt(scores.reduce(function(a,b){return a+Math.pow(b-mean,2);},0) / scores.length);
+      var width = Math.max(4, Math.min(11, Math.round(sd / 5 + 4)));
+      var conservative = Math.max(0, score - width);
+      var optimistic = Math.min(100, score + Math.ceil(width * 0.65));
+      return { conservative: conservative, base: score, optimistic: optimistic };
+    }
+
+    if (prefersReduced) {
+      setNeedle(targetScore);
+      scoreEl.textContent = targetScore;
+      var t = tierFor(targetScore);
+      tierEl.textContent = t.label;
+      tierEl.style.color = t.color;
+      var b = bandFor(targetScore);
+      bandEl.textContent = b.conservative + ' — ' + b.optimistic + ' confidence range';
+      metaCon.textContent = b.conservative;
+      metaBase.textContent = b.base;
+      metaOpt.textContent = b.optimistic;
+      return;
+    }
+
+    var start = null;
+    var duration = 2000;
+    var current = 0;
+
+    function ease(t) {
+      return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+    }
+
+    function animate(ts) {
+      if (!start) start = ts;
+      var elapsed = ts - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = ease(progress);
+      var score = Math.round(eased * targetScore);
+
+      setNeedle(eased * targetScore);
+      scoreEl.textContent = score;
+
+      var t = tierFor(score);
+      tierEl.textContent = t.label;
+      tierEl.style.color = t.color;
+
+      if (progress === 1) {
+        var b = bandFor(targetScore);
+        bandEl.textContent = b.conservative + ' – ' + b.optimistic + ' confidence range';
+        metaCon.textContent = b.conservative;
+        metaBase.textContent = b.base;
+        metaOpt.textContent = b.optimistic;
+      }
+
+      if (progress < 1) requestAnimationFrame(animate);
+    }
+
+    // Delay slightly so page paints first
+    setTimeout(function() { requestAnimationFrame(animate); }, 400);
+  })();
+
+  /* ── Scroll reveal ── */
+  (function() {
+    if (!('IntersectionObserver' in window)) return;
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(function(el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>
