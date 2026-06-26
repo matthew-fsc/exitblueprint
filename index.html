@@ -1293,12 +1293,11 @@
     <h2 class="section-head display">Request your assessment.</h2>
     <p class="section-lead">Share a few basics and we'll be in touch to get you started. No financials required.</p>
 
-    <form id="assessment-form" action="https://formsubmit.co/matthew@fracturesystems.com" method="POST" style="max-width:560px;display:flex;flex-direction:column;gap:20px;">
+    <form id="assessment-form" style="max-width:560px;display:flex;flex-direction:column;gap:20px;" onsubmit="submitForm(event)">
       <!-- Formsubmit config -->
-      <input type="hidden" name="_subject" value="New Exit Blueprint Assessment Request" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_next" value="https://exitblueprint.net/#assessment" />
-      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="access_key" value="de35fdee-9554-4f33-bad5-adbce9906122" />
+      <input type="hidden" name="subject" value="New Exit Blueprint Assessment Request" />
+      <input type="hidden" name="redirect" value="false" />
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div class="form-field">
@@ -1336,10 +1335,16 @@
           <option>Just exploring</option>
         </select>
       </div>
-      <button type="submit" class="btn-large" style="align-self:flex-start;border:none;cursor:pointer;">
+      <button type="submit" id="form-btn" class="btn-large" style="align-self:flex-start;border:none;cursor:pointer;">
         Request my assessment
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
+      <p id="form-confirm" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--emerald-2);padding:16px;background:rgba(31,111,92,0.1);border:1px solid rgba(31,111,92,0.2);border-radius:var(--radius);">
+        Got it. We'll be in touch shortly.
+      </p>
+      <p id="form-error" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--clay);padding:16px;background:rgba(166,64,46,0.1);border:1px solid rgba(166,64,46,0.2);border-radius:var(--radius);">
+        Something went wrong. Please try again or email matthew@fracturesystems.com directly.
+      </p>
     </form>
   </div>
 </section>
@@ -1465,6 +1470,42 @@
     // Delay slightly so page paints first
     setTimeout(function() { requestAnimationFrame(animate); }, 400);
   })();
+
+  /* ── Assessment form ── */
+  async function submitForm(e) {
+    e.preventDefault();
+    var btn = document.getElementById('form-btn');
+    var confirm = document.getElementById('form-confirm');
+    var error = document.getElementById('form-error');
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+    var data = {
+      access_key: 'de35fdee-9554-4f33-bad5-adbce9906122',
+      subject: 'New Exit Blueprint Assessment Request',
+      name: document.getElementById('f-name').value,
+      company: document.getElementById('f-company').value,
+      email: document.getElementById('f-email').value,
+      annual_revenue: document.getElementById('f-revenue').value,
+      exit_timeline: document.getElementById('f-timeline').value,
+    };
+    try {
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      var json = await res.json();
+      if (json.success) {
+        confirm.style.display = 'block';
+      } else {
+        throw new Error(json.message);
+      }
+    } catch(err) {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      error.style.display = 'block';
+    }
+  }
 
   /* ── Scroll reveal ── */
   (function() {
