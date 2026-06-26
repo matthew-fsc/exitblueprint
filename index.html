@@ -25,9 +25,9 @@
       --card-2:     #243530;
       --line:       #2C3E39;
       --line-2:     #3A5048;
-      --text:       #DDD8CC;
-      --text-2:     #A8B0AC;
-      --text-3:     #6A7872;
+      --text:       #EAE6DC;
+      --text-2:     #B8C0BC;
+      --text-3:     #7A8880;
       --brass:      #9A742B;
       --brass-soft: #B9954A;
       --brass-light:#D4B576;
@@ -47,8 +47,8 @@
       font-family: 'Hanken Grotesk', system-ui, sans-serif;
       background: var(--ink);
       color: var(--text);
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: 17px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -199,7 +199,7 @@
     }
 
     .hero-lead {
-      font-size: 18px;
+      font-size: 19px;
       color: var(--text-2);
       line-height: 1.7;
       max-width: 520px;
@@ -405,7 +405,7 @@
     }
 
     .section-lead {
-      font-size: 17px;
+      font-size: 18px;
       color: var(--text-2);
       max-width: 640px;
       margin-bottom: 56px;
@@ -459,7 +459,7 @@
     }
 
     .dim-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-2);
       line-height: 1.55;
       margin-bottom: 16px;
@@ -518,7 +518,7 @@
       color: var(--text);
     }
     .trifecta-card p {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-2);
       line-height: 1.65;
     }
@@ -614,7 +614,7 @@
     }
 
     .step-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-2);
       line-height: 1.55;
     }
@@ -687,7 +687,7 @@
       margin-bottom: 12px;
     }
     .beyond-card p {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-2);
       line-height: 1.6;
     }
@@ -841,6 +841,33 @@
       h1.hero-head { font-size: 28px; }
     }
 
+    /* ── Form ── */
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .form-input {
+      background: var(--card);
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder { color: var(--text-3); }
+    .form-input:focus { border-color: var(--brass-soft); }
+    select.form-input { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A8880' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    select.form-input option { background: var(--card); }
+
     /* ── Animations ── */
     @media (prefers-reduced-motion: no-preference) {
       .reveal {
@@ -863,14 +890,13 @@
     <div class="nav-inner">
       <a href="/" class="wordmark">
         <span class="wordmark-name">Exit Blueprint</span>
-        <span class="wordmark-tag mono">DRS</span>
       </a>
       <ul class="nav-links">
         <li><a href="#method">Method</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#who">Who it's for</a></li>
       </ul>
-      <a href="#cta" class="btn-primary">Start the assessment</a>
+      <a href="#assessment" class="btn-primary">Start the assessment</a>
     </div>
   </div>
 </nav>
@@ -1236,12 +1262,67 @@
     <p class="cta-label mono">Get Started</p>
     <h2 class="display">Find your Diligence Readiness Score.</h2>
     <p>Ten minutes today is cheaper than a re-trade at the closing table.</p>
-    <a href="#" class="btn-large">
+    <a href="#assessment" class="btn-large">
       Start the assessment
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
+  </div>
+</section>
+
+<!-- ── Assessment Form ── -->
+<section id="assessment" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <p class="section-eyebrow mono">Start Here</p>
+    <h2 class="section-head display">Get your Diligence Readiness Score.</h2>
+    <p class="section-lead">Tell us a bit about your business and we'll be in touch to walk you through the full assessment.</p>
+
+    <form id="assessment-form" style="max-width:560px;display:flex;flex-direction:column;gap:20px;" onsubmit="handleFormSubmit(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="form-field">
+          <label class="form-label mono" for="f-name">Your Name</label>
+          <input class="form-input" id="f-name" type="text" placeholder="Jane Smith" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label mono" for="f-company">Company</label>
+          <input class="form-input" id="f-company" type="text" placeholder="Acme Inc." required />
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label mono" for="f-email">Email</label>
+        <input class="form-input" id="f-email" type="email" placeholder="jane@acme.com" required />
+      </div>
+      <div class="form-field">
+        <label class="form-label mono" for="f-revenue">Annual Revenue (approximate)</label>
+        <select class="form-input" id="f-revenue" required>
+          <option value="" disabled selected>Select a range</option>
+          <option>Under $1M</option>
+          <option>$1M – $5M</option>
+          <option>$5M – $15M</option>
+          <option>$15M – $50M</option>
+          <option>Over $50M</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label mono" for="f-timeline">Exit Timeline</label>
+        <select class="form-input" id="f-timeline" required>
+          <option value="" disabled selected>When are you thinking?</option>
+          <option>Under 1 year</option>
+          <option>1 to 2 years</option>
+          <option>3 to 5 years</option>
+          <option>5+ years</option>
+          <option>Just exploring</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-large" style="align-self:flex-start;border:none;cursor:pointer;">
+        Request my assessment
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p id="form-confirm" style="display:none;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--emerald-2);padding:16px;background:rgba(31,111,92,0.1);border:1px solid rgba(31,111,92,0.2);border-radius:var(--radius);">
+        Got it. We'll be in touch within one business day.
+      </p>
+    </form>
   </div>
 </section>
 
@@ -1252,22 +1333,21 @@
       <div class="footer-brand">
         <a href="/" class="wordmark">
           <span class="wordmark-name">Exit Blueprint</span>
-          <span class="wordmark-tag mono" style="margin-left:10px">DRS</span>
         </a>
         <p class="footer-disclaimer">
-          The Diligence Readiness Score (DRS) methodology is proprietary IP of Fracture Systems, licensed to Exit Blueprint. The score is indicative only, not a valuation, offer, or financial advice. Results reflect self-reported inputs and should be interpreted alongside qualified advisory counsel.
+          The Diligence Readiness Score is a scoring tool, not a valuation or financial advice. Results are based on self-reported inputs and are a starting point for advisory conversations.
         </p>
       </div>
       <div class="footer-links">
         <a href="#method">Method</a>
         <a href="#process">Process</a>
         <a href="#who">Who it's for</a>
-        <a href="#cta">Assessment</a>
+        <a href="#assessment">Assessment</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p class="mono">exitblueprint.net</p>
-      <p class="mono">&copy; 2025 Exit Blueprint. All rights reserved.</p>
+      <p class="mono">&copy; 2026 Exit Blueprint. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -1367,6 +1447,18 @@
     // Delay slightly so page paints first
     setTimeout(function() { requestAnimationFrame(animate); }, 400);
   })();
+
+  /* ── Assessment form ── */
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    var form = document.getElementById('assessment-form');
+    var confirm = document.getElementById('form-confirm');
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+    confirm.style.display = 'block';
+    confirm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 
   /* ── Scroll reveal ── */
   (function() {
