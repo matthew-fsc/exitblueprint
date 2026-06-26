@@ -31,6 +31,20 @@ function getQuestionsForCategory(code: string, mode: Mode) {
   return mode === 'quick' ? cat.questions.filter(q => q.isSignature) : cat.questions;
 }
 
+const DRS_CATS: Step[] = ['RQ', 'FI', 'OI', 'CR', 'MT', 'GD'];
+
+const STEP_LABELS: Record<string, string> = {
+  profile: 'Exit Profile',
+  RQ: 'Revenue Quality',
+  FI: 'Financial Integrity',
+  OI: 'Operational Independence',
+  CR: 'Customer Risk',
+  MT: 'Management & Team',
+  GD: 'Growth Drivers',
+  financial: 'Financial Readiness',
+  personal: 'Personal Readiness',
+};
+
 export default function Assessment() {
   const navigate = useNavigate();
   const reduced = useReducedMotion();
@@ -46,14 +60,15 @@ export default function Assessment() {
 
   const step = STEPS[stepIdx];
   const totalSteps = STEPS.length - 2;
+  const currentProgress = Math.max(0, stepIdx - 1);
 
   function canAdvance(): boolean {
     if (step === 'intro') return true;
+    if (step === 'results') return true;
     if (step === 'profile') {
       return exitProfileQuestions.every(q => answers.profile[q.id] !== undefined);
     }
-    if (step === 'results') return true;
-    if (['RQ','FI','OI','CR','MT','GD'].includes(step)) {
+    if (DRS_CATS.includes(step as Step)) {
       const qs = getQuestionsForCategory(step, mode);
       return qs.every(q => answers.drs[q.id] !== undefined);
     }
@@ -70,11 +85,13 @@ export default function Assessment() {
     if (!canAdvance()) return;
     setDirection(1);
     setStepIdx(i => Math.min(i + 1, STEPS.length - 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function back() {
     setDirection(-1);
     setStepIdx(i => Math.max(i - 1, 0));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const setDrsAnswer = useCallback((id: string, value: number) => {
@@ -102,15 +119,10 @@ export default function Assessment() {
   const alignmentText = alignment(drs, answers.profile, financialScore, personalScore);
 
   const variants = {
-    enter: (dir: number) => ({ opacity: 0, y: dir > 0 ? 20 : -20 }),
+    enter: (dir: number) => ({ opacity: 0, y: dir > 0 ? 16 : -16 }),
     center: { opacity: 1, y: 0 },
-    exit: (dir: number) => ({ opacity: 0, y: dir > 0 ? -20 : 20 }),
+    exit: (dir: number) => ({ opacity: 0, y: dir > 0 ? -16 : 16 }),
   };
-
-  const currentProgress = Math.max(0, stepIdx - 1);
-
-  // suppress unused navigate warning -- navigate is used in Nav child
-  void navigate;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -121,7 +133,7 @@ export default function Assessment() {
             <Stepper
               current={currentProgress}
               total={totalSteps}
-              label={step === 'profile' ? 'Exit Profile' : step === 'financial' ? 'Financial Readiness' : step === 'personal' ? 'Personal Readiness' : `${step}: ${categories.find(c => c.code === step)?.name ?? ''}`}
+              label={STEP_LABELS[step] ?? step}
             />
           </div>
         )}
@@ -134,32 +146,35 @@ export default function Assessment() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
           >
+
             {step === 'intro' && (
               <div className="max-w-2xl mx-auto px-4 sm:px-6 py-16 space-y-10">
                 <div className="space-y-4">
                   <p className="font-mono text-xs text-brass uppercase tracking-widest">Diligence Readiness Score</p>
                   <h1 className="font-display text-3xl font-bold">Before we begin</h1>
-                  <p className="text-mut leading-relaxed">Choose your mode. You can switch later by retaking the assessment.</p>
+                  <p className="text-mut leading-relaxed">Choose your mode. Both use the same scoring engine.</p>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {(['quick', 'full'] as const).map(m => (
                     <button
                       key={m}
                       onClick={() => setMode(m)}
-                      className={`text-left p-6 rounded-lg border-2 transition-all space-y-2 ${mode === m ? 'border-brass bg-brass/5' : 'border-line bg-card hover:border-brass-soft'}`}
+                      className={`text-left p-6 rounded-lg border-2 transition-all space-y-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass ${mode === m ? 'border-brass bg-brass/5' : 'border-line bg-card hover:border-brass-soft'}`}
                     >
-                      <p className="font-medium capitalize">{m === 'quick' ? 'Quick' : 'Full'}</p>
+                      <p className="font-medium">{m === 'quick' ? 'Quick' : 'Full'}</p>
                       <p className="text-sm text-mut">
-                        {m === 'quick' ? '6 signature questions. About 4 minutes. One per DRS category.' : 'Complete question bank. About 10 minutes. Highest accuracy.'}
+                        {m === 'quick'
+                          ? 'One signature question per DRS category. About 4 minutes.'
+                          : 'Complete question bank. About 10 minutes. Highest accuracy.'}
                       </p>
                     </button>
                   ))}
                 </div>
                 <button
                   onClick={advance}
-                  className="bg-ink text-paper font-medium px-6 py-3 rounded hover:bg-ink-2 transition-colors"
+                  className="bg-ink text-paper font-medium px-6 py-3 rounded hover:bg-ink-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brass"
                 >
                   Begin
                 </button>
@@ -171,7 +186,7 @@ export default function Assessment() {
                 <div className="space-y-2">
                   <p className="font-mono text-xs text-brass uppercase tracking-widest">Exit Profile</p>
                   <h2 className="font-display text-2xl font-bold">Your exit intent and priorities</h2>
-                  <p className="text-sm text-mut">This section is unscored. It shapes your alignment verdict.</p>
+                  <p className="text-sm text-mut">Unscored. Shapes your alignment verdict.</p>
                 </div>
                 <div className="space-y-8">
                   {exitProfileQuestions.map(q => (
@@ -198,44 +213,40 @@ export default function Assessment() {
               </div>
             )}
 
-            {(['RQ','FI','OI','CR','MT','GD'] as const).includes(step as 'RQ'|'FI'|'OI'|'CR'|'MT'|'GD') && (
-              <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 space-y-8">
-                {(() => {
-                  const cat = categories.find(c => c.code === step)!;
-                  const qs = getQuestionsForCategory(step, mode);
-                  return (
-                    <>
-                      <div className="space-y-2">
-                        <p className="font-mono text-xs text-brass uppercase tracking-widest">{cat.code}: {cat.name}</p>
-                        <p className="font-mono text-xs text-mut">Weight: {Math.round(cat.weight * 100)}%</p>
-                      </div>
-                      <div className="space-y-8">
-                        {qs.map(q => (
-                          <QuestionCard
-                            key={q.id}
-                            id={q.id}
-                            text={q.text}
-                            options={q.options}
-                            selected={answers.drs[q.id]}
-                            onChange={v => setDrsAnswer(q.id, v as number)}
-                          />
-                        ))}
-                      </div>
-                      <div className="flex gap-3 pt-2">
-                        <button onClick={back} className="px-5 py-2 border border-line rounded text-sm hover:bg-paper-2 transition-colors">Back</button>
-                        <button
-                          onClick={advance}
-                          disabled={!canAdvance()}
-                          className="flex-1 bg-ink text-paper font-medium py-2 rounded disabled:opacity-40 hover:bg-ink-2 transition-colors"
-                        >
-                          Continue
-                        </button>
-                      </div>
-                    </>
-                  );
-                })()}
-              </div>
-            )}
+            {DRS_CATS.includes(step as Step) && (() => {
+              const cat = categories.find(c => c.code === step)!;
+              const qs = getQuestionsForCategory(step, mode);
+              return (
+                <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 space-y-8">
+                  <div className="space-y-1">
+                    <p className="font-mono text-xs text-brass uppercase tracking-widest">{cat.code}: {cat.name}</p>
+                    <p className="font-mono text-xs text-mut">Weight: {Math.round(cat.weight * 100)}%</p>
+                  </div>
+                  <div className="space-y-8">
+                    {qs.map(q => (
+                      <QuestionCard
+                        key={q.id}
+                        id={q.id}
+                        text={q.text}
+                        options={q.options}
+                        selected={answers.drs[q.id]}
+                        onChange={v => setDrsAnswer(q.id, Number(v))}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    <button onClick={back} className="px-5 py-2 border border-line rounded text-sm hover:bg-paper-2 transition-colors">Back</button>
+                    <button
+                      onClick={advance}
+                      disabled={!canAdvance()}
+                      className="flex-1 bg-ink text-paper font-medium py-2 rounded disabled:opacity-40 hover:bg-ink-2 transition-colors"
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </div>
+              );
+            })()}
 
             {step === 'financial' && (
               <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 space-y-8">
@@ -251,7 +262,7 @@ export default function Assessment() {
                       text={q.text}
                       options={q.options}
                       selected={answers.financial[q.id]}
-                      onChange={v => setFinancialAnswer(q.id, v as number)}
+                      onChange={v => setFinancialAnswer(q.id, Number(v))}
                     />
                   ))}
                 </div>
@@ -282,7 +293,7 @@ export default function Assessment() {
                       text={q.text}
                       options={q.options}
                       selected={answers.personal[q.id]}
-                      onChange={v => setPersonalAnswer(q.id, v as number)}
+                      onChange={v => setPersonalAnswer(q.id, Number(v))}
                     />
                   ))}
                 </div>
@@ -302,16 +313,18 @@ export default function Assessment() {
             {step === 'results' && (
               <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 space-y-12">
                 {/* DRS Headline */}
-                <div className="bg-ink text-paper rounded-xl p-8 space-y-6">
+                <div className="dark-card bg-ink text-paper rounded-xl p-8 space-y-6">
                   <p className="font-mono text-xs text-brass uppercase tracking-widest">Diligence Readiness Score</p>
                   <div className="max-w-xs mx-auto">
                     <Gauge score={drs} size="lg" />
                   </div>
-                  <div className="text-center space-y-2">
+                  <div className="text-center space-y-3">
                     <p className="font-display text-2xl font-bold">{tier.label}</p>
-                    <p className="font-mono text-xs text-mut">
-                      Conservative {band.conservative} / Base {band.base} / Optimistic {band.optimistic}
-                    </p>
+                    <div className="font-mono text-xs text-mut space-x-4">
+                      <span>Conservative {band.conservative}</span>
+                      <span>Base {band.base}</span>
+                      <span>Optimistic {band.optimistic}</span>
+                    </div>
                   </div>
                 </div>
 
@@ -334,7 +347,7 @@ export default function Assessment() {
                 {/* Dimension bars */}
                 <div className="space-y-3">
                   <p className="font-mono text-xs text-brass uppercase tracking-widest">Dimension Breakdown</p>
-                  <div className="bg-card border border-line rounded-lg p-6 space-y-4">
+                  <div className="bg-card border border-line rounded-lg p-6 space-y-5">
                     {categories.map(cat => (
                       <DimensionBar
                         key={cat.code}
@@ -374,7 +387,6 @@ export default function Assessment() {
                       personal: personalScore,
                       profile: answers.profile,
                       categoryScores,
-                      answers,
                     }}
                   />
                 </div>
@@ -388,7 +400,7 @@ export default function Assessment() {
                     Save as PDF
                   </button>
                   <button
-                    onClick={() => { setStepIdx(0); setAnswers({ profile: {}, drs: {}, financial: {}, personal: {} }); }}
+                    onClick={() => navigate('/assessment')}
                     className="px-5 py-2 border border-line rounded text-sm hover:bg-paper-2 transition-colors"
                   >
                     Retake
@@ -397,10 +409,12 @@ export default function Assessment() {
 
                 {/* Disclaimer */}
                 <div className="text-xs text-mut border-t border-line pt-6 leading-relaxed">
-                  The DRS methodology is proprietary IP of Fracture Systems, licensed to Exit Blueprint. The score is indicative, not a valuation, offer, or financial advice.
+                  The DRS methodology is proprietary IP of Fracture Systems, licensed to Exit Blueprint.
+                  The score is indicative, not a valuation, offer, or financial advice.
                 </div>
               </div>
             )}
+
           </motion.div>
         </AnimatePresence>
       </div>
