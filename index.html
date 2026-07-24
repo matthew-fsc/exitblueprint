@@ -192,13 +192,13 @@
     .big-line em { font-style:italic; color:var(--mint); font-weight:700; }
     .problem-intro { font-size:17px; color:var(--on-dark-muted); line-height:1.62; }
     .problem-list { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--forest-line); }
-    .problem-item { padding:32px 30px 4px 0; border-right:1px solid var(--forest-line); }
+    .problem-item { padding:34px 36px; border-right:1px solid var(--forest-line); }
+    .problem-item:first-child { padding-left:0; }
     .problem-item:last-child { border-right:none; padding-right:0; }
     .problem-marker { width:34px; height:34px; border-radius:10px; background:var(--forest-lift); border:1px solid var(--forest-line); display:grid; place-items:center; margin-bottom:20px; }
     .problem-marker svg { width:17px; height:17px; stroke:var(--mint); fill:none; }
     .problem-item h3 { font-size:19px; font-weight:600; color:var(--off); margin-bottom:11px; letter-spacing:-0.02em; }
     .problem-item p { font-size:15px; color:var(--on-dark-muted); line-height:1.6; }
-    @media (max-width:760px){ .problem-item{ padding-left:0; padding-right:0; border-right:none; border-bottom:1px solid var(--forest-line); padding-bottom:26px; } .problem-item:last-child{ border-bottom:none; } }
 
     /* ============ Method — weighted bars ============ */
     .method-grid { display:grid; grid-template-columns:0.82fr 1.18fr; gap:56px; align-items:start; }
@@ -335,6 +335,9 @@
       .footer-inner { grid-template-columns:1fr 1fr; gap:32px; }
       .footer-brand { grid-column:1 / -1; }
       .problem-list { grid-template-columns:1fr; }
+      .problem-item { padding:30px 0; border-right:none; border-bottom:1px solid var(--forest-line); }
+      .problem-item:first-child { padding-top:34px; }
+      .problem-item:last-child { border-bottom:none; padding-bottom:0; }
     }
     @media (max-width:680px) {
       section { padding:72px 0; }
