@@ -12,7 +12,7 @@ Exit Blueprint scores how prepared a business is to survive buyer diligence with
 
 Audience: business owners, M&A advisors, exit planners (CEPA), PE acquirers, wealth managers, independent sponsors.
 
-IP line that must appear in the footer and report disclaimer: the DRS methodology is proprietary IP of Fracture Systems, licensed to Exit Blueprint. The score is indicative, not a valuation, offer, or financial advice.
+IP line that must appear in the footer and report disclaimer: the DRS methodology is proprietary IP of Exit Blueprint. The score is indicative, not a valuation, offer, or financial advice.
 
 ---
 
