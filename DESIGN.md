@@ -67,4 +67,4 @@ Primary "Start the assessment" and "Log in" actions route to `https://app.exitbl
 
 ## IP line (footer + any report)
 
-The DRS methodology is proprietary IP of Fracture Systems, licensed to Exit Blueprint. The score is indicative, not a valuation, offer, or financial advice.
+The DRS methodology is proprietary IP of Exit Blueprint. The score is indicative, not a valuation, offer, or financial advice.
