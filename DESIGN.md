@@ -5,7 +5,7 @@ Durable visual decisions for the ExitBlueprint marketing site. Refinement preser
 ## Direction contract
 
 - **THESIS:** A precision diligence instrument dressed as a modern, trustworthy financial product. It refuses the dark/brass/serif "luxury deal document" look and the AI-default cream-serif-terracotta look. Calm light ground, one confident green, one bold dark instrument.
-- **OWN-WORLD:** Off-white ground (`#EEEFEE`), crisp white surfaces, deep forest-green dark sections and footer, a single brand green used decisively, mint for accents and "ready" states. Grotesk display + humanist body + monospace reserved strictly for data (dimension codes, weights, scores, ranges). No decorative grid fields, no gradient text, no eyebrow on every section, no uniform card wall.
+- **OWN-WORLD:** Off-white ground (`#EEEFEE`), crisp white surfaces, deep forest-green dark sections and footer, a single brand green used decisively, mint for accents and "ready" states. Grotesk display + humanist body + monospace reserved strictly for data (score codes, bands, scores, ranges). No decorative grid fields, no gradient text, no eyebrow on every section, no uniform card wall.
 - **MODE:** Persuade. A first-time visitor knows what this is, why it matters, and what to do within seconds.
 
 ## Color tokens
@@ -14,9 +14,9 @@ Pinned palette (do not invent new brand colors):
 
 | Token | Hex | Role |
 |---|---|---|
-| `--forest` | `#0C2218` | Dark sections, footer, gauge card; primary text on light (14.5:1) |
+| `--forest` | `#0C2218` | Dark sections, footer, score card; primary text on light (14.5:1) |
 | `--brand` | `#438663` | The single confident brand green: accents, key marks |
-| `--mint` | `#98D4AF` | Accents/highlights on dark, gauge "ready" states, hovers |
+| `--mint` | `#98D4AF` | Accents/highlights on dark, hovers. Not a score color — the tier ramp owns those |
 | `--off` | `#EEEFEE` | Page ground and light surfaces |
 
 Derived roles (WCAG AA verified):
@@ -38,7 +38,26 @@ Derived roles (WCAG AA verified):
 
 **Rule:** mint is never text on a light ground (fails contrast); use it on forest or as a fill. Buttons use `--primary-strong`, not raw `--brand`, so white labels pass AA.
 
-**DRS score ramp (Option A — single-hue green):** `[0,40] #3E5A4C` · `[40,55] #4E7B63` · `[55,70] #438663` · `[70,85] #5FB488` · `[85,100] #98D4AF`. Risk reads dim/desaturated; readiness reads bright mint.
+**Tier ramp — multi-hue, ordinal, always labeled.** The single-hue green ramp is
+retired: with three scores on screen at once it made a weak leg read as a slightly
+duller green, which is the one thing the instrument exists to prevent. Hue now
+carries the readiness signal, falling teal → green → amber → orange → red. These
+are the five colors the app ships, so a score looks the same on the site and in
+the product.
+
+| Band | Light ground | On forest | Meaning |
+|---|---|---|---|
+| 85–100 / 90–100 | `#0E8F9E` | `#35B6C9` | Institutional Grade · Exit Ready |
+| 70–84 / 70–89 | `#2F9E44` | `#46C46F` | Sale Ready · Well Positioned |
+| 55–69 / 50–69 | `#9A7D0A` | `#D9B23A` | Needs Work · Developing |
+| 40–54 / 30–49 | `#E0670F` | `#F0883C` | High Risk · Early Stage |
+| <40 / <30 | `#C0362C` | `#EF6A5E` | Not Saleable (Yet) · Not Ready |
+
+**Rule:** the light column runs 2.98–4.79 on the off-white — swatch contrast, not
+text contrast. On a light section the ramp only ever paints a dot or a bar and the
+label beside it stays in ink. The forest column (5.48–8.25) is the only place these
+colors carry type. Every element that colors by tier reads one custom property,
+`--tier`, set by a `.tier-*` class; the ramp changes in exactly one place.
 
 ## Logo
 
@@ -88,7 +107,7 @@ Loaded from Google Fonts. Fraunces and the serif register are retired.
 
 - **Display / headings:** Schibsted Grotesk, weights 600–800, tracking ~-0.03em, `text-wrap: balance`.
 - **Body / UI:** Figtree, weights 400–600, line-height ~1.6, measure 60–75ch.
-- **Data / annotation:** Spline Sans Mono, weights 400–500, `font-variant-numeric: tabular-nums`. Reserved for dimension codes (RQ, FI, OI, CR, MT, GD), weights, scores, ranges, step counters — never as generic "technical" decoration.
+- **Data / annotation:** Spline Sans Mono, weights 400–500, `font-variant-numeric: tabular-nums`. Reserved for score codes (DRS, BAS, ORI), band labels, scores, ranges, step counters — never as generic "technical" decoration.
 
 Scale: display clamp 40–72px; H2 clamp 26–38px; H3 20–22px; body 17px; small 14–15px; mono labels 11–13px.
 
@@ -96,12 +115,27 @@ Scale: display clamp 40–72px; H2 clamp 26–38px; H3 20–22px; body 17px; sma
 
 - 8px spacing rhythm; radii `--r 14px` / `--r-sm 10px`; more space above a heading than below it.
 - Section rhythm alternates light / forest to pace the scroll (Asana), not a uniform card grid.
-- One authored motion moment: the DRS gauge needle springs to score on load. Sections rise once on first reveal; method bars fill on reveal. All motion respects `prefers-reduced-motion`.
+- One authored motion moment: the three score rings sweep to their scores on load, staggered ~110ms apart so the row reads as a single gesture rather than three animations that happen to fire together. Sections rise once on first reveal; the evidence bars fill on reveal. All motion respects `prefers-reduced-motion`, under which the rings are simply set.
 - Real hover / focus-visible / active states on every interactive element. Responsive to 360px.
 
 ## Signature
 
-The DRS gauge: a 180° semicircular instrument on a forest-dark card, the one bold moment on a calm page. Reinforced by the monospace data layer.
+**The three-score readout:** three rings — DRS, BAS, ORI — on the forest-dark
+card, the one bold moment on a calm page. It replaced a single needle gauge with a
+"confidence range" beneath it, and both had to go: the product reports three scores
+and never composites them, and it ships no confidence band at all.
+
+The composition *is* the argument. Three separate readings that refuse to resolve
+into one, in three different hues, with a footer naming the average the site will
+not print (`Averaged, this owner is a ~~63~~ … We never compute it.`). A visitor
+who reads nothing else should come away knowing there is no single number.
+
+Ring geometry is the app's, not an approximation of it: size, stroke at 9% of it,
+radius on the stroke centreline, and the dash shortened by one stroke with the
+sweep rotated forward by half of one — a round cap paints half a stroke of extra
+arc past each end, so without the correction every ring renders long and starts
+before twelve o'clock. A 78 is therefore the same picture here and in the product.
+The number is printed in the markup and never animates; the ring is reinforcement.
 
 ## Auth
 
@@ -109,4 +143,4 @@ Primary "Start the assessment" and "Log in" actions route to `https://app.exitbl
 
 ## IP line (footer + any report)
 
-The DRS methodology is proprietary IP of Exit Blueprint LLC. The score is indicative, not a valuation, offer, or financial advice.
+The DRS, BAS and ORI methodology is proprietary IP of Exit Blueprint LLC. The scores are indicative, not a valuation, offer, or financial advice.
