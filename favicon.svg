@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Browser-tab icon: the ExitBlueprint symbol reversed out of the forest brand
+     tile. Deliberately theme-INDEPENDENT — a tab strip is light in one browser
+     and dark in the next, and an untiled green mark would disappear into one of
+     them. The forest tile carries its own ground, so the icon reads the same
+     either way. Keep in sync with BrandLogomark({ boxed }) in
+     src/components/ui/BrandMark.tsx. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="ExitBlueprint">
+  <title>ExitBlueprint</title>
+  <rect width="64" height="64" rx="14" fill="#0c2218" />
+  <svg x="12" y="12" width="40" height="40" viewBox="57.48 79.42 31.2 26.19" fill="#98d4af">
+    <polygon points="71.35 79.42 71.35 89.43 76.05 89.43 76.05 83.4 88.63 83.4 88.63 79.42 71.35 79.42" />
+    <polygon points="76.05 101.64 76.05 95.49 71.35 95.49 71.35 105.61 88.68 105.61 88.68 101.64 76.05 101.64" />
+    <path d="M65.54,101.01c-.04.39-.06.83-.1,1.7-.06,1.22-.07,2.22-.07,2.9h-7.89c0-3.87,1.08-6.64,1.8-8.11.43-.89,1.03-2.09,2.22-3.36.4-.43,2.29-2.37,5.18-3.24,1.49-.45,3.14-.57,3.63-.61.26-.02.5-.03,1.06-.05,2.8-.08,4.79,0,8.55.02.28,0,.51,0,.64,0,0,1.44,0,2.89,0,4.33l-9.19.04c-2.34.01-3.22.91-3.9,1.6-1.57,1.58-1.85,4.18-1.91,4.76Z" />
+    <path d="M80.38,87.08c2.13,1.76,4.26,3.53,6.39,5.29-2.13,1.76-4.26,3.53-6.39,5.29v-2.51" />
+  </svg>
+</svg>
