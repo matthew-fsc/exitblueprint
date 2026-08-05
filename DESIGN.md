@@ -143,4 +143,4 @@ Primary "Start the assessment" and "Log in" actions route to `https://app.exitbl
 
 ## IP line (footer + any report)
 
-The DRS methodology is proprietary IP of Exit Blueprint LLC. The score is indicative, not a valuation, offer, or financial advice.
+The DRS, BAS and ORI methodology is proprietary IP of Exit Blueprint LLC. The scores are indicative, not a valuation, offer, or financial advice.
