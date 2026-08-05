@@ -1,6 +1,6 @@
-# Exit Blueprint — Design System
+# ExitBlueprint — Design System
 
-Durable visual decisions for the Exit Blueprint marketing site. Refinement preserves this; a redesign replaces it.
+Durable visual decisions for the ExitBlueprint marketing site. Refinement preserves this; a redesign replaces it.
 
 ## Direction contract
 
@@ -40,6 +40,48 @@ Derived roles (WCAG AA verified):
 
 **DRS score ramp (Option A — single-hue green):** `[0,40] #3E5A4C` · `[40,55] #4E7B63` · `[55,70] #438663` · `[70,85] #5FB488` · `[85,100] #98D4AF`. Risk reads dim/desaturated; readiness reads bright mint.
 
+## Logo
+
+The master artwork lives in `brand/exit-blueprint-logo.svg` (light) and
+`brand/exit-blueprint-logo-reversed.svg` (dark), and is the same mark the app
+ships. It is **one piece of artwork**, never a mark plus live text — the site
+inlines it once as `<symbol id="eb-logo">` and instances it with `<use>`, so the
+nav and footer lockups cannot drift and the wordmark does not restyle itself when
+a webfont falls back.
+
+| Token | Light | On forest | Role |
+|---|---|---|---|
+| `--logo-green` | `#56916A` | `--mint` | The symbol + "Exit" |
+| `--logo-ink` | `#37684D` | `--off` | "Blueprint" |
+
+Three rules:
+
+- **The logo tones are not site palette.** They belong to the mark. The page can
+  restyle around them; the logo does not follow. Never wire the lockup to
+  `--primary` / `--brand`.
+- **The two tones are a contrast RELATIONSHIP, not two colors.** On light,
+  "Blueprint" carries the dominant tone (6.4:1 on white) and the symbol + "Exit"
+  the softer green. On forest that deep green drops to ~2.9:1, so the dark
+  lockup **inverts the lightness order** — "Blueprint" takes the near-white ink
+  (14.5:1), the symbol and "Exit" lift to mint (8.7:1). Same reading, dark ground.
+- **The app tile is pinned in both grounds.** `favicon.svg` is the symbol
+  reversed out of a forest tile and carries its own background on purpose: a tab
+  strip is light in one browser and dark in the next. `apple-touch-icon.png` is
+  the 180px raster of it, because iOS ignores an SVG touch icon and substitutes a
+  screenshot of the page.
+
+**Legibility floor: a 21px lockup** (= a 16px symbol). The hairline between the
+bracket and the swoosh is 0.8 of the symbol's 31.2 units, so below that the two
+shapes fuse into a blob. Nav is 24px, footer 28px, and 22px at ≤400px is the last
+stop — the nav sheds its links, its login text and its button padding before the
+mark is allowed to shrink further. Anything smaller needs a simplified cut of the
+artwork, which is a brand decision, not a scale-it-down decision.
+
+**Name.** The wordmark is one word, **ExitBlueprint**, matching the artwork; prose
+follows it. The registered entity, *Exit Blueprint LLC*, keeps its own two-word
+spelling in the IP and copyright lines — a legal fact, not a styling choice. Same
+split the app makes in `shared/brand.ts`.
+
 ## Typography
 
 Loaded from Google Fonts. Fraunces and the serif register are retired.
@@ -67,4 +109,4 @@ Primary "Start the assessment" and "Log in" actions route to `https://app.exitbl
 
 ## IP line (footer + any report)
 
-The DRS methodology is proprietary IP of Exit Blueprint. The score is indicative, not a valuation, offer, or financial advice.
+The DRS methodology is proprietary IP of Exit Blueprint LLC. The score is indicative, not a valuation, offer, or financial advice.
