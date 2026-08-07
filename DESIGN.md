@@ -7,6 +7,7 @@ Durable visual decisions for the ExitBlueprint marketing site. Refinement preser
 - **THESIS:** A precision diligence instrument dressed as a modern, trustworthy financial product. It refuses the dark/brass/serif "luxury deal document" look and the AI-default cream-serif-terracotta look. Calm light ground, one confident green, one bold dark instrument.
 - **OWN-WORLD:** Off-white ground (`#EEEFEE`), crisp white surfaces, deep forest-green dark sections and footer, a single brand green used decisively, mint for accents and "ready" states. Grotesk display + humanist body + monospace reserved strictly for data (score codes, bands, scores, ranges). No decorative grid fields, no gradient text, no eyebrow on every section, no uniform card wall.
 - **MODE:** Persuade. A first-time visitor knows what this is, why it matters, and what to do within seconds.
+- **THE HERO'S JOB:** enablement, not fear. The headline says the advisor can now *run* the readiness and exit-preparation process; the loss argument is section two, where it reads as the reason rather than as the opening threat. The italic accent in the headline is a **one-word** device — four italic words across two lines read as a second headline rather than an accent.
 - **READER:** The independent wealth manager, RIA principal, or multi-manager office partner who has business-owner clients — not the owner. The owner is a person the reader serves, and appears on the page only as the subject of the artifact. One buyer, one argument.
 
 ## Color tokens
@@ -161,12 +162,13 @@ The number is printed in the markup and never animates; the ring is reinforcemen
 
 ## Calls to action
 
-There is **one** primary action on the page and it is the **design partner program** — an on-page section and the form beneath it, not an external flow. The go-to-market is a hand-provisioned cohort, so the site never links to a self-serve sign-up: a button that lands a visitor in a flow nobody can serve them through is worse than no button.
+There is **one** primary action on the page and it is the contact form — an on-page section, not an external flow. The go-to-market is a hand-provisioned motion, so the site never links to a self-serve sign-up: a button that lands a visitor in a flow nobody can serve them through is worse than no button.
 
-- Primary (nav, hero, partner section) → `#partner` / `#apply`, in-page.
+- Primary (nav, hero, closing band) → `#apply`, in-page. Every primary button on the page resolves to the same destination; there is no second thing to do.
 - "Log in" → `https://app.exitblueprint.net/login`, for advisors who are already provisioned. This is the only outbound product link.
 - The form is the design-partner enquiry. Its fields qualify on **owner-client density**, which predicts fit better than AUM does; the owner's revenue and exit timeline are not asked, because the owner is not the buyer.
-- The nav button carries **two labels in one element** (`.nav-cta-long` / `.nav-cta-short`). "Design partner program" is 214px at nav type size, wider than the whole right-hand side has at 360px, and the mark is already at its 22px legibility floor — so the label shortens and the logo does not.
+- The nav button carries **two labels in one element** (`.nav-cta-long` / `.nav-cta-short`, swapped at ≤460px). The full label is wider than the whole right-hand side has at 360px, and the mark is already at its 22px legibility floor — so the label shortens and the logo does not.
+- The hero's two buttons must fit **one row** in a ~525px column. That is the constraint on their labels, and it is why the secondary one is short.
 
 ## IP line (footer + any report)
 
