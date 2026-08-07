@@ -199,7 +199,11 @@
       background:radial-gradient(circle at 40% 40%, rgba(152,212,175,0.28), transparent 66%);
       pointer-events:none;
     }
-    .hero-grid { display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center; position:relative; z-index:1; }
+    /* 0.96/1.04 rather than 1.05/0.95: the readout needs ~150px per tile to set
+       "Business attractiveness" on one line, and the text column's own binding
+       constraint is the mono note at ~467px, not the button row at 420px. Both
+       clear at 480 / 520. */
+    .hero-grid { display:grid; grid-template-columns:0.96fr 1.04fr; gap:64px; align-items:center; position:relative; z-index:1; }
     .hero-eyebrow { font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--primary-ink); margin-bottom:22px; }
     h1.hero-head { font-size:clamp(38px,5.4vw,66px); font-weight:800; letter-spacing:-0.038em; margin-bottom:22px; color:var(--ink); }
     h1.hero-head em { font-style:italic; color:var(--primary); font-weight:800; }
@@ -216,7 +220,7 @@
        reads three separate readings that refuse to resolve into one. */
     .score-card {
       background:var(--forest-panel); border:1px solid var(--forest-line);
-      border-radius:var(--r-lg); padding:26px 26px 22px; width:100%;
+      border-radius:var(--r-lg); padding:22px 22px 20px; width:100%;
       box-shadow:0 30px 60px -34px rgba(12,34,24,0.6);
       /* The five tier colors, re-toned for this ground. The light values sit at
          ~3:1 on forest and would fail as label text; these clear 5.4:1 at worst.
@@ -232,7 +236,7 @@
     .score-card-label { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--on-dark-muted); }
     .score-card-rubric { font-family:var(--mono); font-size:11px; color:var(--on-dark-muted); letter-spacing:0.04em; }
 
-    .legs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .legs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
     /* Each leg carries its own --tier via a tier-* class, so the ring, the
        number and the band label are one color decision, resolved once. */
     .leg-tile { display:flex; flex-direction:column; align-items:center; text-align:center; min-width:0; }
@@ -245,9 +249,12 @@
        the same at any dial size, instead of drifting small as the ring grows. */
     .dial-num { font-family:var(--display); font-weight:800; font-size:50px; letter-spacing:-0.03em; fill:var(--tier); }
     .leg-code { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.14em; color:var(--on-dark-muted); margin-top:12px; }
-    /* Two lines' worth, always. "Business attractiveness" wraps and the other two
-       do not, so without a floor the three band words land on three different
-       baselines and the row stops reading as one instrument. */
+    /* Two lines' worth, always. At the container's full width all three names now
+       set on one line, but they still wrap in two ranges the card cannot design
+       away: 941–~1100px, where the hero is two columns and the readout is at its
+       narrowest, and below ~520px, where every name wraps. Without the floor the
+       three band words land on different baselines there and the row stops
+       reading as one instrument, so it stays. */
     .leg-name { font-size:13.5px; line-height:1.35; color:var(--off); margin-top:5px; text-wrap:balance; min-height:2.7em; }
     /* The band label is the readiness word. It is set in the tier color AND
        printed — the color reinforces, the word carries. */
@@ -598,7 +605,7 @@
   <div class="container">
     <div class="hero-grid">
       <div>
-        <p class="hero-eyebrow">For independent wealth managers and multi-manager offices</p>
+        <p class="hero-eyebrow">For wealth managers, RIAs and family offices</p>
         <h1 class="hero-head">You hold the relationship. Now you have the <em>process</em>.</h1>
         <p class="hero-lead">ExitBlueprint gives an independent advisor the whole of exit preparation, years before there is a deal: a structured readiness assessment you run inside a normal review, the gaps it surfaces ranked into a roadmap, and a document your client takes home with your firm's name on it.</p>
         <div class="hero-cta">
@@ -608,7 +615,7 @@
           </a>
           <a href="#deliverable" class="btn btn-secondary btn-lg">See a sample</a>
         </div>
-        <p class="hero-note">In a review you already hold &nbsp;&middot;&nbsp; <b>Scored by rule, not by a model</b></p>
+        <p class="hero-note">In a review you already hold &nbsp;&middot;&nbsp; <b>Scored by rule, not a model</b></p>
       </div>
 
       <div class="gauge-wrap">

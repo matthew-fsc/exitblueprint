@@ -113,6 +113,19 @@ Loaded from Google Fonts. Fraunces and the serif register are retired.
 
 Scale: display clamp 40–72px; H2 clamp 26–38px; H3 20–22px; body 17px; small 14–15px; mono labels 11–13px.
 
+## The hero's width split
+
+`0.96fr / 1.04fr` with a 64px gap, which is a measured split rather than a taste one. Both sides are up against a hard number, and **they were measured with Figtree and Spline Sans Mono actually loaded** — a fallback font is 10–15% wider here and will tell you the opposite.
+
+| Side | Binding constraint | Needs | Has |
+|---|---|---|---|
+| Readout | "Business attractiveness" on one line | 142px per tile | 150px |
+| Text | The mono note on one line | 467px | 480px |
+
+The readout's 150px comes from three places so no one of them has to give much: the column ratio, the card's 22px padding, and the 12px gap between tiles. The text column's constraint is the **note**, not the button row (420px) — which is counterintuitive and worth remembering before shortening the wrong string.
+
+Re-measure with the real fonts before changing any of: the column ratio, the card padding, the leg gap, the note's wording, or `--maxw`.
+
 ## Layout & motion
 
 - 8px spacing rhythm; radii `--r 14px` / `--r-sm 10px`; more space above a heading than below it.
@@ -168,7 +181,7 @@ There is **one** primary action on the page and it is the contact form — an on
 - "Log in" → `https://app.exitblueprint.net/login`, for advisors who are already provisioned. This is the only outbound product link.
 - The form is the design-partner enquiry. Its fields qualify on **owner-client density**, which predicts fit better than AUM does; the owner's revenue and exit timeline are not asked, because the owner is not the buyer.
 - The nav button carries **two labels in one element** (`.nav-cta-long` / `.nav-cta-short`, swapped at ≤460px). The full label is wider than the whole right-hand side has at 360px, and the mark is already at its 22px legibility floor — so the label shortens and the logo does not.
-- The hero's two buttons must fit **one row** in a ~525px column. That is the constraint on their labels, and it is why the secondary one is short.
+- The hero's two buttons must fit **one row** in the text column. That is the constraint on their labels, and it is why the secondary one is short.
 
 ## IP line (footer + any report)
 
