@@ -189,7 +189,6 @@
     .btn-nav { padding:10px 20px; white-space:nowrap; }
     .nav-login { text-decoration:none; color:var(--primary-ink); font-weight:600; font-size:15px; transition:color .15s; }
     .nav-login:hover { color:var(--primary-hover); }
-    .nav-cta-short { display:none; }
     .nav-toggle { display:none; }
 
     /* ============ Hero ============ */
@@ -378,7 +377,7 @@
        for, not what a landing page argues. Both are written to the limit of what
        ships — "see the same picture", not "transact"; "hand your planning stack
        the numbers", not "model the drawdown". */
-    .lane-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+    .lane-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:52px; }
     .lane { background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:32px 30px; }
     .lane h3 { font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-bottom:12px; }
     .lane p { font-size:15.5px; color:var(--ink-muted); line-height:1.62; }
@@ -433,7 +432,12 @@
     #cta .container { position:relative; z-index:1; }
     .cta-label { font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--mint); margin-bottom:22px; }
     #cta h2 { font-size:clamp(30px,4.4vw,50px); font-weight:800; letter-spacing:-0.035em; color:var(--off); margin:0 auto 18px; max-width:19ch; }
-    #cta p { font-size:17px; color:var(--on-dark-muted); margin:0 auto 38px; max-width:48ch; }
+    .cta-lead { font-size:17px; color:var(--on-dark-muted); margin:0 auto 38px; max-width:48ch; }
+    /* The direct-outreach path, kept subordinate to the primary action rather
+       than competing with it as a second button. */
+    .cta-alt { font-size:15px; color:var(--on-dark-muted); margin:26px auto 0; }
+    .cta-alt a { color:var(--mint); text-underline-offset:3px; }
+    .cta-alt a:hover { color:var(--off); }
 
     /* ============ Form ============ */
     #apply { background:var(--surface); }
@@ -519,10 +523,6 @@
       .doc-scores { grid-template-columns:1fr; }
       .doc-body, .doc-letterhead, .doc-foot { padding-left:20px; padding-right:20px; }
     }
-    @media (max-width:460px) {
-      .nav-cta-long { display:none; }
-      .nav-cta-short { display:inline; }
-    }
     @media (max-width:400px) {
       /* At this width the nav is down to the lockup and one button, and they
          were already colliding — the old mark-plus-live-text wordmark wrapped to
@@ -590,11 +590,7 @@
       </ul>
       <div class="nav-right">
         <a href="https://app.exitblueprint.net/login" class="nav-login">Log in</a>
-        <!-- Two labels, one button. The full label is wider than the whole
-             right-hand side has at 360px, and the mark is already at its 22px
-             legibility floor and cannot give up more, so the LABEL shortens
-             instead of the logo. -->
-        <a href="#apply" class="btn btn-primary btn-nav"><span class="nav-cta-long">Start the conversation</span><span class="nav-cta-short">Get in touch</span></a>
+        <a href="https://app.exitblueprint.net/sign-up" class="btn btn-primary btn-nav">Get started</a>
       </div>
     </div>
   </div>
@@ -609,8 +605,8 @@
         <h1 class="hero-head">You hold the relationship. Now you have the <em>process</em>.</h1>
         <p class="hero-lead">ExitBlueprint gives an independent advisor the whole of exit preparation, years before there is a deal: a structured readiness assessment you run inside a normal review, the gaps it surfaces ranked into a roadmap, and a document your client takes home with your firm's name on it.</p>
         <div class="hero-cta">
-          <a href="#apply" class="btn btn-primary btn-lg">
-            Start the conversation
+          <a href="https://app.exitblueprint.net/sign-up" class="btn btn-primary btn-lg">
+            Get started
             <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#deliverable" class="btn btn-secondary btn-lg">See a sample</a>
@@ -871,7 +867,8 @@
     <div class="lane-grid reveal">
       <div class="lane">
         <h3>You are the one who convenes them.</h3>
-        <p>Invite the CPA, the attorney and the banker into the same readiness picture, so the conversation starts from one set of facts instead of four. Nobody is displaced: the CPA keeps the tax work and gets a better-prepared client, counsel keeps the documents, and the process runs through you.</p>
+        <p>Invite the CPA, the attorney and the banker into the same readiness picture, so the conversation starts from one set of facts instead of four.</p>
+        <p>Nobody is displaced. The CPA keeps the tax work and gets a better-prepared client, counsel keeps the documents and the deal structure, and the process still runs through you.</p>
       </div>
       <div class="lane">
         <h3>Your planning stack stays yours.</h3>
@@ -934,13 +931,14 @@
 <!-- ============ CTA (dark) ============ -->
 <section id="cta" class="sec-dark">
   <div class="container">
-    <p class="cta-label mono">Get started</p>
+    <p class="cta-label mono">Why now</p>
     <h2>The window is the two years before anyone calls it a deal.</h2>
-    <p>If you have owner clients heading toward a transition, this is worth a conversation now rather than after someone else has started one.</p>
-    <a href="#apply" class="btn btn-on-dark btn-lg">
-      Tell us about your book
+    <p class="cta-lead">If you have owner clients heading toward a transition, this is worth a conversation now rather than after someone else has started one.</p>
+    <a href="https://app.exitblueprint.net/sign-up" class="btn btn-on-dark btn-lg">
+      Get started
       <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
+    <p class="cta-alt">Would you rather talk it through first? <a href="#apply">Tell us about your book.</a></p>
   </div>
 </section>
 
@@ -949,9 +947,9 @@
   <div class="container">
     <div class="form-wrap">
       <div class="form-aside">
-        <p class="eyebrow">Start here</p>
+        <p class="eyebrow">Rather talk it through</p>
         <h2>Tell us about your book.</h2>
-        <p>Five questions, and one of them is the only qualifier that matters. If the fit is not there we will say so rather than sell you a seat.</p>
+        <p>If you would rather speak to someone before signing up, this is the way in. Five questions, and one of them is the only qualifier that matters. If the fit is not there we will say so.</p>
         <ul class="assurances">
           <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>A conversation with the founder, not a scheduled demo</li>
           <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything the platform produces carries your branding and exports clean for archiving</li>
@@ -1033,6 +1031,7 @@
       </div>
       <div class="footer-col">
         <h4>Get started</h4>
+        <a href="https://app.exitblueprint.net/sign-up">Get started</a>
         <a href="#apply">Tell us about your book</a>
         <a href="https://app.exitblueprint.net/login">Log in</a>
         <!-- Owners land here too. A line and an address, deliberately not a
