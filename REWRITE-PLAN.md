@@ -1,10 +1,13 @@
 # Website Rewrite Plan
 
-**Status:** §11's Phase 0 page **has shipped** — `index.html` is rewritten to the five
+**Status:** §11's Phase 0 page **has shipped** and is live — `index.html` is rewritten to the five
 beats in §4, the scope cut in §5 is applied, and `claudebrief.md` is retired. What is
 still open is listed in §13, and the two big ones were assumed rather than answered:
 the category decision (§2) was taken as the reconciliation this doc proposes, and the
-first step (§13.2) is the on-page design-partner form rather than a calendar link.
+first step (§13.2) is an on-page contact form rather than a calendar link. Two later
+calls from Matthew (2026-08-07) then moved the page off this doc's recommendation: the
+**design-partner program is not on the site at all** (§4), and the **hero leads on
+enablement rather than on the loss** (§4, §12). Both are recorded where they land.
 Copy decisions and the category decision remain founder calls; this doc recommends.
 
 **Still outstanding from the plan:** the sample client deliverable (§7) — the page ships
@@ -72,7 +75,7 @@ The site sells a score to an owner. The company sells retention to an advisor.
 | What it sells | A diligence readiness score | *"We help advisors stop losing the liquidity event they spent a decade waiting for."* *(§2.1)* |
 | Emotional lead | Fear of a re-trade at closing | Loss aversion — the advisor can name the client they lost *(App. B)* |
 | Who it's for | Six audiences listed flat: owners, M&A advisors, CEPA, PE acquirers, wealth managers, independent sponsors | One buyer, qualified on owner-client density *(§11.1)* |
-| Primary CTA | "Start the assessment" → `app.exitblueprint.net/sign-up` | Design-partner recruitment. There is no self-serve motion, and `docs/44` says not to turn one on. |
+| Primary CTA | "Start the assessment" → `app.exitblueprint.net/sign-up` | An on-page contact form. There is no self-serve motion, and `docs/44` says not to turn one on. *(The plan proposes design-partner recruitment here; Matthew cut that from the page — see §4.)* |
 | Lead form asks | The owner's annual revenue | The firm's owner-client count — the qualifier that matters *(§11.1)* |
 | Scope | Eleven-section marketing site | *"Stand up a single-page site: the problem, the deliverable, one call to action. Do not build a full marketing site."* *(§18 Phase 0)* |
 
@@ -92,10 +95,14 @@ instrument and changes whose hand it is in.
 One page. Five beats, each traceable to a pillar *(§2.2)* — the plan's own test is that an
 asset not traceable to a pillar gets cut.
 
-1. **The loss.** *"The relationship is not lost at the closing table. It is lost twenty-four
-   months earlier, when someone else starts the conversation you were not in the room
-   for."* *(§1.1)* This is the hook and, in cold traffic, the only pillar that should be
-   working *(§2.3)*.
+1. **Enablement, then the loss.** *Shipped as two beats, in that order.* The hero says the
+   advisor can now **run** the readiness and exit-preparation process; §1.1's core message
+   (*"not lost at the closing table … lost twenty-four months earlier"*) follows it as the
+   reason. This inverts the plan's §2.3 sequencing, which opens cold traffic on the loss.
+   The call (Matthew, 2026-08-07): the advisor already believes they are losing these
+   relationships, so the page opens on the thing they do not have — a process — rather
+   than on a fear they already feel. The loss still does the emotional work, one screen
+   down.
 2. **The deliverable.** The client-facing artifact, shown, not described. *(§15: the sample
    deliverable is "your single most persuasive asset and should exist before your website
    does.")* See §7 — this is a real dependency, not a section.
@@ -109,7 +116,10 @@ asset not traceable to a pillar gets cut.
 5. **The arithmetic.** The revenue-at-stake worksheet, filled in by the visitor with their
    own numbers. *(§1.4)*
 
-Then one call to action: the design-partner program *(§14)*.
+Then one call to action: a short closing band into the contact form. **The
+design-partner program is deliberately not on the page** (Matthew, 2026-08-07) — the
+recruiting terms in §14 are a sales conversation, not a landing-page section, and
+naming a cohort publicly dates the page the moment the cohort fills.
 
 Pillars 2 and 3 (be the hub, own the outcome) are **demo material, not landing-page
 material** *(§2.3: "Demo: Pillars 2 and 3. This is where the product does the talking.")*
@@ -299,7 +309,14 @@ The plan supplies its own approved language, so these are drawn from it rather t
 written fresh. All three lead with Pillar 1, which is the only pillar that should be
 working in cold traffic *(§2.3)*.
 
-**A — the plan's core message (recommended).** *(§1.1)*
+> **Shipped instead (2026-08-07):** the hero leads on **enablement** — *"You hold the
+> relationship. Now you have the process."* — with §1.1's core message moved into the
+> loss section beneath it. The reasoning: the advisor already agrees they are losing
+> these relationships; what they lack is a process, so the page opens on the thing
+> they do not have rather than on the fear they already feel. The drafts below are
+> kept as the record of what was considered.
+
+**A — the plan's core message (originally recommended).** *(§1.1)*
 > Eyebrow: For independent wealth managers and multi-manager offices
 > Headline: The relationship is not lost at the closing table.
 > Subhead: It is lost twenty-four months earlier, when someone else starts the conversation
@@ -308,6 +325,7 @@ working in cold traffic *(§2.3)*.
 > running the readiness work, convening the professionals, and answering the owner's real
 > question, which is not what the company is worth but what they will actually have.
 > CTA: We are building this with ten firms, not for a thousand →
+
 
 **B — the ten-second script.** *(§7.1)*
 > Headline: When the business sells, you should still be the one managing the money.
@@ -336,9 +354,8 @@ transition process in place before anyone else in your market does."*
 1. **The category decision (§2).** Gates every string on the page. The plan wants
    "liquidity event / owner transition platform for advisors" and warns off "exit planning
    software" — reconcile that with the product's name and the assumed reading in §2.
-2. **The first step.** "We are building this with ten firms" needs somewhere to land — a
-   calendar link, a short form, an email. §14 wants a written one-page design-partner
-   agreement behind it.
+2. **The first step.** *Resolved:* the on-page contact form, qualifying on owner-client
+   density. A calendar link would still be an improvement over a form if one exists.
 3. **Commit the GTM document to `exitblueprint-mvp/docs/`?** (§1)
 4. **Does anything owner-facing survive?** §5 says defer, possibly permanently. Confirm,
    since it decides how much of the current page gets deleted rather than rewritten.

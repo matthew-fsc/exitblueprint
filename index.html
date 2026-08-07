@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ExitBlueprint — Keep the client through the liquidity event</title>
-  <meta name="description" content="The relationship is not lost at the closing table. It is lost twenty-four months earlier. ExitBlueprint is the readiness process an independent advisor runs two to three years ahead of a deal." />
-  <meta property="og:title" content="ExitBlueprint — Keep the client through the liquidity event" />
-  <meta property="og:description" content="Most independent advisors have a handful of clients whose net worth is locked in a company they cannot manage. ExitBlueprint gets the advisor into the transition process years before the deal." />
+  <title>ExitBlueprint — Run your client's exit preparation</title>
+  <meta name="description" content="ExitBlueprint gives an independent wealth manager the whole of exit preparation: a readiness assessment you run in a normal review, ranked gaps, a roadmap, and a client-ready document on your firm's letterhead." />
+  <meta property="og:title" content="ExitBlueprint — Run your client's exit preparation" />
+  <meta property="og:description" content="You hold the relationship. Now run the process. Readiness assessment, ranked gaps, roadmap, and a client-ready document, years before there is a deal." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://exitblueprint.net" />
   <meta name="theme-color" content="#0C2218" />
@@ -199,17 +199,17 @@
       background:radial-gradient(circle at 40% 40%, rgba(152,212,175,0.28), transparent 66%);
       pointer-events:none;
     }
-    .hero-grid { display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center; position:relative; z-index:1; }
+    /* 0.96/1.04 rather than 1.05/0.95: the readout needs ~150px per tile to set
+       "Business attractiveness" on one line, and the text column's own binding
+       constraint is the mono note at ~467px, not the button row at 420px. Both
+       clear at 480 / 520. */
+    .hero-grid { display:grid; grid-template-columns:0.96fr 1.04fr; gap:64px; align-items:center; position:relative; z-index:1; }
     .hero-eyebrow { font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--primary-ink); margin-bottom:22px; }
-    h1.hero-head { font-size:clamp(36px,5vw,60px); font-weight:800; letter-spacing:-0.038em; margin-bottom:18px; color:var(--ink); }
+    h1.hero-head { font-size:clamp(38px,5.4vw,66px); font-weight:800; letter-spacing:-0.038em; margin-bottom:22px; color:var(--ink); }
     h1.hero-head em { font-style:italic; color:var(--primary); font-weight:800; }
-    /* The second half of the headline sentence. It is the turn — the headline
-       states the belief, this states when it actually happened — so it is set as
-       display type one step down rather than as body copy. */
-    .hero-turn { font-family:var(--display); font-size:clamp(19px,2.2vw,25px); font-weight:600; letter-spacing:-0.025em; line-height:1.25; color:var(--primary-ink); max-width:26ch; margin-bottom:24px; text-wrap:balance; }
-    .hero-lead { font-size:18px; color:var(--ink-muted); line-height:1.62; max-width:54ch; margin-bottom:32px; }
+    .hero-lead { font-size:19px; color:var(--ink-muted); line-height:1.62; max-width:52ch; margin-bottom:34px; }
     .hero-cta { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-    .hero-note { font-family:var(--mono); font-size:12.5px; color:var(--ink-muted); letter-spacing:0.03em; margin-top:20px; line-height:1.55; max-width:46ch; }
+    .hero-note { font-family:var(--mono); font-size:12.5px; color:var(--ink-muted); letter-spacing:0.03em; margin-top:20px; }
     .hero-note b { color:var(--primary-ink); font-weight:500; }
 
     /* ============ Score card — the signature ============
@@ -220,7 +220,7 @@
        reads three separate readings that refuse to resolve into one. */
     .score-card {
       background:var(--forest-panel); border:1px solid var(--forest-line);
-      border-radius:var(--r-lg); padding:26px 26px 22px; width:100%;
+      border-radius:var(--r-lg); padding:22px 22px 20px; width:100%;
       box-shadow:0 30px 60px -34px rgba(12,34,24,0.6);
       /* The five tier colors, re-toned for this ground. The light values sit at
          ~3:1 on forest and would fail as label text; these clear 5.4:1 at worst.
@@ -236,7 +236,7 @@
     .score-card-label { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--on-dark-muted); }
     .score-card-rubric { font-family:var(--mono); font-size:11px; color:var(--on-dark-muted); letter-spacing:0.04em; }
 
-    .legs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .legs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
     /* Each leg carries its own --tier via a tier-* class, so the ring, the
        number and the band label are one color decision, resolved once. */
     .leg-tile { display:flex; flex-direction:column; align-items:center; text-align:center; min-width:0; }
@@ -249,9 +249,12 @@
        the same at any dial size, instead of drifting small as the ring grows. */
     .dial-num { font-family:var(--display); font-weight:800; font-size:50px; letter-spacing:-0.03em; fill:var(--tier); }
     .leg-code { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.14em; color:var(--on-dark-muted); margin-top:12px; }
-    /* Two lines' worth, always. "Business attractiveness" wraps and the other two
-       do not, so without a floor the three band words land on three different
-       baselines and the row stops reading as one instrument. */
+    /* Two lines' worth, always. At the container's full width all three names now
+       set on one line, but they still wrap in two ranges the card cannot design
+       away: 941–~1100px, where the hero is two columns and the readout is at its
+       narrowest, and below ~520px, where every name wraps. Without the floor the
+       three band words land on different baselines there and the row stops
+       reading as one instrument, so it stays. */
     .leg-name { font-size:13.5px; line-height:1.35; color:var(--off); margin-top:5px; text-wrap:balance; min-height:2.7em; }
     /* The band label is the readiness word. It is set in the tier color AND
        printed — the color reinforces, the word carries. */
@@ -425,21 +428,12 @@
     .calc-question { font-family:var(--display); font-size:clamp(20px,2.4vw,26px); font-weight:600; letter-spacing:-0.025em; line-height:1.3; color:var(--ink); margin-top:34px; padding-top:28px; border-top:1px solid var(--line); max-width:30ch; text-wrap:balance; }
 
     /* ============ CTA (dark) ============ */
-    #partner { padding:104px 0; position:relative; overflow:hidden; }
-    #partner::before { content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:640px; height:640px; border-radius:50%; background:radial-gradient(circle, rgba(152,212,175,0.16), transparent 62%); pointer-events:none; }
-    #partner .container { position:relative; z-index:1; }
+    #cta { text-align:center; padding:112px 0; position:relative; overflow:hidden; }
+    #cta::before { content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:640px; height:640px; border-radius:50%; background:radial-gradient(circle, rgba(152,212,175,0.16), transparent 62%); pointer-events:none; }
+    #cta .container { position:relative; z-index:1; }
     .cta-label { font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--mint); margin-bottom:22px; }
-    .partner-head { display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:end; margin-bottom:52px; }
-    #partner h2 { font-size:clamp(28px,4.2vw,48px); font-weight:800; letter-spacing:-0.035em; color:var(--off); max-width:17ch; }
-    .partner-intro { font-size:17px; color:var(--on-dark-muted); line-height:1.62; }
-    .terms-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0 56px; border-top:1px solid var(--forest-line); }
-    .term { display:grid; grid-template-columns:auto 1fr; gap:16px; padding:22px 0; border-bottom:1px solid var(--forest-line); align-items:start; }
-    .term-key { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--mint); padding-top:4px; width:78px; }
-    .term p { font-size:15px; color:var(--on-dark-muted); line-height:1.58; }
-    .term p b { color:var(--off); font-weight:600; }
-
-    .partner-cta { display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-top:44px; }
-    .partner-cta-note { font-size:12.5px; color:var(--on-dark-muted); letter-spacing:0.03em; }
+    #cta h2 { font-size:clamp(30px,4.4vw,50px); font-weight:800; letter-spacing:-0.035em; color:var(--off); margin:0 auto 18px; max-width:19ch; }
+    #cta p { font-size:17px; color:var(--on-dark-muted); margin:0 auto 38px; max-width:48ch; }
 
     /* ============ Form ============ */
     #apply { background:var(--surface); }
@@ -502,8 +496,6 @@
       .lane-grid { grid-template-columns:1fr; }
       .process-steps { grid-template-columns:repeat(2,1fr); gap:32px 22px; }
       .p-step-connector { display:none; }
-      .partner-head { grid-template-columns:1fr; gap:24px; align-items:start; }
-      .terms-grid { grid-template-columns:1fr; gap:0; }
       .form-wrap { grid-template-columns:1fr; gap:34px; }
       .footer-inner { grid-template-columns:1fr 1fr; gap:32px; }
       .footer-brand { grid-column:1 / -1; }
@@ -598,11 +590,11 @@
       </ul>
       <div class="nav-right">
         <a href="https://app.exitblueprint.net/login" class="nav-login">Log in</a>
-        <!-- Two labels, one button. "Design partner program" is 214px at the nav's
-             own type size, which is wider than the whole right-hand side has at
-             360px; the mark is already at its 22px legibility floor and cannot
-             give up more, so the LABEL shortens instead of the logo. -->
-        <a href="#partner" class="btn btn-primary btn-nav"><span class="nav-cta-long">Design partner program</span><span class="nav-cta-short">Design partner</span></a>
+        <!-- Two labels, one button. The full label is wider than the whole
+             right-hand side has at 360px, and the mark is already at its 22px
+             legibility floor and cannot give up more, so the LABEL shortens
+             instead of the logo. -->
+        <a href="#apply" class="btn btn-primary btn-nav"><span class="nav-cta-long">Start the conversation</span><span class="nav-cta-short">Get in touch</span></a>
       </div>
     </div>
   </div>
@@ -613,18 +605,17 @@
   <div class="container">
     <div class="hero-grid">
       <div>
-        <p class="hero-eyebrow">For independent wealth managers and multi-manager offices</p>
-        <h1 class="hero-head">The relationship is not lost at the closing table.</h1>
-        <p class="hero-turn">It is lost twenty-four months earlier, when someone else starts the conversation you were not in the room for.</p>
-        <p class="hero-lead">ExitBlueprint puts you in that process two to three years ahead of a deal: running the readiness work, convening the professionals, and answering the owner's real question, which is not what the company is worth but what they will actually have.</p>
+        <p class="hero-eyebrow">For wealth managers, RIAs and family offices</p>
+        <h1 class="hero-head">You hold the relationship. Now you have the <em>process</em>.</h1>
+        <p class="hero-lead">ExitBlueprint gives an independent advisor the whole of exit preparation, years before there is a deal: a structured readiness assessment you run inside a normal review, the gaps it surfaces ranked into a roadmap, and a document your client takes home with your firm's name on it.</p>
         <div class="hero-cta">
-          <a href="#partner" class="btn btn-primary btn-lg">
-            Become a design partner
+          <a href="#apply" class="btn btn-primary btn-lg">
+            Start the conversation
             <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="#deliverable" class="btn btn-secondary btn-lg">See what the client gets</a>
+          <a href="#deliverable" class="btn btn-secondary btn-lg">See a sample</a>
         </div>
-        <p class="hero-note">Built for firms with <b>three or more clients</b> whose net worth sits mostly inside a company they own.</p>
+        <p class="hero-note">In a review you already hold &nbsp;&middot;&nbsp; <b>Scored by rule, not a model</b></p>
       </div>
 
       <div class="gauge-wrap">
@@ -940,39 +931,16 @@
   </div>
 </section>
 
-<!-- ============ Design partner program (dark) ============ -->
-<section id="partner" class="sec-dark">
+<!-- ============ CTA (dark) ============ -->
+<section id="cta" class="sec-dark">
   <div class="container">
-    <p class="cta-label mono">Design partner program</p>
-    <div class="partner-head">
-      <h2>We are building this with ten firms, not for a thousand.</h2>
-      <p class="partner-intro">You will shape what it becomes, and you will have a formal owner transition process in place before anyone else in your market does. In exchange we need the truth about what works, and permission to say your name when it does.</p>
-    </div>
-    <div class="terms-grid reveal">
-      <div class="term">
-        <span class="term-key mono">Term</span>
-        <p><b>Six months</b>, with the conversion price agreed in writing at the start rather than sprung at the end.</p>
-      </div>
-      <div class="term">
-        <span class="term-key mono">Price</span>
-        <p><b>Free or heavily discounted</b> for the term, and founding-customer pricing locked after it.</p>
-      </div>
-      <div class="term">
-        <span class="term-key mono">You give</span>
-        <p>A standing call every two weeks, one <b>real client engagement inside sixty days</b>, and permission to be named.</p>
-      </div>
-      <div class="term">
-        <span class="term-key mono">You get</span>
-        <p>Direct influence on the roadmap and <b>founder-level access</b>. No implementation project and no committee.</p>
-      </div>
-    </div>
-    <div class="partner-cta">
-      <a href="#apply" class="btn btn-on-dark btn-lg">
-        Tell us about your book
-        <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <p class="partner-cta-note mono">Five questions. The first one tells us both whether this is a fit.</p>
-    </div>
+    <p class="cta-label mono">Get started</p>
+    <h2>The window is the two years before anyone calls it a deal.</h2>
+    <p>If you have owner clients heading toward a transition, this is worth a conversation now rather than after someone else has started one.</p>
+    <a href="#apply" class="btn btn-on-dark btn-lg">
+      Tell us about your book
+      <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
 </section>
 
@@ -1065,7 +1033,6 @@
       </div>
       <div class="footer-col">
         <h4>Get started</h4>
-        <a href="#partner">Design partner program</a>
         <a href="#apply">Tell us about your book</a>
         <a href="https://app.exitblueprint.net/login">Log in</a>
         <!-- Owners land here too. A line and an address, deliberately not a
@@ -1159,7 +1126,7 @@
     [clients, proceeds, fee].forEach(function(el) { el.addEventListener('input', update); });
   })();
 
-  /* ============ Design partner form ============ */
+  /* ============ Contact form ============ */
   async function submitForm(e) {
     e.preventDefault();
     var btn = document.getElementById('form-btn');
@@ -1169,7 +1136,7 @@
     btn.disabled = true; btn.style.opacity = '0.6';
     var data = {
       access_key: 'de35fdee-9554-4f33-bad5-adbce9906122',
-      subject: 'ExitBlueprint design partner enquiry',
+      subject: 'ExitBlueprint enquiry',
       name: document.getElementById('f-name').value,
       firm: document.getElementById('f-firm').value,
       email: document.getElementById('f-email').value,
