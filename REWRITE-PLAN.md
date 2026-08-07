@@ -1,7 +1,15 @@
 # Website Rewrite Plan
 
-**Status:** Proposal for Matthew. Nothing here is built yet. Copy decisions and the
-category decision are founder calls; this doc recommends, it does not decide.
+**Status:** §11's Phase 0 page **has shipped** — `index.html` is rewritten to the five
+beats in §4, the scope cut in §5 is applied, and `claudebrief.md` is retired. What is
+still open is listed in §13, and the two big ones were assumed rather than answered:
+the category decision (§2) was taken as the reconciliation this doc proposes, and the
+first step (§13.2) is the on-page design-partner form rather than a calendar link.
+Copy decisions and the category decision remain founder calls; this doc recommends.
+
+**Still outstanding from the plan:** the sample client deliverable (§7) — the page ships
+a designed stand-in panel, not the real anonymized export; the security one-pager and
+published pricing (§11, Phase 2); directory submissions (§10).
 
 **What this is.** A plan to rewrite exitblueprint.net so it argues the position the
 company actually sells. The visual system is not the problem and is not being replaced.
