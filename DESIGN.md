@@ -175,13 +175,21 @@ The number is printed in the markup and never animates; the ring is reinforcemen
 
 ## Calls to action
 
-There is **one** primary action on the page and it is the contact form — an on-page section, not an external flow. The go-to-market is a hand-provisioned motion, so the site never links to a self-serve sign-up: a button that lands a visitor in a flow nobody can serve them through is worse than no button.
+**Two paths, and they are not the same thing.** Signing up is the primary action; talking to a person is the alternative for those who want one. Keeping them distinct is the point — a page where every button does the same thing gives a ready visitor nowhere to go, and a page with two equal buttons makes them choose before they know enough to.
 
-- Primary (nav, hero, closing band) → `#apply`, in-page. Every primary button on the page resolves to the same destination; there is no second thing to do.
-- "Log in" → `https://app.exitblueprint.net/login`, for advisors who are already provisioned. This is the only outbound product link.
-- The form is the design-partner enquiry. Its fields qualify on **owner-client density**, which predicts fit better than AUM does; the owner's revenue and exit timeline are not asked, because the owner is not the buyer.
-- The nav button carries **two labels in one element** (`.nav-cta-long` / `.nav-cta-short`, swapped at ≤460px). The full label is wider than the whole right-hand side has at 360px, and the mark is already at its 22px legibility floor — so the label shortens and the logo does not.
+| Path | Label | Destination | Where |
+|---|---|---|---|
+| Primary | "Get started" | `https://app.exitblueprint.net/sign-up` | nav, hero, closing band, footer |
+| Direct outreach | "Start the conversation" | the `#apply` form | the form's own submit button, plus a subordinate text link under the closing band's button |
+| Returning | "Log in" | `https://app.exitblueprint.net/login` | nav, footer |
+
+Rules that follow from that split:
+
+- **"Start the conversation" is reserved for reaching out.** It never appears on a button that leads to sign-up. If a third path is ever added, give it its own verb rather than borrowing one of these.
+- The direct-outreach link under the closing band is **text, not a second button**. It is the alternative, not a peer of the primary action.
+- The form qualifies on **owner-client density**, which predicts fit better than AUM does; the owner's revenue and exit timeline are not asked, because the owner is not the buyer.
 - The hero's two buttons must fit **one row** in the text column. That is the constraint on their labels, and it is why the secondary one is short.
+- The nav button label has to clear the 360px nav, where the mark is already at its 22px legibility floor and cannot give up more width. "Get started" fits outright; a longer label needs the two-element `.nav-cta-long` / `.nav-cta-short` swap that used to live there.
 
 ## IP line (footer + any report)
 
