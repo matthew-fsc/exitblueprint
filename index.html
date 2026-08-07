@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ExitBlueprint — Exit readiness, in three scores</title>
-  <meta name="description" content="Know what the buyer will find. Before they find it. ExitBlueprint scores three legs of exit readiness — the business, its attractiveness, and the owner — and reports them separately." />
-  <meta property="og:title" content="ExitBlueprint — Exit readiness, in three scores" />
-  <meta property="og:description" content="Most value is lost in the deal, not at the offer. Three scores, never averaged: business readiness, attractiveness, and your own." />
+  <title>ExitBlueprint — Keep the client through the liquidity event</title>
+  <meta name="description" content="The relationship is not lost at the closing table. It is lost twenty-four months earlier. ExitBlueprint is the readiness process an independent advisor runs two to three years ahead of a deal." />
+  <meta property="og:title" content="ExitBlueprint — Keep the client through the liquidity event" />
+  <meta property="og:description" content="Most independent advisors have a handful of clients whose net worth is locked in a company they cannot manage. ExitBlueprint gets the advisor into the transition process years before the deal." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://exitblueprint.net" />
   <meta name="theme-color" content="#0C2218" />
@@ -189,6 +189,7 @@
     .btn-nav { padding:10px 20px; white-space:nowrap; }
     .nav-login { text-decoration:none; color:var(--primary-ink); font-weight:600; font-size:15px; transition:color .15s; }
     .nav-login:hover { color:var(--primary-hover); }
+    .nav-cta-short { display:none; }
     .nav-toggle { display:none; }
 
     /* ============ Hero ============ */
@@ -200,11 +201,15 @@
     }
     .hero-grid { display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center; position:relative; z-index:1; }
     .hero-eyebrow { font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--primary-ink); margin-bottom:22px; }
-    h1.hero-head { font-size:clamp(38px,5.4vw,66px); font-weight:800; letter-spacing:-0.038em; margin-bottom:22px; color:var(--ink); }
+    h1.hero-head { font-size:clamp(36px,5vw,60px); font-weight:800; letter-spacing:-0.038em; margin-bottom:18px; color:var(--ink); }
     h1.hero-head em { font-style:italic; color:var(--primary); font-weight:800; }
-    .hero-lead { font-size:19px; color:var(--ink-muted); line-height:1.62; max-width:52ch; margin-bottom:34px; }
+    /* The second half of the headline sentence. It is the turn — the headline
+       states the belief, this states when it actually happened — so it is set as
+       display type one step down rather than as body copy. */
+    .hero-turn { font-family:var(--display); font-size:clamp(19px,2.2vw,25px); font-weight:600; letter-spacing:-0.025em; line-height:1.25; color:var(--primary-ink); max-width:26ch; margin-bottom:24px; text-wrap:balance; }
+    .hero-lead { font-size:18px; color:var(--ink-muted); line-height:1.62; max-width:54ch; margin-bottom:32px; }
     .hero-cta { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-    .hero-note { font-family:var(--mono); font-size:12.5px; color:var(--ink-muted); letter-spacing:0.03em; margin-top:20px; }
+    .hero-note { font-family:var(--mono); font-size:12.5px; color:var(--ink-muted); letter-spacing:0.03em; margin-top:20px; line-height:1.55; max-width:46ch; }
     .hero-note b { color:var(--primary-ink); font-weight:500; }
 
     /* ============ Score card — the signature ============
@@ -256,8 +261,6 @@
        column, where the mono still sets it clear of the tile edge. */
     .leg-band { font-family:var(--mono); font-size:clamp(9px,2.6vw,11px); font-weight:500; letter-spacing:0.07em; text-transform:uppercase; color:var(--tier); margin-top:7px; white-space:nowrap; }
 
-    /* The line that makes the refusal concrete: it names the number the site
-       will not print, and what averaging costs you. */
     .score-card-foot {
       margin-top:22px; padding-top:16px; border-top:1px solid var(--forest-line);
       font-size:13px; line-height:1.55; color:var(--on-dark-muted);
@@ -274,7 +277,7 @@
     .tier-high-risk     { --tier:var(--tier-high-risk); }
     .tier-not-saleable  { --tier:var(--tier-not-saleable); }
 
-    /* ============ Problem (dark) ============ */
+    /* ============ Loss (dark) ============ */
     .problem-lead { display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:end; margin-bottom:56px; }
     .big-line { font-family:var(--display); font-size:clamp(28px,4vw,46px); font-weight:700; letter-spacing:-0.032em; line-height:1.12; color:var(--off); max-width:15ch; }
     .big-line em { font-style:italic; color:var(--mint); font-weight:700; }
@@ -288,7 +291,42 @@
     .problem-item h3 { font-size:19px; font-weight:600; color:var(--off); margin-bottom:11px; letter-spacing:-0.02em; }
     .problem-item p { font-size:15px; color:var(--on-dark-muted); line-height:1.6; }
 
-    /* ============ Method — weighted bars ============ */
+    /* ============ The deliverable ============
+       The artifact beat. A light "document" panel rather than a screenshot: it
+       shows the SHAPE of what the client leaves with — three readings, then
+       where to start — in the same tokens and the same tier ramp the product
+       uses, so the page is not describing the deliverable in prose. Labeled a
+       sample everywhere it could be mistaken for a specific client's numbers. */
+    .doc-grid { display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:start; }
+    .doc-head-col { position:sticky; top:100px; }
+    .doc-panel { background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; box-shadow:0 24px 50px -34px rgba(12,34,24,0.4); }
+    .doc-letterhead { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 26px; border-bottom:1px solid var(--line); background:var(--surface); }
+    /* A neutral placeholder lockup. It is deliberately NOT the ExitBlueprint mark:
+       the point of the beat is that the artifact carries the advisor's brand. */
+    .doc-firm { display:flex; align-items:center; gap:11px; }
+    .doc-firm-mark { width:26px; height:26px; border-radius:7px; border:1.5px dashed var(--line-2); flex-shrink:0; }
+    .doc-firm-name { font-size:13.5px; font-weight:600; color:var(--ink-2); }
+    .doc-firm-sub { font-family:var(--mono); font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); }
+    .doc-stamp { font-family:var(--mono); font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); white-space:nowrap; }
+    .doc-body { padding:26px; }
+    .doc-title { font-size:20px; font-weight:600; letter-spacing:-0.02em; margin-bottom:4px; }
+    .doc-sub { font-size:14px; color:var(--ink-muted); margin-bottom:24px; }
+    .doc-scores { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:26px; }
+    .doc-score { border:1px solid var(--line); border-radius:var(--r-sm); padding:14px 15px; background:var(--surface); min-width:0; }
+    .doc-score-code { font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:0.12em; color:var(--ink-muted); }
+    .doc-score-num { font-family:var(--display); font-size:32px; font-weight:800; letter-spacing:-0.03em; color:var(--ink); line-height:1.1; margin-top:6px; }
+    .doc-score-band { display:flex; align-items:center; gap:7px; margin-top:6px; font-size:12.5px; color:var(--ink-2); }
+    .doc-score-band .band-dot { margin-right:0; width:9px; height:9px; }
+    .doc-rule { font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-muted); padding-bottom:10px; border-bottom:1px solid var(--line); margin-bottom:4px; }
+    .doc-gap { display:grid; grid-template-columns:26px 1fr; gap:14px; padding:16px 0; border-bottom:1px solid var(--line); align-items:start; }
+    .doc-gap:last-of-type { border-bottom:none; padding-bottom:4px; }
+    .doc-gap-rank { font-family:var(--mono); font-size:12px; color:var(--primary-ink); padding-top:2px; }
+    .doc-gap h4 { font-family:var(--body); font-size:15px; font-weight:600; color:var(--ink); letter-spacing:0; margin-bottom:4px; }
+    .doc-gap p { font-size:14px; color:var(--ink-muted); line-height:1.55; }
+    .doc-foot { padding:16px 26px; border-top:1px solid var(--line); background:var(--surface); font-size:11.5px; color:var(--ink-muted); line-height:1.5; }
+    .doc-caption { font-family:var(--mono); font-size:12px; color:var(--ink-muted); margin-top:16px; line-height:1.55; }
+
+    /* ============ Method — evidence bars ============ */
     .method-grid { display:grid; grid-template-columns:0.82fr 1.18fr; gap:56px; align-items:start; }
     .method-head-col { position:sticky; top:100px; }
     .dim-list { display:flex; flex-direction:column; }
@@ -303,17 +341,13 @@
     .dim-name { font-family:var(--display); font-size:20px; font-weight:600; color:var(--ink); letter-spacing:-0.02em; }
     .dim-scale { font-family:var(--mono); font-size:13px; color:var(--primary-ink); font-weight:500; flex-shrink:0; }
     .dim-desc { font-size:14.5px; color:var(--ink-muted); line-height:1.55; margin-bottom:14px; }
-    /* The bar used to show a dimension's weight in a composite. There is no
-       composite and the three legs carry equal weight, so weight is not the
-       interesting number any more — what each leg is BUILT from is. The track is
-       now the leg's evidence basis: the solid part is scored from a hard input
-       (a percentage, a ratio, an HHI, a documented selection), the tinted
-       remainder is the owner's own 1–5 rating. It is the honest caveat that
-       makes three identical rings defensible — they are not the same kind of
-       reading, and the DRS at 76% measured is not the ORI at 14%. */
-    /* The remainder is hatched, not just lighter. A paler fill would read as
-       "missing"; the hatch reads as a different KIND of evidence, which is what
-       it is — the owner's own rating rather than a measured input. */
+    /* The track is the leg's evidence basis: the solid part is scored from a hard
+       input (a percentage, a ratio, an HHI, a documented selection), the hatched
+       remainder is the owner's own 1–5 rating. It is the honest caveat that makes
+       three identical rings defensible — they are not the same KIND of reading,
+       and the DRS at 76% measured is not the ORI at 14%. The remainder is hatched
+       rather than merely paler: a paler fill would read as "missing", the hatch
+       reads as a different kind of evidence, which is what it is. */
     .dim-bar-track {
       height:9px; border-radius:6px; overflow:hidden; display:flex;
       background:repeating-linear-gradient(-45deg, rgba(67,134,99,0.30) 0 2px, rgba(67,134,99,0.08) 2px 5px);
@@ -323,83 +357,100 @@
     .dim-basis { display:flex; gap:14px; margin-top:8px; font-family:var(--mono); font-size:12px; color:var(--ink-muted); }
     .dim-basis b { color:var(--primary-ink); font-weight:500; }
     .method-note { font-size:14.5px; line-height:1.6; color:var(--ink-muted); margin-top:20px; padding-top:18px; border-top:1px solid var(--line); max-width:46ch; }
+    .method-note s { text-decoration-thickness:1px; text-underline-offset:2px; }
+    .method-note b { color:var(--ink); font-weight:600; }
+    .band-dot { display:inline-block; width:11px; height:11px; border-radius:50%; vertical-align:middle; background:var(--tier); box-shadow:0 0 0 3px color-mix(in srgb, var(--tier) 14%, transparent); flex-shrink:0; }
 
-    /* ============ Trifecta ============ */
-    .trifecta-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:52px; }
-    .leg {
-      background:var(--card); border:1px solid var(--line); border-radius:var(--r);
-      padding:30px 28px; transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .leg:hover { transform:translateY(-3px); box-shadow:0 20px 40px -26px rgba(12,34,24,0.35); }
-    .leg-badge { display:inline-flex; align-items:center; font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.1em; padding:6px 11px; border-radius:8px; margin-bottom:20px; }
-    .leg-badge.b1 { background:var(--forest-panel); color:var(--mint); }
-    .leg-badge.b2 { background:var(--brand-tint); color:var(--primary-ink); }
-    .leg-badge.b3 { background:var(--mint-tint); color:var(--primary-ink); }
-    .leg h3 { font-size:22px; font-weight:600; color:var(--ink); margin-bottom:12px; letter-spacing:-0.02em; }
-    .leg p { font-size:15px; color:var(--ink-muted); line-height:1.62; }
-
-    /* ============ Bands ============ */
-    .bands-wrap { margin-top:14px; border:1px solid var(--line); border-radius:var(--r); overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; background:var(--card); }
-    .bands-table { width:100%; min-width:480px; border-collapse:collapse; }
-    .bands-table th { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); background:var(--surface); padding:14px 24px; text-align:left; border-bottom:1px solid var(--line); }
-    .bands-table td { padding:19px 24px; border-bottom:1px solid var(--line); font-size:15px; }
-    .bands-table tr:last-child td { border-bottom:none; }
-    .bands-table tbody tr { transition:background .12s; }
-    .bands-table tbody tr:hover { background:var(--surface); }
-    .band-range { font-family:var(--mono); font-size:14px; color:var(--ink-2); white-space:nowrap; }
-    /* The dot is the only place the tier hue appears on a light ground. It reads
-       at 3:1 as a swatch, which is fine for a mark and would not be for text —
-       so the tier NAME beside it stays in ink. Color reinforces; the word carries. */
-    .band-dot { display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:11px; vertical-align:middle; background:var(--tier); box-shadow:0 0 0 3px color-mix(in srgb, var(--tier) 14%, transparent); }
-    .band-tier { font-weight:600; color:var(--ink); white-space:nowrap; }
-    .band-note { color:var(--ink-muted); }
-    .bands-cap { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--primary-ink); margin-top:46px; }
-    .bands-wrap + .bands-cap { margin-top:40px; }
-    .bands-milestone { font-size:14.5px; color:var(--ink-muted); margin-top:14px; }
-    .bands-milestone b { color:var(--ink); font-weight:600; }
-
-    /* ============ Process (dark) — stepper ============ */
+    /* ============ Before anyone sells (dark) — stepper ============ */
     .process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:56px; position:relative; }
     .p-step { position:relative; }
     .p-step-num { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; background:var(--forest-lift); border:1px solid var(--forest-line); font-family:var(--mono); font-size:14px; font-weight:500; color:var(--mint); margin-bottom:22px; }
     .p-step-connector { position:absolute; top:20px; left:52px; right:-11px; height:1.5px; background:linear-gradient(90deg,var(--forest-line),transparent); }
     .p-step:last-child .p-step-connector { display:none; }
-    .p-step h3 { font-size:22px; font-weight:600; color:var(--off); margin-bottom:11px; letter-spacing:-0.02em; }
+    .p-step h3 { font-size:20px; font-weight:600; color:var(--off); margin-bottom:11px; letter-spacing:-0.02em; }
     .p-step p { font-size:14.5px; color:var(--on-dark-muted); line-height:1.58; }
 
-    /* ============ Who ============ */
-    .who-grid { display:flex; flex-wrap:wrap; gap:12px; margin-top:44px; }
-    .who-item { display:inline-flex; align-items:center; gap:13px; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:12px 22px 12px 14px; transition:border-color .15s, transform .15s; }
-    .who-item:hover { border-color:var(--primary); transform:translateY(-2px); }
-    .who-icon { width:30px; height:30px; border-radius:50%; background:var(--brand-tint); display:grid; place-items:center; flex-shrink:0; }
-    .who-icon svg { width:15px; height:15px; stroke:var(--primary-ink); fill:none; }
-    .who-label { font-size:15px; color:var(--ink); font-weight:500; }
+    /* ============ The two lanes ============
+       Pillars 2 and 3 get a line each and no more: they are what the demo is
+       for, not what a landing page argues. Both are written to the limit of what
+       ships — "see the same picture", not "transact"; "hand your planning stack
+       the numbers", not "model the drawdown". */
+    .lane-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+    .lane { background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:32px 30px; }
+    .lane h3 { font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-bottom:12px; }
+    .lane p { font-size:15.5px; color:var(--ink-muted); line-height:1.62; }
+    .lane p + p { margin-top:12px; }
 
-    /* ============ Beyond ============ */
-    .beyond-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:52px; }
-    .beyond-card { background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:30px 30px; display:flex; gap:22px; align-items:flex-start; }
-    .beyond-tag { font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.06em; color:var(--primary-ink); background:var(--surface); border:1px solid var(--line); padding:8px 12px; border-radius:9px; flex-shrink:0; white-space:nowrap; }
-    .beyond-body h3 { font-size:18px; font-weight:600; color:var(--ink); margin-bottom:9px; letter-spacing:-0.01em; }
-    .beyond-body p { font-size:14.5px; color:var(--ink-muted); line-height:1.6; }
+    /* ============ The arithmetic ============
+       Ships with every field BLANK on purpose. The plan's instruction is to
+       present the framework and let the advisor supply the inputs, because the
+       number is persuasive precisely when they produce it themselves. Nothing
+       is sent anywhere; it computes in the page. */
+    .calc-grid { display:grid; grid-template-columns:0.95fr 1.05fr; gap:56px; align-items:start; }
+    .calc {
+      background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg);
+      padding:30px; box-shadow:0 24px 50px -36px rgba(12,34,24,0.35);
+    }
+    .calc-field { display:flex; flex-direction:column; gap:7px; margin-bottom:18px; }
+    .calc-label { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); }
+    .calc-input-wrap { position:relative; display:flex; align-items:center; }
+    .calc-prefix, .calc-suffix { position:absolute; font-family:var(--mono); font-size:15px; color:var(--ink-muted); pointer-events:none; }
+    .calc-prefix { left:15px; }
+    .calc-suffix { right:15px; }
+    .calc-input {
+      background:var(--surface); border:1.5px solid var(--line-2); border-radius:var(--r-sm);
+      padding:13px 15px; color:var(--ink); font-family:var(--mono); font-size:15px;
+      outline:none; transition:border-color .15s, box-shadow .15s; width:100%;
+      font-variant-numeric:tabular-nums; appearance:textfield; -moz-appearance:textfield;
+    }
+    .calc-input::-webkit-outer-spin-button, .calc-input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+    .calc-input::placeholder { color:#98A19A; }
+    .calc-input:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--brand-tint); }
+    .calc-input.has-prefix { padding-left:30px; }
+    .calc-input.has-suffix { padding-right:34px; }
+    .calc-out { margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+    .calc-row { display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:9px 0; }
+    .calc-row-label { font-size:14.5px; color:var(--ink-muted); }
+    .calc-row-val { font-family:var(--mono); font-size:16px; color:var(--ink-2); font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .calc-row.total { border-top:1px solid var(--line); margin-top:8px; padding-top:16px; }
+    .calc-row.total .calc-row-label { font-size:15.5px; color:var(--ink); font-weight:600; }
+    .calc-row.total .calc-row-val { font-family:var(--display); font-size:clamp(26px,3.4vw,34px); font-weight:800; letter-spacing:-0.03em; color:var(--primary-ink); }
+    /* Empty is a state, not a number: at display weight an em dash reads as a
+       redaction bar, so the blank total drops back to the muted mono the other
+       rows use until there is something real to print. */
+    .calc-row.total .calc-row-val.is-empty { font-family:var(--mono); font-size:16px; font-weight:400; color:var(--ink-muted); letter-spacing:0; }
+    .calc-illus { font-family:var(--mono); font-size:11.5px; color:var(--ink-muted); line-height:1.55; margin-top:16px; padding-top:14px; border-top:1px solid var(--line); }
+    /* The question the framework exists to set up. It is the payoff, so it is set
+       as display type, not as a caption under a widget. */
+    .calc-question { font-family:var(--display); font-size:clamp(20px,2.4vw,26px); font-weight:600; letter-spacing:-0.025em; line-height:1.3; color:var(--ink); margin-top:34px; padding-top:28px; border-top:1px solid var(--line); max-width:30ch; text-wrap:balance; }
 
     /* ============ CTA (dark) ============ */
-    #cta { text-align:center; padding:118px 0; position:relative; overflow:hidden; }
-    #cta::before { content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:640px; height:640px; border-radius:50%; background:radial-gradient(circle, rgba(152,212,175,0.16), transparent 62%); pointer-events:none; }
-    #cta .container { position:relative; z-index:1; }
+    #partner { padding:104px 0; position:relative; overflow:hidden; }
+    #partner::before { content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:640px; height:640px; border-radius:50%; background:radial-gradient(circle, rgba(152,212,175,0.16), transparent 62%); pointer-events:none; }
+    #partner .container { position:relative; z-index:1; }
     .cta-label { font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--mint); margin-bottom:22px; }
-    #cta h2 { font-size:clamp(30px,4.4vw,52px); font-weight:800; letter-spacing:-0.035em; color:var(--off); margin:0 auto 18px; max-width:18ch; }
-    #cta p { font-size:17px; color:var(--on-dark-muted); margin:0 auto 38px; max-width:46ch; }
+    .partner-head { display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:end; margin-bottom:52px; }
+    #partner h2 { font-size:clamp(28px,4.2vw,48px); font-weight:800; letter-spacing:-0.035em; color:var(--off); max-width:17ch; }
+    .partner-intro { font-size:17px; color:var(--on-dark-muted); line-height:1.62; }
+    .terms-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0 56px; border-top:1px solid var(--forest-line); }
+    .term { display:grid; grid-template-columns:auto 1fr; gap:16px; padding:22px 0; border-bottom:1px solid var(--forest-line); align-items:start; }
+    .term-key { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--mint); padding-top:4px; width:78px; }
+    .term p { font-size:15px; color:var(--on-dark-muted); line-height:1.58; }
+    .term p b { color:var(--off); font-weight:600; }
 
-    /* ============ Assessment form ============ */
-    #assessment { background:var(--surface); }
+    .partner-cta { display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-top:44px; }
+    .partner-cta-note { font-size:12.5px; color:var(--on-dark-muted); letter-spacing:0.03em; }
+
+    /* ============ Form ============ */
+    #apply { background:var(--surface); }
     .form-wrap { display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start; }
     .form-aside .eyebrow { margin-bottom:16px; }
     .form-aside h2 { font-size:clamp(26px,3.2vw,36px); font-weight:700; letter-spacing:-0.03em; margin-bottom:14px; }
     .form-aside p { font-size:16px; color:var(--ink-muted); line-height:1.6; max-width:40ch; }
     .form-aside .assurances { list-style:none; margin-top:26px; display:flex; flex-direction:column; gap:12px; }
-    .form-aside .assurances li { display:flex; align-items:center; gap:11px; font-size:14.5px; color:var(--ink-2); }
-    .form-aside .assurances svg { width:17px; height:17px; stroke:var(--primary); fill:none; flex-shrink:0; }
-    #assessment-form { display:flex; flex-direction:column; gap:18px; background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg); padding:32px; }
+    .form-aside .assurances li { display:flex; align-items:flex-start; gap:11px; font-size:14.5px; color:var(--ink-2); line-height:1.5; }
+    .form-aside .assurances svg { width:17px; height:17px; stroke:var(--primary); fill:none; flex-shrink:0; margin-top:3px; }
+    #apply-form { display:flex; flex-direction:column; gap:18px; background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg); padding:32px; }
     .form-field { display:flex; flex-direction:column; gap:7px; }
     .form-label { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); }
     .form-input { background:var(--surface); border:1.5px solid var(--line-2); border-radius:var(--r-sm); padding:13px 15px; color:var(--ink); font-family:var(--body); font-size:15px; outline:none; transition:border-color .15s, box-shadow .15s; appearance:none; -webkit-appearance:none; width:100%; }
@@ -428,6 +479,8 @@
     .footer-col h4 { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--on-dark-muted); margin-bottom:16px; }
     .footer-col a { display:block; text-decoration:none; color:var(--on-dark); font-size:15px; margin-bottom:11px; transition:color .15s; }
     .footer-col a:hover { color:var(--mint); }
+    .footer-owner { font-size:13px; color:var(--on-dark-muted); line-height:1.6; margin-top:18px; }
+    .footer-owner a { color:var(--mint); }
     .footer-bottom { margin-top:52px; padding-top:26px; border-top:1px solid var(--forest-line); display:flex; justify-content:space-between; align-items:center; gap:16px; }
     .footer-bottom p { font-family:var(--mono); font-size:11.5px; font-weight:400; color:var(--on-dark-muted); letter-spacing:0.03em; }
 
@@ -442,11 +495,15 @@
       .hero-grid { grid-template-columns:1fr; gap:48px; }
       .method-grid { grid-template-columns:1fr; gap:36px; }
       .method-head-col { position:static; }
+      .doc-grid { grid-template-columns:1fr; gap:36px; }
+      .doc-head-col { position:static; }
+      .calc-grid { grid-template-columns:1fr; gap:36px; }
       .problem-lead { grid-template-columns:1fr; gap:28px; align-items:start; }
-      .trifecta-grid { grid-template-columns:1fr; }
+      .lane-grid { grid-template-columns:1fr; }
       .process-steps { grid-template-columns:repeat(2,1fr); gap:32px 22px; }
       .p-step-connector { display:none; }
-      .beyond-grid { grid-template-columns:1fr; }
+      .partner-head { grid-template-columns:1fr; gap:24px; align-items:start; }
+      .terms-grid { grid-template-columns:1fr; gap:0; }
       .form-wrap { grid-template-columns:1fr; gap:34px; }
       .footer-inner { grid-template-columns:1fr 1fr; gap:32px; }
       .footer-brand { grid-column:1 / -1; }
@@ -465,7 +522,14 @@
       .footer-bottom { flex-direction:column; align-items:flex-start; gap:10px; }
       .form-two { grid-template-columns:1fr; }
       .hero-cta .btn { flex:1; justify-content:center; }
-      .bands-table th, .bands-table td { padding-left:16px; padding-right:16px; }
+      /* Three score tiles at 320px of usable width leaves ~90px each and the band
+         word is already down to 9px, so the readout stacks rather than shrinks. */
+      .doc-scores { grid-template-columns:1fr; }
+      .doc-body, .doc-letterhead, .doc-foot { padding-left:20px; padding-right:20px; }
+    }
+    @media (max-width:460px) {
+      .nav-cta-long { display:none; }
+      .nav-cta-short { display:inline; }
     }
     @media (max-width:400px) {
       /* At this width the nav is down to the lockup and one button, and they
@@ -480,8 +544,8 @@
     }
     @media (max-width:360px) {
       .container,.container-narrow { padding:0 18px; }
-      h1.hero-head { font-size:32px; }
-      #assessment-form { padding:22px; }
+      h1.hero-head { font-size:31px; }
+      #apply-form, .calc { padding:22px; }
     }
   </style>
 </head>
@@ -528,13 +592,17 @@
         <svg class="wordmark-logo" viewBox="0 0 200.87 34.57" aria-hidden="true" focusable="false"><use href="#eb-logo" /></svg>
       </a>
       <ul class="nav-links">
-        <li><a href="#method">Method</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#who">Who it's for</a></li>
+        <li><a href="#deliverable">What the client gets</a></li>
+        <li><a href="#method">The method</a></li>
+        <li><a href="#arithmetic">The arithmetic</a></li>
       </ul>
       <div class="nav-right">
         <a href="https://app.exitblueprint.net/login" class="nav-login">Log in</a>
-        <a href="https://app.exitblueprint.net/sign-up" class="btn btn-primary btn-nav">Start the assessment</a>
+        <!-- Two labels, one button. "Design partner program" is 214px at the nav's
+             own type size, which is wider than the whole right-hand side has at
+             360px; the mark is already at its 22px legibility floor and cannot
+             give up more, so the LABEL shortens instead of the logo. -->
+        <a href="#partner" class="btn btn-primary btn-nav"><span class="nav-cta-long">Design partner program</span><span class="nav-cta-short">Design partner</span></a>
       </div>
     </div>
   </div>
@@ -545,23 +613,24 @@
   <div class="container">
     <div class="hero-grid">
       <div>
-        <p class="hero-eyebrow">DRS &middot; BAS &middot; ORI</p>
-        <h1 class="hero-head">Know what the buyer will find. <em>Before</em> they find it.</h1>
-        <p class="hero-lead">Most value is lost in the deal, not at the offer. ExitBlueprint scores three things separately &mdash; whether the business survives diligence, why a buyer would compete for it, and whether you are ready to hand it over.</p>
+        <p class="hero-eyebrow">For independent wealth managers and multi-manager offices</p>
+        <h1 class="hero-head">The relationship is not lost at the closing table.</h1>
+        <p class="hero-turn">It is lost twenty-four months earlier, when someone else starts the conversation you were not in the room for.</p>
+        <p class="hero-lead">ExitBlueprint puts you in that process two to three years ahead of a deal: running the readiness work, convening the professionals, and answering the owner's real question, which is not what the company is worth but what they will actually have.</p>
         <div class="hero-cta">
-          <a href="https://app.exitblueprint.net/sign-up" class="btn btn-primary btn-lg">
-            Start the assessment
+          <a href="#partner" class="btn btn-primary btn-lg">
+            Become a design partner
             <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="#method" class="btn btn-secondary btn-lg">See the method</a>
+          <a href="#deliverable" class="btn btn-secondary btn-lg">See what the client gets</a>
         </div>
-        <p class="hero-note">No financials required &nbsp;·&nbsp; <b>Three scores, never averaged</b></p>
+        <p class="hero-note">Built for firms with <b>three or more clients</b> whose net worth sits mostly inside a company they own.</p>
       </div>
 
       <div class="gauge-wrap">
         <div class="score-card">
           <div class="score-card-head">
-            <p class="score-card-label">Sample readout</p>
+            <p class="score-card-label">Client readout &middot; sample</p>
             <p class="score-card-rubric">48 sub-scores</p>
           </div>
           <!-- The rings are drawn from one geometry: size 112, stroke 9% of it,
@@ -610,8 +679,9 @@
             </div>
           </div>
           <p class="score-card-foot">
-            Averaged, this owner is a <s>63</s> — a tidy number that buries the leg
-            actually holding up the deal. <b>We never compute it.</b>
+            This is what your client leaves the meeting holding, on your firm&rsquo;s
+            letterhead. The business is nearly ready. <b>The owner is not</b>, and that
+            is the conversation only you can have.
           </p>
         </div>
       </div>
@@ -619,49 +689,128 @@
   </div>
 </section>
 
-<!-- ============ Problem (dark) ============ -->
-<section id="problem" class="sec-dark">
+<!-- ============ The loss (dark) ============ -->
+<section id="loss" class="sec-dark">
   <div class="container">
     <div class="problem-lead reveal">
-      <p class="big-line">A clean offer means little. Diligence is where the price gets <em>re-cut</em>.</p>
-      <p class="problem-intro">Most owners fight for the headline number and lose the deal in the fine print. The leverage shifts the moment the buyer's team opens the files.</p>
+      <p class="big-line">You find out after the <em>wire clears</em>.</p>
+      <p class="problem-intro">An advisor takes on an owner at forty-eight and does everything right for twelve years: the planning, the insurance, the kids, the second home. At sixty the owner hires an investment banker. For nine months that banker runs the calendar and is the most trusted voice in the owner's life. At closing there is one warm introduction, and twelve years of relationship equity transfers in a single sentence.</p>
     </div>
     <div class="problem-list reveal">
       <div class="problem-item">
         <div class="problem-marker"><svg viewBox="0 0 20 20"><path d="M3 10h14M11 4l6 6-6 6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>The offer is not the price</h3>
-        <p>Most owners negotiate hard for a headline number, then lose it in diligence. By the time the buyer's team arrives, the leverage has shifted.</p>
+        <h3>The seats are assigned before there is a table</h3>
+        <p>By the time a transaction is real, the professional team is chosen and the process belongs to someone else. The decision about who manages the proceeds was made well before anyone called it a deal.</p>
       </div>
       <div class="problem-item">
         <div class="problem-marker"><svg viewBox="0 0 20 20"><path d="M10 2 3 6v5c0 4 3 6.5 7 7 4-.5 7-3 7-7V6l-7-4Z" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 8v3M10 13.5v.5" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <h3>Surprises become discounts</h3>
-        <p>Undocumented addbacks, concentrated customers, owner-dependent operations, weak financials: each one gives the buyer a reason to renegotiate or restructure.</p>
+        <h3>The banker is doing the job well</h3>
+        <p>None of this is anyone behaving badly. The banker sells the company, and sells it hard, which is what they were hired for. The gap is that nobody was doing the advisor's job early enough for it to matter.</p>
       </div>
       <div class="problem-item">
         <div class="problem-marker"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5" stroke-width="1.5"/><path d="M10 6v4.2l2.8 1.8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Most owners find out too late</h3>
-        <p>A diligence process that starts at the letter of intent gives you no runway to fix what the buyer will find. The preparation window is now, not then.</p>
+        <h3>The asset was never on your statement</h3>
+        <p>Most of the client's net worth sits inside an operating company you cannot manage and are rarely asked about. It converts to cash exactly once, and that single event decides the next decade of the relationship.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ Method — weighted dimensions ============ -->
+<!-- ============ The deliverable ============ -->
+<section id="deliverable" class="sec-surface">
+  <div class="container">
+    <div class="doc-grid">
+      <div class="doc-head-col">
+        <p class="eyebrow">What the client gets</p>
+        <h2 class="sec-head">Something the owner takes home and shows their spouse.</h2>
+        <p class="sec-lead">The output is not a dashboard you log into. It is a document you hand across the table, in your firm's branding, that tells an owner where the business actually stands and what to do about it first. It exports clean for your books-and-records archiving.</p>
+        <p class="method-note">Readiness, whether or not they sell. Nothing in it recommends a transaction, and nothing in it depends on one happening.</p>
+      </div>
+
+      <!-- The shape of the artifact, in the product's own tokens and tier ramp.
+           A designed representation, labeled a sample — not a screenshot, and not
+           any real client's numbers. When the anonymized export from the
+           Deliverables studio exists, it replaces this panel. -->
+      <div class="doc-panel reveal">
+        <div class="doc-letterhead">
+          <div class="doc-firm">
+            <div class="doc-firm-mark" aria-hidden="true"></div>
+            <div>
+              <div class="doc-firm-name">Your firm</div>
+              <div class="doc-firm-sub mono">Your letterhead</div>
+            </div>
+          </div>
+          <div class="doc-stamp mono">Sample</div>
+        </div>
+
+        <div class="doc-body">
+          <h3 class="doc-title">Exit readiness review</h3>
+          <p class="doc-sub">Prepared for an owner-client &middot; reviewed quarterly</p>
+
+          <div class="doc-scores">
+            <div class="doc-score tier-sale-ready">
+              <div class="doc-score-code mono">DRS &middot; BUSINESS READINESS</div>
+              <div class="doc-score-num mono">78</div>
+              <div class="doc-score-band"><span class="band-dot" aria-hidden="true"></span>Sale Ready</div>
+            </div>
+            <div class="doc-score tier-needs-work">
+              <div class="doc-score-code mono">BAS &middot; ATTRACTIVENESS</div>
+              <div class="doc-score-num mono">64</div>
+              <div class="doc-score-band"><span class="band-dot" aria-hidden="true"></span>Developing</div>
+            </div>
+            <div class="doc-score tier-high-risk">
+              <div class="doc-score-code mono">ORI &middot; OWNER READINESS</div>
+              <div class="doc-score-num mono">46</div>
+              <div class="doc-score-band"><span class="band-dot" aria-hidden="true"></span>Early Stage</div>
+            </div>
+          </div>
+
+          <p class="doc-rule mono">Where to start</p>
+          <div class="doc-gap">
+            <div class="doc-gap-rank mono">01</div>
+            <div>
+              <h4>The owner has not named a number</h4>
+              <p>The after-tax figure that makes the next chapter work has never been written down, so no offer can be evaluated against anything. This is the shortest leg and it is entirely in your lane.</p>
+            </div>
+          </div>
+          <div class="doc-gap">
+            <div class="doc-gap-rank mono">02</div>
+            <div>
+              <h4>Customer concentration above the comfortable band</h4>
+              <p>The largest account carries more revenue than a buyer will underwrite without structure. Left alone it shows up as escrow and earnout rather than as price.</p>
+            </div>
+          </div>
+          <div class="doc-gap">
+            <div class="doc-gap-rank mono">03</div>
+            <div>
+              <h4>Add-backs are in the owner's head</h4>
+              <p>Undocumented adjustments get disallowed under a quality-of-earnings review, which pulls the earnings base down and compresses the multiple applied to it.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="doc-foot">Indicative scoring for planning discussion. Not a valuation, an appraisal, a tax opinion, or legal advice. Value figures are estimates for discussion with the client's CPA and counsel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Method ============ -->
 <section id="method" class="sec-light">
   <div class="container">
     <div class="method-grid">
       <div class="method-head-col">
-        <p class="eyebrow">The Method</p>
-        <h2 class="sec-head">Three scores. Never averaged.</h2>
-        <p class="sec-lead">Exit readiness is not one question, so it does not get one number. Each leg answers a question the others cannot, and each is scored on its own 0&ndash;100 scale from 16 rank-weighted sub-scores. Roll them together and the weakest leg &mdash; the one that actually stalls the deal &mdash; disappears into the average.</p>
-        <p class="method-note">Every score is rule-based and versioned. Nothing is computed by a model, and no score is adjusted after the fact.</p>
+        <p class="eyebrow">The method</p>
+        <h2 class="sec-head">A reading you can put your name on.</h2>
+        <p class="sec-lead">Three scores, each on its own 0&ndash;100 scale, each computed by rule from the owner's answers against a versioned rubric. Run the same answers twice and you get the same number twice. No model writes a score, adjusts one, or reasons about one, which is what lets a fiduciary hand it to a client and defend every line of it.</p>
+        <p class="method-note">Averaged, the sample owner above is a <s>63</s> &mdash; a tidy number that buries the leg actually holding up the deal. <b>We never compute it.</b></p>
       </div>
       <div class="dim-list reveal" id="dim-list">
         <div class="dim-row">
           <div class="dim-code mono">DRS</div>
           <div class="dim-main">
             <div class="dim-top"><span class="dim-name">Business Readiness</span><span class="dim-scale mono">Tier ladder</span></div>
-            <p class="dim-desc">Will it survive diligence and change hands without you? Owner independence, financial statement quality, management depth, customer concentration, documented process, contract transferability. This is the leg a buyer&rsquo;s team is paid to attack.</p>
+            <p class="dim-desc">Will it survive diligence and change hands without the owner? Owner independence, financial statement quality, management depth, customer concentration, documented process, contract transferability. This is the leg a buyer's team is paid to attack.</p>
             <div class="dim-bar-track"><div class="dim-bar-fill" style="--s:0.76"></div></div>
             <p class="dim-basis"><span><b>76%</b> measured</span><span><b>24%</b> self-rated</span></p>
           </div>
@@ -670,7 +819,7 @@
           <div class="dim-code mono">BAS</div>
           <div class="dim-main">
             <div class="dim-top"><span class="dim-name">Business Attractiveness</span><span class="dim-scale mono">Five bands</span></div>
-            <p class="dim-desc">Why would a buyer compete for it? Recurring revenue, growth track record, differentiation and pricing power, margin performance. Readiness gets you through diligence intact; attractiveness is what expands the multiple you start from.</p>
+            <p class="dim-desc">Why would a buyer compete for it? Recurring revenue, growth track record, differentiation and pricing power, margin performance. Readiness gets the business through diligence intact; attractiveness is what expands the multiple it starts from.</p>
             <div class="dim-bar-track"><div class="dim-bar-fill" style="--s:0.40"></div></div>
             <p class="dim-basis"><span><b>40%</b> measured</span><span><b>60%</b> self-rated</span></p>
           </div>
@@ -679,7 +828,7 @@
           <div class="dim-code mono">ORI</div>
           <div class="dim-main">
             <div class="dim-top"><span class="dim-name">Owner Readiness</span><span class="dim-scale mono">Five bands</span></div>
-            <p class="dim-desc">Are <em>you</em> ready? The after-tax number you actually need, what you are retiring to, transition runway, exit-path clarity, comfort with your net worth tied up in one asset. Scored independently of the business, and it never enters the DRS.</p>
+            <p class="dim-desc">Is the owner ready? The after-tax number they actually need, what they are retiring to, transition runway, exit-path clarity, comfort with a net worth tied up in one asset. Scored independently of the business, and it never enters the DRS. This is the leg your client hired <em>you</em> for.</p>
             <div class="dim-bar-track"><div class="dim-bar-fill" style="--s:0.14"></div></div>
             <p class="dim-basis"><span><b>14%</b> measured</span><span><b>86%</b> self-rated</span></p>
           </div>
@@ -689,289 +838,198 @@
   </div>
 </section>
 
-<!-- ============ Trifecta ============ -->
-<section id="trifecta" class="sec-surface">
+<!-- ============ Before anyone sells (dark) ============ -->
+<section id="tuesday" class="sec-dark">
   <div class="container">
-    <h2 class="sec-head">A sale-ready business can still fail to close.</h2>
-    <p class="sec-lead">A strong DRS with a short Owner Readiness leg stalls just as surely as weak financials do &mdash; it simply stalls for a reason nobody wrote down. The three legs have to stand together before a transaction closes on the owner&rsquo;s terms, which is exactly why they are reported apart.</p>
-    <div class="trifecta-grid reveal">
-      <div class="leg">
-        <span class="leg-badge b1 mono">DRS</span>
-        <h3>Business Readiness</h3>
-        <p>What a buyer&rsquo;s diligence team will find, and how much of it they will use to recut the price. Transferability: whether the business runs, and keeps its value, without you in it.</p>
-      </div>
-      <div class="leg">
-        <span class="leg-badge b2 mono">BAS</span>
-        <h3>Business Attractiveness</h3>
-        <p>Why a buyer would compete for it rather than merely clear diligence on it. Recurring revenue, growth, differentiation and margin are what move the multiple you negotiate from.</p>
-      </div>
-      <div class="leg">
-        <span class="leg-badge b3 mono">ORI</span>
-        <h3>Owner Readiness</h3>
-        <p>Your own preparedness, personal and financial: the number you actually need after tax, the runway you have, and what you are retiring to. The most overlooked leg, and the one that most often stalls a deal late.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ Bands ============ -->
-<section id="bands" class="sec-light">
-  <div class="container">
-    <p class="eyebrow">Reading the Scores</p>
-    <h2 class="sec-head">Two ladders, because the three scores don&rsquo;t mean the same thing.</h2>
-    <p class="sec-lead">Business Readiness is graded on buyer posture &mdash; what a bidder does when they see that number. Attractiveness and Owner Readiness are indices on the same 0&ndash;100 scale, so they get a plain readiness ladder instead. Borrowing one set of labels for all three would flatter the two that haven&rsquo;t earned it.</p>
-
-    <h3 class="bands-cap">DRS &mdash; Business Readiness</h3>
-    <div class="bands-wrap reveal">
-      <table class="bands-table">
-        <thead>
-          <tr><th scope="col">Score</th><th scope="col">Tier</th><th scope="col">What the buyer does</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="band-range">85&ndash;100</td>
-            <td class="band-tier"><span class="band-dot tier-institutional"></span>Institutional Grade</td>
-            <td class="band-note">Competitive process, multiple bids, seller-favorable terms</td>
-          </tr>
-          <tr>
-            <td class="band-range">70&ndash;84</td>
-            <td class="band-tier"><span class="band-dot tier-sale-ready"></span>Sale Ready</td>
-            <td class="band-note">Standard diligence, closes on schedule</td>
-          </tr>
-          <tr>
-            <td class="band-range">55&ndash;69</td>
-            <td class="band-tier"><span class="band-dot tier-needs-work"></span>Needs Work</td>
-            <td class="band-note">Extended diligence, earnouts, escrow, retrade risk on flagged items</td>
-          </tr>
-          <tr>
-            <td class="band-range">40&ndash;54</td>
-            <td class="band-tier"><span class="band-dot tier-high-risk"></span>High Risk</td>
-            <td class="band-note">Distressed pricing, heavy escrow, contingent consideration</td>
-          </tr>
-          <tr>
-            <td class="band-range">&lt; 40</td>
-            <td class="band-tier"><span class="band-dot tier-not-saleable"></span>Not Saleable (Yet)</td>
-            <td class="band-note">No institutional bid. Do not go to market.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="bands-milestone">Two milestones worth naming: <b>Diligence Ready is a DRS of 70</b>. <b>Competitive Process Ready is 85</b>.</p>
-
-    <h3 class="bands-cap">BAS and ORI &mdash; Attractiveness and Owner Readiness</h3>
-    <div class="bands-wrap reveal">
-      <table class="bands-table">
-        <thead>
-          <tr><th scope="col">Score</th><th scope="col">Band</th><th scope="col">Where it leaves you</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="band-range">90&ndash;100</td>
-            <td class="band-tier"><span class="band-dot tier-institutional"></span>Exit Ready</td>
-            <td class="band-note">Nothing on this leg is holding the transaction back</td>
-          </tr>
-          <tr>
-            <td class="band-range">70&ndash;89</td>
-            <td class="band-tier"><span class="band-dot tier-sale-ready"></span>Well Positioned</td>
-            <td class="band-note">Strong, with specific items still worth closing</td>
-          </tr>
-          <tr>
-            <td class="band-range">50&ndash;69</td>
-            <td class="band-tier"><span class="band-dot tier-needs-work"></span>Developing</td>
-            <td class="band-note">Real progress, not yet aligned with the other legs</td>
-          </tr>
-          <tr>
-            <td class="band-range">30&ndash;49</td>
-            <td class="band-tier"><span class="band-dot tier-high-risk"></span>Early Stage</td>
-            <td class="band-note">This leg is short enough to wobble the plan</td>
-          </tr>
-          <tr>
-            <td class="band-range">&lt; 30</td>
-            <td class="band-tier"><span class="band-dot tier-not-saleable"></span>Not Ready</td>
-            <td class="band-note">Foundational work before a transaction is realistic</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ============ Process (dark) ============ -->
-<section id="process" class="sec-dark">
-  <div class="container">
-    <p class="eyebrow">How it Works</p>
-    <h2 class="sec-head">Four steps from request to roadmap.</h2>
+    <p class="eyebrow">Before anyone sells</p>
+    <h2 class="sec-head">What it does for you next Tuesday.</h2>
+    <p class="sec-lead">If a tool only pays off at an exit three years out, it is not yet worth a line in your budget. The readiness process earns its place in the meetings you already hold.</p>
     <div class="process-steps reveal">
       <div class="p-step">
-        <div class="p-step-connector" aria-hidden="true"></div>
+        <div class="p-step-connector"></div>
         <div class="p-step-num mono">01</div>
-        <h3>Profile</h3>
-        <p>Define your exit goals, intended path, priority ranking, and timeline. This shapes how the output is interpreted.</p>
+        <h3>In a normal review</h3>
+        <p>Run the assessment with no transaction on the horizon. It fits the meeting already on the calendar, and it does not require the client to be thinking about selling.</p>
       </div>
       <div class="p-step">
-        <div class="p-step-connector" aria-hidden="true"></div>
+        <div class="p-step-connector"></div>
         <div class="p-step-num mono">02</div>
-        <h3>Assess</h3>
-        <p>Work through the question bank behind all three legs &mdash; 48 sub-scores, 16 to a leg. No financials required.</p>
+        <h3>A score that moves</h3>
+        <p>Re-score on the engagement's own clock. The delta is the agenda: what closed, what slipped, and what it changed about the range the business would trade in.</p>
       </div>
       <div class="p-step">
-        <div class="p-step-connector" aria-hidden="true"></div>
+        <div class="p-step-connector"></div>
         <div class="p-step-num mono">03</div>
-        <h3>Score</h3>
-        <p>All three scores are computed from your answers by rule &mdash; the DRS with its buyer-posture tier, the BAS and ORI with their readiness bands. No model touches a number.</p>
+        <h3>An annual review with a spine</h3>
+        <p>The owner conversation stops being an account update and becomes a plan with a document attached, tracked across years rather than restarted every January.</p>
       </div>
       <div class="p-step">
         <div class="p-step-num mono">04</div>
-        <h3>Roadmap</h3>
-        <p>The top ranked gaps surface with initiative copy calibrated to severity. An alignment verdict reads all three legs against your stated timeline and names the short one.</p>
+        <h3>A first meeting that is not a pitch</h3>
+        <p>Most owners have never been asked these questions by an advisor. Walking a prospect through the readiness conversation is the differentiator, long before anyone in the room has a deal.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ Who ============ -->
-<section id="who" class="sec-light">
+<!-- ============ The two lanes ============ -->
+<section id="lanes" class="sec-light">
   <div class="container">
-    <h2 class="sec-head">Built for the deal table.</h2>
-    <p class="sec-lead">ExitBlueprint is built for anyone who needs to know where a business stands before a buyer does the asking.</p>
-    <div class="who-grid reveal">
-      <div class="who-item">
-        <span class="who-icon"><svg viewBox="0 0 16 16"><circle cx="8" cy="5" r="2.8" stroke-width="1.3"/><path d="M2.5 13.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5" stroke-width="1.3" stroke-linecap="round"/></svg></span>
-        <span class="who-label">Business Owners</span>
+    <h2 class="sec-head">Where the process runs, and where it stops.</h2>
+    <p class="sec-lead">Two boundaries worth being precise about, because getting either one wrong is how a platform ends up competing with the people it needs on its side.</p>
+    <div class="lane-grid reveal">
+      <div class="lane">
+        <h3>You are the one who convenes them.</h3>
+        <p>Invite the CPA, the attorney and the banker into the same readiness picture, so the conversation starts from one set of facts instead of four. Nobody is displaced: the CPA keeps the tax work and gets a better-prepared client, counsel keeps the documents, and the process runs through you.</p>
       </div>
-      <div class="who-item">
-        <span class="who-icon"><svg viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="11" height="11" rx="1.8" stroke-width="1.3"/><path d="M5.5 8h5M5.5 10.5h3" stroke-width="1.3" stroke-linecap="round"/></svg></span>
-        <span class="who-label">M&amp;A Advisors</span>
-      </div>
-      <div class="who-item">
-        <span class="who-icon"><svg viewBox="0 0 16 16"><path d="M8 2.2 10.3 5.6 14 6.1l-2.8 2.8.7 3.9L8 11l-3.4 1.8.7-3.9L2.5 6.1l3.7-.5L8 2.2Z" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
-        <span class="who-label">Exit Planners (CEPA)</span>
-      </div>
-      <div class="who-item">
-        <span class="who-icon"><svg viewBox="0 0 16 16"><path d="M2.5 11.5 6 8l3 2 4.5-5.5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 4.5h3v3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="who-label">PE Acquirers</span>
-      </div>
-      <div class="who-item">
-        <span class="who-icon"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.7" stroke-width="1.3"/><path d="M8 5v3.2l1.8 1.8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="who-label">Wealth Managers</span>
-      </div>
-      <div class="who-item">
-        <span class="who-icon"><svg viewBox="0 0 16 16"><path d="M3.5 13.5V8L8 2.8 12.5 8v5.5M6.5 13.5v-3.2h3v3.2" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="who-label">Independent Sponsors</span>
+      <div class="lane">
+        <h3>Your planning stack stays yours.</h3>
+        <p>We do not project retirement income, model a drawdown, or run the financial plan. That is your work and the software you already pay for.</p>
+        <p>What we do is hand that stack a defensible set of numbers: a value range for the business, a net-proceeds view, and a readiness picture that says how much of it is real yet. The estimates are for discussion with the client's CPA and counsel.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ Beyond ============ -->
-<section id="beyond" class="sec-surface">
+<!-- ============ The arithmetic ============ -->
+<section id="arithmetic" class="sec-surface">
   <div class="container">
-    <p class="eyebrow">Beyond the Scores</p>
-    <h2 class="sec-head">The scores are the beginning, not the summary.</h2>
-    <div class="beyond-grid reveal">
-      <div class="beyond-card">
-        <span class="beyond-tag mono">SCORES</span>
-        <div class="beyond-body">
-          <h3>The three scores</h3>
-          <p>DRS, BAS and ORI on their own 0–100 scales. The readout you share with your advisory team and track over time as you close gaps before going to market.</p>
-        </div>
+    <div class="calc-grid">
+      <div>
+        <p class="eyebrow">The arithmetic</p>
+        <h2 class="sec-head">What is actually at stake in your book.</h2>
+        <p class="sec-lead">Nobody can quote you a credible retention rate for this, so we will not try. Put your own numbers in instead. The figure that matters is the one you produce.</p>
+        <p class="calc-question">How many of those do you expect to still be managing eighteen months after the sale?</p>
       </div>
-      <div class="beyond-card">
-        <span class="beyond-tag mono">EBITDA</span>
-        <div class="beyond-body">
-          <h3>EBITDA Recast</h3>
-          <p>Addback clarity that a buyer's quality-of-earnings team will examine first. Gaps here pull EBITDA and compress the multiple simultaneously.</p>
+
+      <div class="calc">
+        <div class="calc-field">
+          <label class="calc-label mono" for="c-clients">Owner clients approaching transition</label>
+          <div class="calc-input-wrap">
+            <input class="calc-input" id="c-clients" type="number" min="0" step="1" inputmode="numeric" placeholder="5" aria-describedby="calc-total-label" />
+          </div>
         </div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-tag mono">EV GAP</span>
-        <div class="beyond-body">
-          <h3>Enterprise Value Gap</h3>
-          <p>The distance between current enterprise value and where you need to be. Mapped to your stated timeline and to the after-tax number behind your Owner Readiness score.</p>
+        <div class="calc-field">
+          <label class="calc-label mono" for="c-proceeds">Average expected net proceeds per exit</label>
+          <div class="calc-input-wrap">
+            <span class="calc-prefix mono" aria-hidden="true">$</span>
+            <input class="calc-input has-prefix" id="c-proceeds" type="number" min="0" step="100000" inputmode="numeric" placeholder="6,000,000" />
+          </div>
         </div>
-      </div>
-      <div class="beyond-card">
-        <span class="beyond-tag mono">ROADMAP</span>
-        <div class="beyond-body">
-          <h3>Initiative Roadmap</h3>
-          <p>Ranked gaps with severity-calibrated initiative copy. What to do first, in plain language, ordered by how much weight the sub-score behind it actually carries.</p>
+        <div class="calc-field">
+          <label class="calc-label mono" for="c-fee">Your advisory fee on managed proceeds</label>
+          <div class="calc-input-wrap">
+            <input class="calc-input has-suffix" id="c-fee" type="number" min="0" max="5" step="0.05" inputmode="decimal" placeholder="0.80" />
+            <span class="calc-suffix mono" aria-hidden="true">%</span>
+          </div>
+        </div>
+
+        <div class="calc-out" aria-live="polite">
+          <div class="calc-row">
+            <span class="calc-row-label">Annual revenue per retained relationship</span>
+            <span class="calc-row-val mono" id="c-per">&mdash;</span>
+          </div>
+          <div class="calc-row total">
+            <span class="calc-row-label" id="calc-total-label">Recurring revenue at stake across the book</span>
+            <span class="calc-row-val mono is-empty" id="c-total">&mdash;</span>
+          </div>
+          <p class="calc-illus mono" id="c-ev">Enterprise value effect, illustrative only: RIA valuation multiples vary widely.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CTA (dark) ============ -->
-<section id="cta" class="sec-dark">
+<!-- ============ Design partner program (dark) ============ -->
+<section id="partner" class="sec-dark">
   <div class="container">
-    <p class="cta-label mono">Get Started</p>
-    <h2>Find all three of your scores.</h2>
-    <p>A conversation today is cheaper than a re-trade at the closing table.</p>
-    <a href="https://app.exitblueprint.net/sign-up" class="btn btn-on-dark btn-lg">
-      Start the assessment
-      <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <p class="cta-label mono">Design partner program</p>
+    <div class="partner-head">
+      <h2>We are building this with ten firms, not for a thousand.</h2>
+      <p class="partner-intro">You will shape what it becomes, and you will have a formal owner transition process in place before anyone else in your market does. In exchange we need the truth about what works, and permission to say your name when it does.</p>
+    </div>
+    <div class="terms-grid reveal">
+      <div class="term">
+        <span class="term-key mono">Term</span>
+        <p><b>Six months</b>, with the conversion price agreed in writing at the start rather than sprung at the end.</p>
+      </div>
+      <div class="term">
+        <span class="term-key mono">Price</span>
+        <p><b>Free or heavily discounted</b> for the term, and founding-customer pricing locked after it.</p>
+      </div>
+      <div class="term">
+        <span class="term-key mono">You give</span>
+        <p>A standing call every two weeks, one <b>real client engagement inside sixty days</b>, and permission to be named.</p>
+      </div>
+      <div class="term">
+        <span class="term-key mono">You get</span>
+        <p>Direct influence on the roadmap and <b>founder-level access</b>. No implementation project and no committee.</p>
+      </div>
+    </div>
+    <div class="partner-cta">
+      <a href="#apply" class="btn btn-on-dark btn-lg">
+        Tell us about your book
+        <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="partner-cta-note mono">Five questions. The first one tells us both whether this is a fit.</p>
+    </div>
   </div>
 </section>
 
-<!-- ============ Assessment / lead form ============ -->
-<section id="assessment">
+<!-- ============ Apply ============ -->
+<section id="apply">
   <div class="container">
     <div class="form-wrap">
       <div class="form-aside">
-        <p class="eyebrow">Prefer a guided start</p>
-        <h2>Request a guided assessment.</h2>
-        <p>Would you rather talk it through first? Share a few basics and we'll be in touch to walk you through the assessment. No financials required.</p>
+        <p class="eyebrow">Start here</p>
+        <h2>Tell us about your book.</h2>
+        <p>Five questions, and one of them is the only qualifier that matters. If the fit is not there we will say so rather than sell you a seat.</p>
         <ul class="assurances">
-          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>A starting point for advisory conversations, not a valuation</li>
-          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Around ten minutes across all three legs</li>
+          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>A conversation with the founder, not a scheduled demo</li>
+          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything the platform produces carries your branding and exports clean for archiving</li>
           <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Your details are used only to reach you</li>
         </ul>
       </div>
 
-      <form id="assessment-form" onsubmit="submitForm(event)">
-        <input type="hidden" name="access_key" value="de35fdee-9554-4f33-bad5-adbce9906122" />
-        <input type="hidden" name="subject" value="New ExitBlueprint Assessment Request" />
-        <input type="hidden" name="redirect" value="false" />
-
+      <form id="apply-form" onsubmit="submitForm(event)">
         <div class="form-two">
           <div class="form-field">
-            <label class="form-label mono" for="f-name">Your Name</label>
+            <label class="form-label mono" for="f-name">Your name</label>
             <input class="form-input" id="f-name" name="name" type="text" placeholder="Jane Smith" autocomplete="name" required />
           </div>
           <div class="form-field">
-            <label class="form-label mono" for="f-company">Company</label>
-            <input class="form-input" id="f-company" name="company" type="text" placeholder="Acme Inc." autocomplete="organization" required />
+            <label class="form-label mono" for="f-firm">Firm</label>
+            <input class="form-input" id="f-firm" name="firm" type="text" placeholder="Smith Wealth Partners" autocomplete="organization" required />
           </div>
         </div>
         <div class="form-field">
           <label class="form-label mono" for="f-email">Email</label>
-          <input class="form-input" id="f-email" name="email" type="email" placeholder="jane@acme.com" autocomplete="email" required />
+          <input class="form-input" id="f-email" name="email" type="email" placeholder="jane@smithwealth.com" autocomplete="email" required />
         </div>
+        <!-- The one qualifier. Owner-client density predicts fit better than AUM
+             does, and asking it first is how a bad fit gets found in week one
+             rather than in month nine. -->
         <div class="form-field">
-          <label class="form-label mono" for="f-revenue">Annual Revenue (approximate)</label>
-          <select class="form-input" id="f-revenue" name="annual_revenue" required>
+          <label class="form-label mono" for="f-owners">Clients who own an operating business that is most of their net worth</label>
+          <select class="form-input" id="f-owners" name="owner_clients" required>
             <option value="" disabled selected>Select a range</option>
-            <option>Under $1M</option>
-            <option>$1M – $5M</option>
-            <option>$5M – $15M</option>
-            <option>$15M – $50M</option>
-            <option>Over $50M</option>
+            <option>1 to 2</option>
+            <option>3 to 5</option>
+            <option>6 to 10</option>
+            <option>More than 10</option>
           </select>
         </div>
         <div class="form-field">
-          <label class="form-label mono" for="f-timeline">Exit Timeline</label>
-          <select class="form-input" id="f-timeline" name="exit_timeline" required>
-            <option value="" disabled selected>When are you thinking?</option>
-            <option>Under 1 year</option>
-            <option>1 to 2 years</option>
-            <option>3 to 5 years</option>
-            <option>5+ years</option>
-            <option>Just exploring</option>
+          <label class="form-label mono" for="f-lost">Have you had a client sell and the proceeds go somewhere else?</label>
+          <select class="form-input" id="f-lost" name="lost_one" required>
+            <option value="" disabled selected>Select one</option>
+            <option>Yes, and I can name the client</option>
+            <option>Not yet, but I can see one coming</option>
+            <option>No</option>
           </select>
         </div>
         <button type="submit" id="form-btn" class="btn btn-primary btn-lg">
-          Request my assessment
+          Start the conversation
           <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <p id="form-confirm" class="mono">Got it. We'll be in touch shortly.</p>
@@ -990,7 +1048,7 @@
           <svg class="wordmark-logo" viewBox="0 0 200.87 34.57" aria-hidden="true" focusable="false"><use href="#eb-logo" /></svg>
         </a>
         <p class="footer-disclaimer">
-          The DRS, BAS and ORI are scoring tools, not a valuation or financial advice. Results are based on self-reported inputs and are a starting point for advisory conversations.
+          The DRS, BAS and ORI are scoring tools, not a valuation, an appraisal, a tax opinion, or financial advice. Results are based on self-reported inputs and are a starting point for advisory conversations.
           <!-- The two lines below name the LEGAL ENTITY, not the brand, so they keep the
                two-word spelling while the wordmark and the prose read "ExitBlueprint".
                Same split the app makes in shared/brand.ts: the entity name is a legal
@@ -999,17 +1057,20 @@
         </p>
       </div>
       <div class="footer-col">
-        <h4>Explore</h4>
-        <a href="#method">Method</a>
-        <a href="#process">Process</a>
-        <a href="#who">Who it's for</a>
-        <a href="#bands">Reading the score</a>
+        <h4>The argument</h4>
+        <a href="#loss">The loss</a>
+        <a href="#deliverable">What the client gets</a>
+        <a href="#method">The method</a>
+        <a href="#arithmetic">The arithmetic</a>
       </div>
       <div class="footer-col">
         <h4>Get started</h4>
-        <a href="https://app.exitblueprint.net/sign-up">Start the assessment</a>
+        <a href="#partner">Design partner program</a>
+        <a href="#apply">Tell us about your book</a>
         <a href="https://app.exitblueprint.net/login">Log in</a>
-        <a href="#assessment">Request a guided assessment</a>
+        <!-- Owners land here too. A line and an address, deliberately not a
+             second audience the page tries to serve. -->
+        <p class="footer-owner">Own a business rather than advise one? Write to <a href="mailto:matthew@fracturesystems.com">matthew@fracturesystems.com</a> and we will point you to an advisor running the process.</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1050,7 +1111,55 @@
     });
   })();
 
-  /* ============ Assessment form ============ */
+  /* ============ The arithmetic ============
+     Everything stays in the page: no submit, no network call, no storage. The
+     fields ship blank on purpose — the framework is the persuasive part, and it
+     only works when the advisor supplies their own figures. Until all three are
+     present the outputs read as em dashes rather than as zeroes, because a
+     confident $0 is worse than an obvious blank. */
+  (function() {
+    var clients = document.getElementById('c-clients');
+    var proceeds = document.getElementById('c-proceeds');
+    var fee = document.getElementById('c-fee');
+    if (!clients || !proceeds || !fee) return;
+
+    var perEl = document.getElementById('c-per');
+    var totalEl = document.getElementById('c-total');
+    var evEl = document.getElementById('c-ev');
+    var EV_MULTIPLE = 2.5;
+    var EV_NOTE = 'Enterprise value effect, illustrative only: RIA valuation multiples vary widely.';
+
+    var money = new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'USD', maximumFractionDigits: 0
+    });
+
+    function num(el) {
+      var v = parseFloat(el.value);
+      return isFinite(v) && v >= 0 ? v : null;
+    }
+
+    function update() {
+      var n = num(clients), p = num(proceeds), f = num(fee);
+      if (p === null || f === null) { perEl.textContent = '—'; }
+      else { perEl.textContent = money.format(p * (f / 100)) + ' / yr'; }
+
+      if (n === null || p === null || f === null) {
+        totalEl.textContent = '—';
+        totalEl.classList.add('is-empty');
+        evEl.textContent = EV_NOTE;
+        return;
+      }
+      var total = n * p * (f / 100);
+      totalEl.textContent = money.format(total) + ' / yr';
+      totalEl.classList.remove('is-empty');
+      evEl.textContent = 'At a ' + EV_MULTIPLE + 'x revenue multiple that is roughly '
+        + money.format(total * EV_MULTIPLE) + ' of firm value. Illustrative only: RIA valuation multiples vary widely.';
+    }
+
+    [clients, proceeds, fee].forEach(function(el) { el.addEventListener('input', update); });
+  })();
+
+  /* ============ Design partner form ============ */
   async function submitForm(e) {
     e.preventDefault();
     var btn = document.getElementById('form-btn');
@@ -1060,12 +1169,12 @@
     btn.disabled = true; btn.style.opacity = '0.6';
     var data = {
       access_key: 'de35fdee-9554-4f33-bad5-adbce9906122',
-      subject: 'New ExitBlueprint Assessment Request',
+      subject: 'ExitBlueprint design partner enquiry',
       name: document.getElementById('f-name').value,
-      company: document.getElementById('f-company').value,
+      firm: document.getElementById('f-firm').value,
       email: document.getElementById('f-email').value,
-      annual_revenue: document.getElementById('f-revenue').value,
-      exit_timeline: document.getElementById('f-timeline').value
+      owner_clients: document.getElementById('f-owners').value,
+      lost_one: document.getElementById('f-lost').value
     };
     try {
       var res = await fetch('https://api.web3forms.com/submit', {
@@ -1075,7 +1184,7 @@
       });
       var json = await res.json();
       if (json.success) {
-        document.getElementById('assessment-form').reset();
+        document.getElementById('apply-form').reset();
         confirmEl.style.display = 'block';
       } else { throw new Error(json.message); }
     } catch(err) {

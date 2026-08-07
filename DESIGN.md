@@ -7,6 +7,7 @@ Durable visual decisions for the ExitBlueprint marketing site. Refinement preser
 - **THESIS:** A precision diligence instrument dressed as a modern, trustworthy financial product. It refuses the dark/brass/serif "luxury deal document" look and the AI-default cream-serif-terracotta look. Calm light ground, one confident green, one bold dark instrument.
 - **OWN-WORLD:** Off-white ground (`#EEEFEE`), crisp white surfaces, deep forest-green dark sections and footer, a single brand green used decisively, mint for accents and "ready" states. Grotesk display + humanist body + monospace reserved strictly for data (score codes, bands, scores, ranges). No decorative grid fields, no gradient text, no eyebrow on every section, no uniform card wall.
 - **MODE:** Persuade. A first-time visitor knows what this is, why it matters, and what to do within seconds.
+- **READER:** The independent wealth manager, RIA principal, or multi-manager office partner who has business-owner clients — not the owner. The owner is a person the reader serves, and appears on the page only as the subject of the artifact. One buyer, one argument.
 
 ## Color tokens
 
@@ -126,9 +127,30 @@ card, the one bold moment on a calm page. It replaced a single needle gauge with
 and never composites them, and it ships no confidence band at all.
 
 The composition *is* the argument. Three separate readings that refuse to resolve
-into one, in three different hues, with a footer naming the average the site will
-not print (`Averaged, this owner is a ~~63~~ … We never compute it.`). A visitor
-who reads nothing else should come away knowing there is no single number.
+into one, in three different hues. **The card's caption is advisor-facing** — it
+names what the client leaves the meeting holding and which leg the advisor is the
+only one who can move — because the hero's job is the retention argument, not the
+methodology one. The line naming the average the site will not print
+(`Averaged, the sample owner above is a ~~63~~ … We never compute it.`) moved with
+that argument into the method section, where it belongs and where the reader has
+already been told why three numbers exist.
+
+**The artifact panel** (`.doc-*`, "What the client gets") is the second signature and
+the newer one: a light "document" that shows the *shape* of what an owner takes home —
+letterhead, three readings, ranked gaps, disclaimer — in the same tokens and the same
+tier ramp the product ships. It is a designed representation, labeled a sample at the
+letterhead, not a screenshot and not any real client's numbers. The firm mark is a
+dashed placeholder on purpose: the point of the beat is that the artifact carries the
+*advisor's* brand, so it must not carry ours. **When the anonymized export from the
+Deliverables studio exists, it replaces this panel** — that is the intended end state,
+and the panel is the stand-in until then.
+
+**The arithmetic** (`.calc-*`) ships with every field blank and stays in the page — no
+submit, no network call, no storage. Blank is deliberate: the framework persuades only
+when the advisor supplies their own figures, so the site presents the form and not a
+filled-in example. Empty is styled as a *state* (`.is-empty` drops the total back to
+muted mono) because an em dash at display weight reads as a redaction bar rather than
+as an absent number. The firm-value line is always labeled illustrative.
 
 Ring geometry is the app's, not an approximation of it: size, stroke at 9% of it,
 radius on the stroke centreline, and the dash shortened by one stroke with the
@@ -137,9 +159,14 @@ arc past each end, so without the correction every ring renders long and starts
 before twelve o'clock. A 78 is therefore the same picture here and in the product.
 The number is printed in the markup and never animates; the ring is reinforcement.
 
-## Auth
+## Calls to action
 
-Primary "Start the assessment" and "Log in" actions route to `https://app.exitblueprint.net`. The lead-capture form is preserved as a secondary "guided assessment" contact option.
+There is **one** primary action on the page and it is the **design partner program** — an on-page section and the form beneath it, not an external flow. The go-to-market is a hand-provisioned cohort, so the site never links to a self-serve sign-up: a button that lands a visitor in a flow nobody can serve them through is worse than no button.
+
+- Primary (nav, hero, partner section) → `#partner` / `#apply`, in-page.
+- "Log in" → `https://app.exitblueprint.net/login`, for advisors who are already provisioned. This is the only outbound product link.
+- The form is the design-partner enquiry. Its fields qualify on **owner-client density**, which predicts fit better than AUM does; the owner's revenue and exit timeline are not asked, because the owner is not the buyer.
+- The nav button carries **two labels in one element** (`.nav-cta-long` / `.nav-cta-short`). "Design partner program" is 214px at nav type size, wider than the whole right-hand side has at 360px, and the mark is already at its 22px legibility floor — so the label shortens and the logo does not.
 
 ## IP line (footer + any report)
 
