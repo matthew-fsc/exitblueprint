@@ -171,3 +171,37 @@ reporter's prose as the body.
 Do not guess. Label `needs-human-triage`, leave `intake` on, comment with the
 specific question, and stop. An unresolved report waiting on a person is a
 better outcome than a wrong issue or a wrongly closed one.
+
+---
+
+## 4. How this runs
+
+`.github/workflows/report-triage.yml`, in two halves that cannot be the same
+half:
+
+- **Judge** — `.github/scripts/triage-report.mjs` reads this file, `DESIGN.md`,
+  `index.html` and the open issue list, and returns a structured verdict. It
+  holds the model credential and **no GitHub token**.
+- **Apply** — the workflow reads that verdict off disk and files, labels,
+  comments or closes. It holds `GITHUB_TOKEN` and **calls no model**.
+
+Nothing that reads an untrusted report can also write to the repository. That
+split is the security boundary, so keep it: do not give the judge a token, and
+do not let the apply step call a model.
+
+**Model access goes through the Vercel AI Gateway.** That is how this project
+talks to every model — the gateway owns the endpoint, the routing and the spend.
+The workflow needs exactly one secret, `AI_GATEWAY_API_KEY`, and the provider
+resolves the endpoint itself, so no base URL is hard-coded anywhere.
+
+- **Do not add a provider API key** — no `ANTHROPIC_API_KEY`, no `OPENAI_API_KEY`,
+  no per-vendor SDK. A change that reintroduces one is going the wrong way, and a
+  report suggesting it should be declined on this rule.
+- The model is the `TRIAGE_MODEL` repository variable, in the gateway's
+  `creator/model` form (for example `anthropic/claude-sonnet-4.5`). Unset is
+  fine: the script resolves against the models the gateway actually serves and
+  falls back to the newest Claude Sonnet on offer, so a renamed or retired slug
+  degrades instead of failing the run.
+- With no `AI_GATEWAY_API_KEY` configured, intake is labeled
+  `needs-human-triage` and the job exits clean. A missing secret must never read
+  as a rejected report.
