@@ -482,6 +482,39 @@
     .footer-bottom { margin-top:52px; padding-top:26px; border-top:1px solid var(--forest-line); display:flex; justify-content:space-between; align-items:center; gap:16px; }
     .footer-bottom p { font-family:var(--mono); font-size:11.5px; font-weight:400; color:var(--on-dark-muted); letter-spacing:0.03em; }
 
+    /* ============ Report ============
+       The report link lives in the footer's utility row, not in a column of
+       navigation: reporting a fault is not part of the argument the page makes,
+       so it takes the row's mono register rather than competing with "Get
+       started". It differs from its two neighbours in tone, not in size — full
+       --on-dark against their muted, which makes the one interactive thing in
+       the row read as interactive without breaking the row's rhythm. */
+    .footer-report { display:inline-flex; align-items:center; font-family:var(--mono); font-size:11.5px; letter-spacing:0.03em; color:var(--on-dark); text-decoration:none; border-bottom:1px solid var(--forest-line); padding-bottom:3px; transition:color .15s, border-color .15s; }
+    .footer-report:hover { color:var(--mint); border-color:var(--mint); }
+    .footer-report:focus-visible { outline:none; border-radius:3px; box-shadow:0 0 0 3px var(--forest-panel), 0 0 0 5.5px var(--mint); }
+
+    /* margin:auto is what centres a modal dialog, and the reset's blanket
+       margin:0 takes it away — so it is restored here rather than inherited. */
+    #report-dialog { width:min(560px, calc(100vw - 32px)); max-height:calc(100vh - 48px); margin:auto; overflow:auto; padding:0; border:1px solid var(--line); border-radius:var(--r-lg); background:var(--card); color:var(--ink); box-shadow:0 30px 70px -20px rgba(12,34,24,0.45); }
+    #report-dialog::backdrop { background:rgba(12,34,24,0.62); }
+    .report-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding:28px 28px 0; }
+    .report-head h2 { font-size:23px; letter-spacing:-0.028em; }
+    .report-close { display:flex; align-items:center; justify-content:center; width:32px; height:32px; margin:-4px -6px 0 0; flex-shrink:0; background:transparent; border:1px solid transparent; border-radius:var(--r-sm); color:var(--ink-muted); cursor:pointer; transition:color .15s, background .15s, border-color .15s; }
+    .report-close:hover { color:var(--ink); background:var(--surface); border-color:var(--line); }
+    .report-close:focus-visible { outline:none; box-shadow:0 0 0 3px var(--card), 0 0 0 5.5px var(--primary); }
+    .report-close svg { width:15px; height:15px; fill:none; }
+    .report-note { padding:12px 28px 0; font-size:13.5px; color:var(--ink-muted); line-height:1.6; max-width:54ch; }
+    #report-form { display:flex; flex-direction:column; gap:16px; padding:22px 28px 28px; }
+    textarea.form-input { min-height:118px; resize:vertical; line-height:1.55; }
+    .report-meta { font-family:var(--mono); font-size:11px; letter-spacing:0.02em; color:var(--ink-muted); line-height:1.65; }
+    .report-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:2px; }
+    #report-btn { border:none; cursor:pointer; }
+    .report-alt { font-size:13px; color:var(--ink-muted); }
+    .report-alt a { color:var(--primary-ink); }
+    #report-confirm, #report-error { display:none; font-family:var(--mono); font-size:13px; padding:15px 16px; border-radius:var(--r-sm); line-height:1.5; }
+    #report-confirm { color:var(--primary-ink); background:var(--brand-tint); border:1px solid rgba(67,134,99,0.25); }
+    #report-error { color:#8A3F2C; background:rgba(176,86,60,0.09); border:1px solid rgba(176,86,60,0.22); }
+
     /* ============ Reveal ============ */
     @media (prefers-reduced-motion:no-preference) {
       html.js .reveal { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
@@ -522,6 +555,17 @@
          word is already down to 9px, so the readout stacks rather than shrinks. */
       .doc-scores { grid-template-columns:1fr; }
       .doc-body, .doc-letterhead, .doc-foot { padding-left:20px; padding-right:20px; }
+      /* The row is stacked here, so the link's underline would otherwise sit on
+         top of the copyright line. */
+      .footer-report { margin:3px 0 5px; }
+      .report-head { padding:22px 20px 0; }
+      .report-note { padding:10px 20px 0; }
+      #report-form { padding:18px 20px 22px; gap:14px; }
+      /* A short phone viewport puts the submit below the fold. The dialog
+         scrolls, but the fields give up the height first. */
+      textarea.form-input { min-height:96px; }
+      .report-actions { gap:12px; }
+      #report-btn { width:100%; justify-content:center; }
     }
     @media (max-width:400px) {
       /* At this width the nav is down to the lockup and one button, and they
@@ -1041,10 +1085,67 @@
     </div>
     <div class="footer-bottom">
       <p class="mono">exitblueprint.net</p>
+      <!-- Ships as a real link to the GitHub intake form and is upgraded to the
+           on-page dialog by script, so a visitor without JS still has somewhere
+           to go. Both routes end at the same triage gate; neither files anything
+           by itself. -->
+      <a class="footer-report" id="report-link" href="https://github.com/matthew-fsc/exitblueprint/issues/new?template=site-report.yml">Report a bug or suggest something</a>
       <p class="mono">&copy; 2026 Exit Blueprint LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>
+
+<!-- ============ Report dialog ============
+     Intake, not the work list. A report goes to the founder's inbox and then
+     through the gate in .github/workflows/report-triage.yml, which files a GitHub
+     issue only when an agent judges it a real change AND finds it compatible with
+     the rules in DESIGN.md — the bar is written down in .github/REPORT-TRIAGE.md.
+     Nothing here creates an issue on its own, which is why the confirmation says
+     "reviewed" rather than "filed". -->
+<dialog id="report-dialog" aria-labelledby="report-title">
+  <div class="report-head">
+    <h2 id="report-title">Report something</h2>
+    <button type="button" class="report-close" id="report-close" aria-label="Close">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <p class="report-note">A bug, something missing, or a change you think this page should make. Every report is checked against the site's design rules before anything is filed, so name the section and say what you expected.</p>
+  <form id="report-form" onsubmit="submitReport(event)">
+    <div class="form-field">
+      <label class="form-label mono" for="r-type">Kind</label>
+      <select class="form-input" id="r-type" name="report_type" required>
+        <option value="" disabled selected>Select one</option>
+        <option>Bug — something is broken or wrong</option>
+        <option>Feature — something the page should do</option>
+        <option>Suggestion — something that should read or look different</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label class="form-label mono" for="r-summary">One line</label>
+      <input class="form-input" id="r-summary" name="summary" type="text" maxlength="140" placeholder="The nav button overlaps the logo on my phone" required />
+    </div>
+    <div class="form-field">
+      <label class="form-label mono" for="r-details">Detail</label>
+      <textarea class="form-input" id="r-details" name="details" rows="5" maxlength="4000" placeholder="What you did, what you expected, and what happened instead. For a suggestion: what the page does now, and what it should do." required></textarea>
+    </div>
+    <div class="form-field">
+      <label class="form-label mono" for="r-email">Email (optional)</label>
+      <input class="form-input" id="r-email" name="email" type="email" placeholder="Only if you would like a reply" autocomplete="email" />
+    </div>
+    <!-- Honeypot. A bot fills it, a person never sees it. -->
+    <input type="checkbox" name="botcheck" id="r-botcheck" tabindex="-1" aria-hidden="true" style="display:none" />
+    <p class="report-meta">Sent with the report: the page address you are on and your browser version. Your email is used to reply and is never published.</p>
+    <div class="report-actions">
+      <button type="submit" id="report-btn" class="btn btn-primary">
+        Send the report
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="report-alt">On GitHub? <a href="https://github.com/matthew-fsc/exitblueprint/issues/new?template=site-report.yml">File it directly.</a></p>
+    </div>
+    <p id="report-confirm" class="mono">Got it. Reports are reviewed before anything is filed — if it holds up it will appear in the repository's issue list.</p>
+    <p id="report-error" class="mono">That did not send. Please email matthew@fracturesystems.com, or file it on GitHub with the link above.</p>
+  </form>
+</dialog>
 
 <script>
   /* ============ Score dial sweep ============
@@ -1151,6 +1252,80 @@
       var json = await res.json();
       if (json.success) {
         document.getElementById('apply-form').reset();
+        confirmEl.style.display = 'block';
+      } else { throw new Error(json.message); }
+    } catch(err) {
+      btn.disabled = false; btn.style.opacity = '1';
+      errorEl.style.display = 'block';
+    }
+  }
+
+  /* ============ Report dialog ============
+     Progressive enhancement over the footer anchor: if <dialog> is missing the
+     click is never intercepted and the href — the GitHub intake form — stands.
+     #report opens it directly, which is what the repo's issue-template config
+     and any "report it" link elsewhere point at. */
+  (function() {
+    var d = document.getElementById('report-dialog');
+    var link = document.getElementById('report-link');
+    if (!d || !link || typeof d.showModal !== 'function') return;
+
+    function open(e) {
+      if (e) e.preventDefault();
+      if (d.open) return;
+      // A second report in the same visit starts clean rather than under the
+      // last one's confirmation.
+      document.getElementById('report-confirm').style.display = 'none';
+      document.getElementById('report-error').style.display = 'none';
+      var btn = document.getElementById('report-btn');
+      btn.disabled = false; btn.style.opacity = '1';
+      d.showModal();
+      var first = document.getElementById('r-type');
+      if (first) first.focus();
+    }
+
+    link.addEventListener('click', open);
+    document.getElementById('report-close').addEventListener('click', function() { d.close(); });
+    // Click outside the panel. The dialog element itself is only hit on the
+    // backdrop, because every child carries the padding.
+    d.addEventListener('click', function(e) { if (e.target === d) d.close(); });
+    if (location.hash === '#report') open();
+    window.addEventListener('hashchange', function() { if (location.hash === '#report') open(); });
+  })();
+
+  async function submitReport(e) {
+    e.preventDefault();
+    var btn = document.getElementById('report-btn');
+    var confirmEl = document.getElementById('report-confirm');
+    var errorEl = document.getElementById('report-error');
+    errorEl.style.display = 'none';
+    btn.disabled = true; btn.style.opacity = '0.6';
+    var type = document.getElementById('r-type').value;
+    var email = document.getElementById('r-email').value.trim();
+    var data = {
+      access_key: 'de35fdee-9554-4f33-bad5-adbce9906122',
+      // The leading word matches the triage workflow's report_type input, so a
+      // report can be handed to the gate without being re-typed.
+      subject: 'ExitBlueprint site report · ' + type.split(' — ')[0],
+      from_name: 'ExitBlueprint site',
+      report_type: type,
+      summary: document.getElementById('r-summary').value,
+      details: document.getElementById('r-details').value,
+      page: window.location.href,
+      viewport: window.innerWidth + '×' + window.innerHeight,
+      browser: navigator.userAgent,
+      botcheck: document.getElementById('r-botcheck').checked ? 'flagged' : ''
+    };
+    if (email) data.email = email;
+    try {
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      var json = await res.json();
+      if (json.success) {
+        document.getElementById('report-form').reset();
         confirmEl.style.display = 'block';
       } else { throw new Error(json.message); }
     } catch(err) {

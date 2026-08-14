@@ -1,0 +1,10 @@
+# Blank issues stay on: the maintainer files work directly and should not have to
+# go through intake to do it. The intake form is for reports arriving from outside.
+blank_issues_enabled: true
+contact_links:
+  - name: Report from the site instead
+    url: https://exitblueprint.net/#report
+    about: No GitHub account needed — the form at the bottom of the page goes to the same triage.
+  - name: Something about the product, not the site
+    url: mailto:matthew@fracturesystems.com
+    about: Scores, accounts, deliverables and billing live in the app, not in this repo.
