@@ -182,6 +182,7 @@ The number is printed in the markup and never animates; the ring is reinforcemen
 | Primary | "Get started" | `https://app.exitblueprint.net/sign-up` | nav, hero, closing band, footer |
 | Direct outreach | "Start the conversation" | the `#apply` form | the form's own submit button, plus a subordinate text link under the closing band's button |
 | Returning | "Log in" | `https://app.exitblueprint.net/login` | nav, footer |
+| Report | "Report a bug or suggest something" | the `#report` dialog | the footer's utility row, nowhere else |
 
 Rules that follow from that split:
 
@@ -190,6 +191,16 @@ Rules that follow from that split:
 - The form qualifies on **owner-client density**, which predicts fit better than AUM does; the owner's revenue and exit timeline are not asked, because the owner is not the buyer.
 - The hero's two buttons must fit **one row** in the text column. That is the constraint on their labels, and it is why the secondary one is short.
 - The nav button label has to clear the 360px nav, where the mark is already at its 22px legibility floor and cannot give up more width. "Get started" fits outright; a longer label needs the two-element `.nav-cta-long` / `.nav-cta-short` swap that used to live there.
+- **"Report" is the fourth path and it took its own verb** rather than borrowing one of the three above, per the rule directly overhead. It is a utility, not a call to action: it sits in the footer's bottom utility row in that row's mono register, and it differs from its two neighbours in *tone* — full `--on-dark` against their muted — rather than in size or weight. It never appears as a button, never appears in the nav, and never appears above the footer. A page that invites a visitor to file a fault in the same breath as it asks them to sign up has confused two different jobs.
+
+## Reporting
+
+The footer's report link opens `#report`, a dialog that sends to the same Web3Forms endpoint the `#apply` form uses. It is **intake, not a work list**: nothing a visitor submits reaches the repository's issues by itself.
+
+- The link ships as a real `<a>` pointing at the GitHub intake form and is upgraded to the dialog by script, so it still works with JavaScript off.
+- What a report can become is decided by the triage gate in `.github/workflows/report-triage.yml` against the bar written down in `.github/REPORT-TRIAGE.md`. That rulebook treats **this document as binding** — a suggestion that breaks a rule here is declined on the rule, by name.
+- Because filing is not automatic, the confirmation says *reviewed*, never *filed*. Do not reword it into a promise the pipeline does not keep.
+- The dialog discloses exactly what rides along with a report — page address and browser version — and the reporter's email is never published.
 
 ## IP line (footer + any report)
 

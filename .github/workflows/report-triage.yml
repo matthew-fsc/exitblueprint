@@ -1,0 +1,220 @@
+# The gate between "someone reported something" and "it is on the work list".
+#
+# Nothing reaches the backlog because it was submitted. A report becomes an issue
+# only when the agent judges it a meaningful change AND finds it compatible with
+# the repo's rules — both defined in .github/REPORT-TRIAGE.md, which is the
+# instruction set for the judgement step.
+#
+# Two ways in, one gate:
+#   - intake issues  — filed through .github/ISSUE_TEMPLATE/site-report.yml by
+#     someone with a GitHub account. They land labeled `intake`, which is not the
+#     work list: triage either rewrites them into a real issue or closes them.
+#   - workflow_dispatch — a report that arrived by email from the site form.
+#     Nothing is created unless the report passes, so a declined one leaves no
+#     trace in the issue list at all.
+#
+# The model runs through the **Vercel AI Gateway** (AI_GATEWAY_API_KEY), which is
+# how this project talks to every model — there is no provider API key here and
+# there should not be one. The judgement step holds the gateway key and no GitHub
+# write access; the apply step holds GITHUB_TOKEN and calls no model. Neither half
+# can both decide and act, which is the point.
+
+name: Report triage
+
+on:
+  issues:
+    types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      report_type:
+        description: Bug / Feature / Suggestion
+        required: true
+        type: choice
+        options: [Bug, Feature, Suggestion]
+      summary:
+        description: One line — what it is
+        required: true
+        type: string
+      details:
+        description: The report as received
+        required: true
+        type: string
+      where:
+        description: Where on the page (section or anchor)
+        required: false
+        type: string
+      environment:
+        description: Browser and screen, for bugs
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: report-triage-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    # Only intake runs through the gate. Issues the maintainer files directly are
+    # already decided, and `triaged` stops a run from re-triaging its own labeling.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (contains(github.event.issue.labels.*.name, 'intake') &&
+       !contains(github.event.issue.labels.*.name, 'triaged'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the rules
+        uses: actions/checkout@v4
+
+      # A missing credential must not look like a rejected report. Without one the
+      # job parks the intake for a person and exits clean.
+      - name: Is a gateway credential available
+        id: guard
+        env:
+          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
+        run: |
+          if [ -n "$AI_GATEWAY_API_KEY" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Park for human triage
+        if: steps.guard.outputs.ready != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          echo "No AI_GATEWAY_API_KEY set — triage skipped, nothing was judged." >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$ISSUE" ]; then
+            gh label create needs-human-triage --color BFD4C6 --description "Waiting on a person" --force
+            gh issue edit "$ISSUE" --add-label needs-human-triage
+          fi
+
+      - name: Ensure triage labels exist
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create intake             --color D9D9D9 --description "Reported, not yet judged"      --force
+          gh label create triaged            --color 438663 --description "Passed the triage gate"        --force
+          gh label create declined           --color 8A8A8A --description "Did not pass the triage gate"  --force
+          gh label create needs-human-triage --color BFD4C6 --description "Waiting on a person"           --force
+          gh label create suggestion         --color 98D4AF --description "A change to how the page reads" --force
+          gh label create spam               --color 4A4A4A --description "Not a report"                  --force
+
+      # Written from env, never interpolated into the shell, and read by the
+      # judgement step as a file — so a report body cannot break out of quoting.
+      - name: Stage the report
+        if: steps.guard.outputs.ready == 'true' && github.event_name == 'workflow_dispatch'
+        env:
+          R_TYPE: ${{ inputs.report_type }}
+          R_SUMMARY: ${{ inputs.summary }}
+          R_DETAILS: ${{ inputs.details }}
+          R_WHERE: ${{ inputs.where }}
+          R_ENV: ${{ inputs.environment }}
+        run: |
+          {
+            printf 'Kind: %s\n\n' "$R_TYPE"
+            printf 'One line: %s\n\n' "$R_SUMMARY"
+            printf 'Where on the page: %s\n\n' "${R_WHERE:-not given}"
+            printf 'Browser and screen: %s\n\n' "${R_ENV:-not given}"
+            printf 'Detail:\n%s\n' "$R_DETAILS"
+          } > ./.triage-report.md
+
+      - name: Collect open issues for the duplicate check
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p .triage
+          gh issue list --state open --limit 200 --json number,title,labels > .triage/open-issues.json
+
+      - name: Set up Node
+        if: steps.guard.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install the gateway client
+        if: steps.guard.outputs.ready == 'true'
+        run: npm install --no-save --no-audit --no-fund ai@^7 @ai-sdk/gateway@^4 zod@^4
+
+      # Judgement only. This step has the gateway key and no GitHub token, so
+      # whatever the model decides, it cannot touch the repository itself.
+      - name: Judge the report
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
+          TRIAGE_MODEL: ${{ vars.TRIAGE_MODEL }}
+          MODE: ${{ github.event_name == 'workflow_dispatch' && 'dispatch' || 'issue' }}
+          REPORT_FILE: ./.triage-report.md
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          OPEN_ISSUES_FILE: .triage/open-issues.json
+        run: node .github/scripts/triage-report.mjs
+
+      # Action only. Reads the verdict off disk and applies it; calls no model.
+      - name: Apply the verdict
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODE: ${{ github.event_name == 'workflow_dispatch' && 'dispatch' || 'issue' }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          verdict=$(jq -r '.verdict'      .triage/verdict.json)
+          kind=$(jq -r '.kind // empty'   .triage/verdict.json)
+          spam=$(jq -r '.spam'            .triage/verdict.json)
+          rule=$(jq -r '.decidingRule'    .triage/verdict.json)
+          title=$(jq -r '.title // empty' .triage/verdict.json)
+          dupe=$(jq -r '.duplicateOf // empty' .triage/verdict.json)
+
+          {
+            echo "### Triage verdict: \`$verdict\`"
+            echo ""
+            echo "$rule"
+            if [ -n "$dupe" ]; then echo ""; echo "Duplicate of #$dupe."; fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          extra_labels=""
+          [ "$spam" = "true" ] && extra_labels=",spam"
+
+          if [ "$MODE" = "dispatch" ]; then
+            # Nothing exists yet, so a report that does not pass creates nothing.
+            if [ "$verdict" = "file" ]; then
+              url=$(gh issue create --title "$title" --body-file .triage/body.md --label "$kind,triaged")
+              echo "" >> "$GITHUB_STEP_SUMMARY"
+              echo "Filed: $url" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "" >> "$GITHUB_STEP_SUMMARY"
+              echo "Nothing was filed. Reply for the reporter:" >> "$GITHUB_STEP_SUMMARY"
+              echo "" >> "$GITHUB_STEP_SUMMARY"
+              cat .triage/reply.md >> "$GITHUB_STEP_SUMMARY"
+            fi
+            exit 0
+          fi
+
+          case "$verdict" in
+            file)
+              gh issue edit "$ISSUE" \
+                --title "$title" \
+                --body-file .triage/body.md \
+                --add-label "$kind,triaged" \
+                --remove-label intake
+              ;;
+            decline)
+              gh issue comment "$ISSUE" --body-file .triage/reply.md
+              gh issue edit "$ISSUE" --add-label "declined$extra_labels" --remove-label intake
+              gh issue close "$ISSUE" --reason "not planned"
+              ;;
+            *)
+              # `intake` stays on: the report is still waiting at the gate.
+              gh issue comment "$ISSUE" --body-file .triage/reply.md
+              gh issue edit "$ISSUE" --add-label needs-human-triage
+              ;;
+          esac
