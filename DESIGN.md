@@ -72,34 +72,37 @@ a webfont falls back.
 
 | Token | Light | On forest | Role |
 |---|---|---|---|
-| `--logo-green` | `#56916A` | `--mint` | The symbol + "Exit" |
-| `--logo-ink` | `#37684D` | `--off` | "Blueprint" |
+| `--logo-green` | `#438663` | `--mint` | The E-arrow symbol |
+| `--logo-ink` | `#0C2218` | `--off` | The wordmark |
+
+The artwork is the 2026-09 rebrand, extracted as vectors from the rebrand deck.
 
 Three rules:
 
-- **The logo tones are not site palette.** They belong to the mark. The page can
-  restyle around them; the logo does not follow. Never wire the lockup to
-  `--primary` / `--brand`.
-- **The two tones are a contrast RELATIONSHIP, not two colors.** On light,
-  "Blueprint" carries the dominant tone (6.4:1 on white) and the symbol + "Exit"
-  the softer green. On forest that deep green drops to ~2.9:1, so the dark
-  lockup **inverts the lightness order** — "Blueprint" takes the near-white ink
-  (14.5:1), the symbol and "Exit" lift to mint (8.7:1). Same reading, dark ground.
-- **The app tile is pinned in both grounds.** `favicon.svg` is the symbol
-  reversed out of a forest tile and carries its own background on purpose: a tab
-  strip is light in one browser and dark in the next. `apple-touch-icon.png` is
-  the 180px raster of it, because iOS ignores an SVG touch icon and substitutes a
-  screenshot of the page.
+- **The logo tones are not site palette roles.** They belong to the mark. The
+  page can restyle around them; the logo does not follow. Never wire the lockup
+  to `--primary` / `--brand`.
+- **The two tones are a contrast RELATIONSHIP, not two colors.** On light, the
+  wordmark carries the dominant tone (forest, 16.7:1 on white) and the symbol the
+  softer brand green (4.4:1). Forest on forest vanishes, so the footer uses the
+  deck's reversed pair: the symbol in mint, the wordmark in light ink.
+- **The app tile is pinned in both grounds.** `favicon.svg` is the symbol in
+  off-white reversed out of a forest tile, as the deck shows the symbol alone,
+  and carries its own background on purpose: a tab strip is light in one browser
+  and dark in the next. `apple-touch-icon.png` is the 180px raster of it, because
+  iOS ignores an SVG touch icon and substitutes a screenshot of the page.
 
-**Legibility floor: a 21px lockup** (= a 16px symbol). The hairline between the
-bracket and the swoosh is 0.8 of the symbol's 31.2 units, so below that the two
-shapes fuse into a blob. Nav is 24px, footer 28px, and 22px at ≤400px is the last
-stop — the nav sheds its links, its login text and its button padding before the
-mark is allowed to shrink further. Anything smaller needs a simplified cut of the
-artwork, which is a brand decision, not a scale-it-down decision.
+**Legibility floor: a 16px symbol.** The E's middle bar is 6.9 of the symbol's
+54 units, about 2px at 16px; below that the counters close up. Nav is 24px,
+footer 28px, and 22px at ≤400px is the last stop — the nav sheds its links, its
+login text and its button padding before the mark is allowed to shrink further.
+Anything smaller needs a simplified cut of the artwork, which is a brand
+decision, not a scale-it-down decision.
 
-**Name.** The wordmark is one word, **ExitBlueprint**, matching the artwork; prose
-follows it. The registered entity, *Exit Blueprint LLC*, keeps its own two-word
+**Name.** The written name is one word, **ExitBlueprint**, and prose follows it.
+The 2026-09 artwork sets it as two words; Matthew kept the written name as one
+(exitblueprint-mvp `docs/decisions/2026-09-23-rebrand-logo.md`), so do not "fix"
+either side to match the other. The registered entity, *Exit Blueprint LLC*, keeps its own two-word
 spelling in the IP and copyright lines — a legal fact, not a styling choice. Same
 split the app makes in `shared/brand.ts`.
 
