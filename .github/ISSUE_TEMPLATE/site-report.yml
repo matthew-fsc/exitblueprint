@@ -1,0 +1,60 @@
+name: Site report — bug, feature or suggestion
+description: Something broken on exitblueprint.net, or a change you think it should make.
+title: "[report] "
+labels: ["intake"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reports are read by a triage agent before anything is filed. It checks the
+        report against the site's design rules (`DESIGN.md`) and against what is
+        already open, and only meaningful, rules-compliant reports become work
+        items — everything else is answered and closed. Specifics get through;
+        opinions without a page reference generally do not.
+
+        Reporting the **product** behind `app.exitblueprint.net` — scores,
+        accounts, deliverables, billing? That lives in the app repo, not here.
+
+  - type: dropdown
+    id: report_type
+    attributes:
+      label: Kind
+      options:
+        - Bug — something is broken or wrong
+        - Feature — something the page should do
+        - Suggestion — something that should read or look different
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: One line
+      description: What it is, in a sentence someone could act on.
+      placeholder: The nav CTA overlaps the logo below 380px
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Detail
+      description: |
+        For a bug: what you did, what you expected, what happened instead.
+        For a feature or suggestion: what the page does now, what it should do, and why that is better for an advisor reading it.
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: Where on the page
+      description: Section, or the anchor in the URL.
+      placeholder: "#method — the three-score readout"
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and screen
+      description: Only matters for bugs, and only if you have it to hand.
+      placeholder: Safari 18 on iPhone 15, portrait

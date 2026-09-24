@@ -1,0 +1,6 @@
+# Scratch the triage workflow writes into the workspace at run time.
+.triage/
+.triage-report.md
+
+# The gateway client is installed per run, never committed.
+node_modules/
