@@ -27,10 +27,19 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # Publish only the site. Uploading '.' also served CLAUDE.md, DESIGN.md,
+      # REWRITE-PLAN.md and .claude/ at exitblueprint.net. A new public file
+      # must be added here; anything not listed is not deployed.
+      - name: Assemble site
+        run: |
+          mkdir _site
+          cp index.html favicon.svg apple-touch-icon.png _site/
+          cp -R brand _site/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment

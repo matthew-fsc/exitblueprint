@@ -10,6 +10,16 @@ calls from Matthew (2026-08-07) then moved the page off this doc's recommendatio
 enablement rather than on the loss** (§4, §12). Both are recorded where they land.
 Copy decisions and the category decision remain founder calls; this doc recommends.
 
+**CTA, 2026-09-28 (Matthew's call):** the primary CTA is "Request access" into the
+on-page `#apply` form, in the nav, hero, closing band and footer. It had pointed at
+`app.exitblueprint.net/sign-up` as "Get started" since PR #11, but sign-up is
+invite-only during the pilot, so a stranger hit a dead end. Nothing on the page links
+to `/sign-up` now; "Log in" is unchanged. The same pass made maintenance edits because
+the product falsified the sentences: no books-and-records export claim, no trading-range
+clause on the delta, the sample disclaimer now says the narrative is AI-drafted (as
+`server/pdf.ts` does), and "reasons about one" is gone from the method. It also removed
+one prose em dash, added a privacy link, and narrowed the Pages deploy to the site files.
+
 **Still outstanding from the plan:** the sample client deliverable (§7) — the page ships
 a designed stand-in panel, not the real anonymized export; the security one-pager and
 published pricing (§11, Phase 2); directory submissions (§10).
@@ -83,6 +93,10 @@ Two of these are urgent. **The main button points at a signup flow the go-to-mar
 should not exist** — every visitor who takes the primary action lands somewhere the motion
 cannot serve them. And the site is qualifying on the wrong axis: it asks an owner for
 revenue when the one question that predicts fit is how many owner clients a *firm* has.
+
+*Both resolved.* The form qualifies on owner-client count, and since 2026-09-28 the
+primary CTA is "Request access" into that form; nothing links to `/sign-up`, which is
+invite-only during the pilot (see the status note above).
 
 What survives: the three-score argument (`Three scores. Never averaged.`), the ring
 readout, the determinism claim, and the whole visual system. The rewrite keeps the
@@ -288,6 +302,9 @@ change.**
 *Done when:* the page argues retention to an advisor, no CTA points at a flow the motion
 cannot serve, every claim traces to shipped code and a sourced statistic, and the page is
 shorter than the one it replaced.
+*As shipped:* the CTA went to the on-page form, not design-partner recruitment (§4). PR #11
+moved it back to `/sign-up` as "Get started"; on 2026-09-28 it became "Request access" into
+the form, because sign-up is invite-only during the pilot.
 
 **Phase 0/1 — directories.** Canonical description, OG image, screenshots; submit *(§13)*.
 
@@ -355,7 +372,9 @@ transition process in place before anyone else in your market does."*
    "liquidity event / owner transition platform for advisors" and warns off "exit planning
    software" — reconcile that with the product's name and the assumed reading in §2.
 2. **The first step.** *Resolved:* the on-page contact form, qualifying on owner-client
-   density. A calendar link would still be an improvement over a form if one exists.
+   density. Since 2026-09-28 every primary CTA ("Request access") leads to it, because
+   sign-up is invite-only during the pilot (Matthew). A calendar link would still be an
+   improvement over a form if one exists.
 3. **Commit the GTM document to `exitblueprint-mvp/docs/`?** (§1)
 4. **Does anything owner-facing survive?** §5 says defer, possibly permanently. Confirm,
    since it decides how much of the current page gets deleted rather than rewritten.

@@ -448,6 +448,8 @@
     .form-aside .assurances { list-style:none; margin-top:26px; display:flex; flex-direction:column; gap:12px; }
     .form-aside .assurances li { display:flex; align-items:flex-start; gap:11px; font-size:14.5px; color:var(--ink-2); line-height:1.5; }
     .form-aside .assurances svg { width:17px; height:17px; stroke:var(--primary); fill:none; flex-shrink:0; margin-top:3px; }
+    .form-aside .assurances a { color:var(--primary-ink); text-underline-offset:3px; }
+    .form-aside .assurances a:hover { color:var(--primary-hover); }
     #apply-form { display:flex; flex-direction:column; gap:18px; background:var(--card); border:1px solid var(--line); border-radius:var(--r-lg); padding:32px; }
     .form-field { display:flex; flex-direction:column; gap:7px; }
     .form-label { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); }
@@ -481,6 +483,8 @@
     .footer-owner a { color:var(--mint); }
     .footer-bottom { margin-top:52px; padding-top:26px; border-top:1px solid var(--forest-line); display:flex; justify-content:space-between; align-items:center; gap:16px; }
     .footer-bottom p { font-family:var(--mono); font-size:11.5px; font-weight:400; color:var(--on-dark-muted); letter-spacing:0.03em; }
+    .footer-bottom a { color:var(--on-dark-muted); text-underline-offset:3px; transition:color .15s; }
+    .footer-bottom a:hover { color:var(--mint); }
 
     /* ============ Reveal ============ */
     @media (prefers-reduced-motion:no-preference) {
@@ -589,7 +593,7 @@
       </ul>
       <div class="nav-right">
         <a href="https://app.exitblueprint.net/login" class="nav-login">Log in</a>
-        <a href="https://app.exitblueprint.net/sign-up" class="btn btn-primary btn-nav">Get started</a>
+        <a href="#apply" class="btn btn-primary btn-nav">Request access</a>
       </div>
     </div>
   </div>
@@ -604,8 +608,8 @@
         <h1 class="hero-head">You hold the relationship. Now you have the <em>process</em>.</h1>
         <p class="hero-lead">ExitBlueprint gives an independent advisor the whole of exit preparation, years before there is a deal: a structured readiness assessment you run inside a normal review, the gaps it surfaces ranked into a roadmap, and a document your client takes home with your firm's name on it.</p>
         <div class="hero-cta">
-          <a href="https://app.exitblueprint.net/sign-up" class="btn btn-primary btn-lg">
-            Get started
+          <a href="#apply" class="btn btn-primary btn-lg">
+            Request access
             <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#deliverable" class="btn btn-secondary btn-lg">See a sample</a>
@@ -709,7 +713,7 @@
       <div class="doc-head-col">
         <p class="eyebrow">What the client gets</p>
         <h2 class="sec-head">Something the owner takes home and shows their spouse.</h2>
-        <p class="sec-lead">The output is not a dashboard you log into. It is a document you hand across the table, in your firm's branding, that tells an owner where the business actually stands and what to do about it first. It exports clean for your books-and-records archiving.</p>
+        <p class="sec-lead">The output is not a dashboard you log into. It is a document you hand across the table, in your firm's branding, that tells an owner where the business actually stands and what to do about it first. It downloads as a PDF for your files.</p>
         <p class="method-note">Readiness, whether or not they sell. Nothing in it recommends a transaction, and nothing in it depends on one happening.</p>
       </div>
 
@@ -775,7 +779,7 @@
           </div>
         </div>
 
-        <p class="doc-foot">Indicative scoring for planning discussion. Not a valuation, an appraisal, a tax opinion, or legal advice. Value figures are estimates for discussion with the client's CPA and counsel.</p>
+        <p class="doc-foot">Narrative drafted by AI from structured assessment data, for advisor review before release. Not financial, legal, tax, or investment advice. Figures are self-reported or estimated unless independently verified.</p>
       </div>
     </div>
   </div>
@@ -788,8 +792,8 @@
       <div class="method-head-col">
         <p class="eyebrow">The method</p>
         <h2 class="sec-head">A reading you can put your name on.</h2>
-        <p class="sec-lead">Three scores, each on its own 0&ndash;100 scale, each computed by rule from the owner's answers against a versioned rubric. Run the same answers twice and you get the same number twice. No model writes a score, adjusts one, or reasons about one, which is what lets a fiduciary hand it to a client and defend every line of it.</p>
-        <p class="method-note">Averaged, the sample owner above is a <s>63</s> &mdash; a tidy number that buries the leg actually holding up the deal. <b>We never compute it.</b></p>
+        <p class="sec-lead">Three scores, each on its own 0&ndash;100 scale, each computed by rule from the owner's answers against a versioned rubric. Run the same answers twice and you get the same number twice. No model computes a score or adjusts one, which is what lets a fiduciary hand it to a client and defend every line of it.</p>
+        <p class="method-note">Averaged, the sample owner above is a <s>63</s>: a tidy number that buries the leg actually holding up the deal. <b>We never compute it.</b></p>
       </div>
       <div class="dim-list reveal" id="dim-list">
         <div class="dim-row">
@@ -841,7 +845,7 @@
         <div class="p-step-connector"></div>
         <div class="p-step-num mono">02</div>
         <h3>A score that moves</h3>
-        <p>Re-score on the engagement's own clock. The delta is the agenda: what closed, what slipped, and what it changed about the range the business would trade in.</p>
+        <p>Re-score on the engagement's own clock. The delta is the agenda: what closed, what slipped, and how each score moved.</p>
       </div>
       <div class="p-step">
         <div class="p-step-connector"></div>
@@ -933,8 +937,8 @@
     <p class="cta-label mono">Why now</p>
     <h2>The window is the two years before anyone calls it a deal.</h2>
     <p class="cta-lead">If you have owner clients heading toward a transition, this is worth a conversation now rather than after someone else has started one.</p>
-    <a href="https://app.exitblueprint.net/sign-up" class="btn btn-on-dark btn-lg">
-      Get started
+    <a href="#apply" class="btn btn-on-dark btn-lg">
+      Request access
       <svg viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <p class="cta-alt">Would you rather talk it through first? <a href="#apply">Tell us about your book.</a></p>
@@ -946,13 +950,13 @@
   <div class="container">
     <div class="form-wrap">
       <div class="form-aside">
-        <p class="eyebrow">Rather talk it through</p>
+        <p class="eyebrow">Request access</p>
         <h2>Tell us about your book.</h2>
-        <p>If you would rather speak to someone before signing up, this is the way in. Five questions, and one of them is the only qualifier that matters. If the fit is not there we will say so.</p>
+        <p>Access starts with a conversation, and this is the way in. Five questions, and one of them is the only qualifier that matters. If the fit is not there we will say so.</p>
         <ul class="assurances">
           <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>A conversation with the founder, not a scheduled demo</li>
-          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything the platform produces carries your branding and exports clean for archiving</li>
-          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Your details are used only to reach you</li>
+          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything the platform produces carries your branding, and reports download as a PDF for your files</li>
+          <li><svg viewBox="0 0 18 18"><path d="M3 9.5 7 13l8-8.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Your details are used only to reach you. <a href="https://app.exitblueprint.net/legal/privacy">Privacy</a></span></li>
         </ul>
       </div>
 
@@ -1030,7 +1034,7 @@
       </div>
       <div class="footer-col">
         <h4>Get started</h4>
-        <a href="https://app.exitblueprint.net/sign-up">Get started</a>
+        <a href="#apply">Request access</a>
         <a href="#apply">Tell us about your book</a>
         <a href="https://app.exitblueprint.net/login">Log in</a>
         <!-- Owners land here too. A line and an address, deliberately not a
@@ -1039,7 +1043,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="mono">exitblueprint.net</p>
+      <p class="mono">exitblueprint.net &nbsp;&middot;&nbsp; <a href="https://app.exitblueprint.net/legal/privacy">Privacy</a></p>
       <p class="mono">&copy; 2026 Exit Blueprint LLC. All rights reserved.</p>
     </div>
   </div>
