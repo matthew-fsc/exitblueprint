@@ -178,11 +178,11 @@ The number is printed in the markup and never animates; the ring is reinforcemen
 
 ## Calls to action
 
-**Two paths, and they are not the same thing.** Signing up is the primary action; talking to a person is the alternative for those who want one. Keeping them distinct is the point — a page where every button does the same thing gives a ready visitor nowhere to go, and a page with two equal buttons makes them choose before they know enough to.
+**Two paths, and they are not the same thing.** Requesting access is the primary action while sign-up is invite-only during the pilot (Matthew, 2026-09-28; `REWRITE-PLAN.md` §13.2); logging in is for firms already in. Keeping them distinct is the point — a page where every button does the same thing gives a ready visitor nowhere to go, and a page with two equal buttons makes them choose before they know enough to.
 
 | Path | Label | Destination | Where |
 |---|---|---|---|
-| Primary | "Get started" | `https://app.exitblueprint.net/sign-up` | nav, hero, closing band, footer |
+| Primary | "Request access" | the `#apply` form | nav, hero, closing band, footer |
 | Direct outreach | "Start the conversation" | the `#apply` form | the form's own submit button, plus a subordinate text link under the closing band's button |
 | Returning | "Log in" | `https://app.exitblueprint.net/login` | nav, footer |
 
