@@ -187,7 +187,7 @@
     /* Was an inline padding override on the button; it needs to be a class so the
        narrow-viewport rule can win against it without !important. */
     .btn-nav { padding:10px 20px; white-space:nowrap; }
-    .nav-login { text-decoration:none; color:var(--primary-ink); font-weight:600; font-size:15px; transition:color .15s; }
+    .nav-login { white-space:nowrap; text-decoration:none; color:var(--primary-ink); font-weight:600; font-size:15px; transition:color .15s; }
     .nav-login:hover { color:var(--primary-hover); }
     .nav-toggle { display:none; }
 
@@ -516,7 +516,9 @@
       section { padding:72px 0; }
       #hero { padding:60px 0 72px; }
       .nav-links { display:none; }
-      .nav-login { display:none; }
+      /* "Log in" stays on the phone. It used to be hidden here, which left a
+         returning advisor on a phone no way into the app short of the footer. */
+      .nav-right { gap:14px; }
       .process-steps { grid-template-columns:1fr; gap:26px; }
       .footer-inner { grid-template-columns:1fr; }
       .footer-bottom { flex-direction:column; align-items:flex-start; gap:10px; }
@@ -537,9 +539,20 @@
       .wordmark-logo { height:22px; }
       .nav-inner { gap:12px; }
       .btn-nav { font-size:13.5px; padding:10px 14px; }
+      .nav-right { gap:12px; }
+      .nav-login { font-size:14px; }
     }
     @media (max-width:360px) {
       .container,.container-narrow { padding:0 18px; }
+    }
+    @media (max-width:340px) {
+      /* Below 340px (the 320px phones) the lockup at its 22px floor, "Log in"
+         and "Request access" cannot share one row. The nav keeps "Log in",
+         because it is the only way back into the app from the top of the page;
+         "Request access" is the hero's first button a few pixels below. */
+      .btn-nav { display:none; }
+    }
+    @media (max-width:360px) {
       h1.hero-head { font-size:31px; }
       #apply-form, .calc { padding:22px; }
     }

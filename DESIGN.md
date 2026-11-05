@@ -94,8 +94,11 @@ Three rules:
 
 **Legibility floor: a 16px symbol.** The E's middle bar is 6.9 of the symbol's
 54 units, about 2px at 16px; below that the counters close up. Nav is 24px,
-footer 28px, and 22px at ≤400px is the last stop — the nav sheds its links, its
-login text and its button padding before the mark is allowed to shrink further.
+footer 28px, and 22px at ≤400px is the last stop — the nav sheds its links and
+its button padding before the mark is allowed to shrink further. "Log in" is never
+shed: it is a returning advisor's only way into the app from the top of the page,
+so below 340px the nav button gives way to it instead (the hero carries "Request
+access" directly beneath).
 Anything smaller needs a simplified cut of the artwork, which is a brand
 decision, not a scale-it-down decision.
 
