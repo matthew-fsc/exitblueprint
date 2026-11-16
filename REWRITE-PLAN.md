@@ -20,6 +20,16 @@ clause on the delta, the sample disclaimer now says the narrative is AI-drafted 
 `server/pdf.ts` does), and "reasons about one" is gone from the method. It also removed
 one prose em dash, added a privacy link, and narrowed the Pages deploy to the site files.
 
+**Claims audit, 2026-11-16.** Every claim on the page was held against `exitblueprint-mvp` main
+`234d0bbc`. `npm run site-claims` passes (48 sub-scores, ladders, evidence split, three scores).
+Of the worded claims, one was false and is fixed: the method disclaimer said results "are based
+on self-reported inputs", but the product now substantiates financial answers against documents and
+connected books (`shared/verification-tier.ts`), so it now uses the page's own sample wording,
+"self-reported or estimated unless independently verified". §8's collaborator row was stale and
+is updated. Two items went to Matthew as decisions and are not edited here. The first is §8's
+drawdown row ("should not build"), which the "life after the sale" buildout would reverse. The
+second is whether the page links a demo video and an owner readiness check.
+
 **Still outstanding from the plan:** the sample client deliverable (§7) — the page ships
 a designed stand-in panel, not the real anonymized export; the security one-pager and
 published pricing (§11, Phase 2); directory submissions (§10).
@@ -243,7 +253,7 @@ verifiable source, or it does not ship.
 | Anything implying the advisor benefits from a sale | **Never.** *(§9)* A conflict optic a fiduciary notices immediately. | *"Ready, whether or not they sell."* |
 | Output as a valuation, tax opinion, or legal advice | **Never.** *(§9)* | "Value range," "scenario," "for discussion with the client's CPA or counsel." Disclaimers in the product output, not only in the pitch. |
 | Financial planning software as inferior | **Never.** *(§9, §12.1)* Nearly every prospect uses one and many love it. | Complementary, and honest about what we do not do. Our lane ends where the planning stack begins — which the design partner's own consensus draws for us. This is the most credible sentence available to an RIA. |
-| The CPA / attorney / banker *transact* in the platform | **Cannot say yet.** Collaborators are read-only; no document access, no actionable assignment. | *"Invite the CPA, the attorney and the banker into the same readiness picture."* |
+| The CPA / attorney / banker *transact* in the platform | **Can now be said in part; the copy is Matthew's call.** *(Updated 2026-11-16: the earlier verdict, "collaborators are read-only; no document access, no actionable assignment", is no longer true.)* Professionals now hold assigned work items, upload documents the firm accepts or returns, and pass handoffs both ways (deal-team decisions d1–d9, 2026-10-26; handoff model, 2026-11-12). The banker still does not run the buyer process in the product (d8: reads a frozen deal file), and an attorney's own login cannot yet read the disclosure schedule. | Still live: *"Invite the CPA, the attorney and the banker into the same readiness picture."* True, and now an under-claim. |
 | Post-close cash flow / retirement income / drawdown modeling | **Cannot say, and should not build.** Explicitly on the wealth manager's side of the design partner's line. | "Net proceeds, in a form your planning software can take." |
 | Any market statistic | **Only with a primary source and a publication year.** *(App. A: "Advisors are numerate and will check.")* | This includes the "~80% of net worth is in the business" figure that every draft of the hero reaches for. Source it or cut it. Use at most one *(App. A: "three or more signals that you are presenting rather than listening.")* |
 
