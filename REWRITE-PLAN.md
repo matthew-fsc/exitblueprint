@@ -26,11 +26,9 @@ Of the worded claims, one was false and is fixed: the method disclaimer said res
 on self-reported inputs", but the product now substantiates financial answers against documents and
 connected books (`shared/verification-tier.ts`), so it now uses the page's own sample wording,
 "self-reported or estimated unless independently verified". §8's collaborator row was stale and
-is updated. Matthew then decided two calls. Drawdown: "Build it, rewrite the line on ship"
-(`exitblueprint-mvp` #4626), so the planning-stack lane now says the product shows the years each
-way the sale could fund the household, and still does not run the plan. This change merges only
-after #4626 is deployed. An owner readiness-check link goes on the page next, and a demo video
-waits for a re-recording on the new design.
+is updated. Two items went to Matthew as decisions and are not edited here. The first is §8's
+drawdown row ("should not build"), which the "life after the sale" buildout would reverse. The
+second is whether the page links a demo video and an owner readiness check.
 
 **Still outstanding from the plan:** the sample client deliverable (§7) — the page ships
 a designed stand-in panel, not the real anonymized export; the security one-pager and
@@ -256,7 +254,7 @@ verifiable source, or it does not ship.
 | Output as a valuation, tax opinion, or legal advice | **Never.** *(§9)* | "Value range," "scenario," "for discussion with the client's CPA or counsel." Disclaimers in the product output, not only in the pitch. |
 | Financial planning software as inferior | **Never.** *(§9, §12.1)* Nearly every prospect uses one and many love it. | Complementary, and honest about what we do not do. Our lane ends where the planning stack begins — which the design partner's own consensus draws for us. This is the most credible sentence available to an RIA. |
 | The CPA / attorney / banker *transact* in the platform | **Can now be said in part; the copy is Matthew's call.** *(Updated 2026-11-16: the earlier verdict, "collaborators are read-only; no document access, no actionable assignment", is no longer true.)* Professionals now hold assigned work items, upload documents the firm accepts or returns, and pass handoffs both ways (deal-team decisions d1–d9, 2026-10-26; handoff model, 2026-11-12). The banker still does not run the buyer process in the product (d8: reads a frozen deal file), and an attorney's own login cannot yet read the disclosure schedule. | Still live: *"Invite the CPA, the attorney and the banker into the same readiness picture."* True, and now an under-claim. |
-| Post-close cash flow / retirement income / drawdown modeling | **Reversed 2026-11-16 (Matthew).** The product now models years covered from net proceeds, advisor-only (`exitblueprint-mvp` decision `2026-11-16-the-product-models-a-drawdown`). Still no tax engine, Monte Carlo or account-level allocation. | "A net-proceeds view with the years each way the sale could go would fund the household." Never "we run the plan". |
+| Post-close cash flow / retirement income / drawdown modeling | **Cannot say, and should not build.** Explicitly on the wealth manager's side of the design partner's line. | "Net proceeds, in a form your planning software can take." |
 | Any market statistic | **Only with a primary source and a publication year.** *(App. A: "Advisors are numerate and will check.")* | This includes the "~80% of net worth is in the business" figure that every draft of the hero reaches for. Source it or cut it. Use at most one *(App. A: "three or more signals that you are presenting rather than listening.")* |
 
 ---
